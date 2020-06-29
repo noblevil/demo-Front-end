@@ -6,11 +6,130 @@ function getOrgList() {
         orgList: [
             {
                 address: "北京市市辖区东城区",
-                orgName: "广州大学",
+                orgName: "广州大学1",
                 unifiedCode: "11111",
                 number: "11111",
                 department: "11111",
                 listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学2",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学3",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学4",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学5",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学6",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学7",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学8",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 1,
+                trainSubject: 1,
+                trainForm: 1
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学9",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
+
+
+            },
+            {
+                address: "北京市市辖区东城区",
+                orgName: "广州大学10",
+                unifiedCode: "11111",
+                number: "11111",
+                department: "11111",
+                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 1,
 
 
             },
@@ -21,6 +140,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 0,
+                trainLevel: 1,
+                trainSubject: 0,
+                trainForm: 0,
 
 
             },
@@ -31,17 +153,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
 
             },
             {
@@ -51,86 +165,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
-
-
-            },
-            {
-                address: "北京市市辖区东城区",
-                orgName: "广州大学",
-                unifiedCode: "11111",
-                number: "11111",
-                department: "11111",
-                listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
 
 
             },
@@ -141,6 +178,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 2,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
 
 
             },
@@ -151,6 +191,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 2,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
 
 
             },
@@ -161,6 +204,9 @@ function getOrgList() {
                 number: "11111",
                 department: "11111",
                 listType: 0,
+                trainLevel: 0,
+                trainSubject: 0,
+                trainForm: 0,
 
 
             },

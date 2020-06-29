@@ -4,7 +4,7 @@
       <el-row>
         <el-col :span="12">校外机构查询</el-col>
         <el-col :span="12">
-          <el-button type="primary" @click="get">查询</el-button>
+          <el-button type="primary" @click="filteredOrgList">查询</el-button>
           <el-button type="info">重置</el-button>
         </el-col>
       </el-row>
@@ -273,6 +273,45 @@ export default {
 
     current_change3: function(currentPage) {
       this.grayCurrentPage = currentPage;
+    },
+
+    filteredOrgList() {
+      let filteredList = [];
+      let self = this;
+
+      //浅层比较
+      function shallowEqual(object1, object2) {
+        const keys1 = Object.keys(object1);
+        const keys2 = Object.keys(object2);
+
+        if (keys1.length !== keys2.length) {
+          return false;
+        }
+
+        for (let index = 0; index < keys1.length; index++) {
+          const val1 = object1[keys1[index]];
+          const val2 = object2[keys2[index]];
+          if (val1 !== "") {
+            if (val1 !== val2) {
+              return false;
+            }
+          }
+        }
+        return true;
+      }
+
+      self.orgList.filter(function(org) {
+        if (shallowEqual(org, self.queryForm)) {
+          filteredList.push(org);
+        }
+      });
+
+      this.orgList = filteredList;
+      console.log(filteredLists);
+
+      this.whiteList = this.orgList.filter(item => item.listType === 0);
+      this.blackList = this.orgList.filter(item => item.listType === 1);
+      this.grayList = this.orgList.filter(item => item.listType === 2);
     }
   }
 };

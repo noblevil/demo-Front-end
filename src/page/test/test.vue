@@ -225,12 +225,17 @@ export default {
       queryForm: {
         address: "",
         orgName: "",
+        unifiedCode: "",
+        number: "",
+        department: "",
+        listType: "",
         trainLevel: "",
         trainSubject: "",
-        trainForm: ""
+        trainForm: "",
       },
 
       orgList: [],
+      initialList:[],
 
       whiteList: [],
       blackList: [],
@@ -241,11 +246,12 @@ export default {
     };
   },
   created() {
+
     //加载白名单 黑名单数据 灰名单数据 没有筛选条件
     getOrgList().then(res => {
       console.log(res);
       this.orgList = res.data.data.orgList;
-
+      this.initialList=res.data.data.orgList;
       this.whiteList = this.orgList.filter(item => item.listType === 0);
       this.blackList = this.orgList.filter(item => item.listType === 1);
       this.grayList = this.orgList.filter(item => item.listType === 2);
@@ -275,12 +281,14 @@ export default {
       this.grayCurrentPage = currentPage;
     },
 
-    filteredOrgList() {
-      let filteredList = [];
-      let self = this;
+
+    filteredOrgList () {
+
+      let filteredList=[];
 
       //浅层比较
       function shallowEqual(object1, object2) {
+
         const keys1 = Object.keys(object1);
         const keys2 = Object.keys(object2);
 
@@ -300,19 +308,31 @@ export default {
         return true;
       }
 
-      self.orgList.filter(function(org) {
-        if (shallowEqual(org, self.queryForm)) {
-          filteredList.push(org);
+      for(let i=0; i<this.initialList.length; i++){
+        if (shallowEqual(this.queryForm,this.initialList[i])){
+          filteredList.push(this.initialList[i])
         }
-      });
+      }
+      /*
+      self.orgList.filter(function (org) {
+        console.log(shallowEqual(self.queryForm,org))
+        if (shallowEqual(self.queryForm,org)){
+          filteredList.push(org)
+        }
+      })
+      */
+
 
       this.orgList = filteredList;
-      console.log(filteredLists);
 
       this.whiteList = this.orgList.filter(item => item.listType === 0);
       this.blackList = this.orgList.filter(item => item.listType === 1);
       this.grayList = this.orgList.filter(item => item.listType === 2);
-    }
+    },
+
+
+
+
   }
 };
 </script>

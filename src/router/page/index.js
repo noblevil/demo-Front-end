@@ -1,6 +1,39 @@
 import Layout from '@/page/index/'
 
 export default [
+  {
+    path: '/home',
+    name: '我的测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/home'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/complaint',
+    name: '我的测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/complaint'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/policy',
+    name: '我的测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/policy'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
 
   {
     path: '/test',

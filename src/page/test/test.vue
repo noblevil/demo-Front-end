@@ -307,7 +307,7 @@ export default {
       });
 
       this.orgList = filteredList;
-      console.log(filteredLists);
+      console.log(filteredList);
 
       this.whiteList = this.orgList.filter(item => item.listType === 0);
       this.blackList = this.orgList.filter(item => item.listType === 1);

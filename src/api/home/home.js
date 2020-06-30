@@ -7,10 +7,32 @@ export const getHome = () => {
     })
 }
 
-export const getOrgList = () => {
+export const getAllOrgList = () => {
     return request({
-        url: '/api/OrgList',
+        url: '/api/AllOrgList',
         method: 'get',
     })
+}
+
+export const queryOrgList = (
+    orgName,
+    address,
+    trainType,
+    trainSubject,
+    trainForm) => {
+
+    return request({
+        url: '/api/queryOrgList',
+        method: 'get',
+        data: {
+            orgName,
+            address,
+            trainType,
+            trainSubject,
+            trainForm
+        }
+    })
+
+
 }
 

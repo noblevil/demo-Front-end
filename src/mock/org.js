@@ -143,4 +143,42 @@ export default ({ mock }) => {
 
     });
 
+    Mock.mock(/\/api\/demo\/detail/, 'get', getFakeDetail => {
+
+        // console.log(typeof(getFakeDetail.body));
+        // console.log(getFakeDetail);
+        var cityName = "";
+        for (var i = 9; i < getFakeDetail.body.length; i++) {
+            if (getFakeDetail.body[i] == '"')
+                break;
+            cityName += getFakeDetail.body[i]
+        }
+        console.log("行政区为：" + cityName);
+        const json = { code: 200, success: true, msg: '操作成功' };
+
+
+        json.data = [
+            { "orgName": "广州市番禺区佳成教育培训中心", "orgAddress": "广州市番禺区小谷围街穗石村双桂街自编8号商业综合楼205-209" },
+            { "orgName": "广州市番禺区云艺教育培训中心", "orgAddress": "广州市番禺区东环街东艺路14号招商金山谷四期会所2楼" },
+            { "orgName": "广州市越秀区加拿达少儿英文培训中心", "orgAddress": "广州市越秀区庙前直街10号、10号之一第二层" },
+            { "orgName": "广州市越秀区好老师教育培训中心", "orgAddress": "广州市越秀区寺右二马路23、25号三层自编323、323A、325、32" },
+        ];
+
+        var org = [];
+        // console.log(json.data);
+        // console.log(json.data.length);
+
+        for (var i = 0; i < json.data.length; i++) {
+            var flag = (json.data[i]["orgAddress"]).indexOf(cityName);
+            // console.log(flag);
+            if (flag != -1) {
+                org.push(json.data[i]);
+            }
+        }
+        // console.log("ddddd"+org);
+
+        return org;
+
+    });
+
 }

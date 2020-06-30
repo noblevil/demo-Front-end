@@ -37,6 +37,22 @@ Vue.use(window.AVUE, {
 Vue.component('basicContainer', basicContainer);
 Vue.component('basicBlock', basicBlock);
 
+
+//高德地图
+// 引入vue-amap
+import VueAMap from 'vue-amap';
+Vue.use(VueAMap);
+// 初始化vue-amap
+VueAMap.initAMapApiLoader({
+  // 高德的key
+  key: 'e2a5c7f776d1152b1a7519e5d0ff9e92',
+  // 插件集合
+  plugin: ['AMap.Autocomplete', 'AMap.PlaceSearch', 'AMap.Scale', 'AMap.OverView', 'AMap.ToolBar', 'AMap.MapType', 'AMap.PolyEditor', 'AMap.CircleEditor', 'AMap.Geolocation'],
+  // 高德 sdk 版本，默认为 1.4.4
+  v: '1.4.4',
+  uiVersion: '1.0'
+});
+
 //全局注册自定义组件
 Vue.component('xButton', xButton)
 

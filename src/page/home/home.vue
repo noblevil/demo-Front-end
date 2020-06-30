@@ -1,6 +1,11 @@
 <template>
   <div>
-    <my-header></my-header>
+    <div class="myMap">
+      <my-map></my-map>
+    </div>
+    <div>
+      <my-header></my-header>
+    </div>
 
     <div class="orgQueryForm">
       <el-form :inline="true" ref="form" :model="queryForm" label-width="100px">
@@ -59,6 +64,7 @@
         </el-form-item>
       </el-form>
     </div>
+
     <div class="orgList">
       <el-table
         :data="orgList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
@@ -82,13 +88,15 @@ import { regionData, CodeToText } from "element-china-area-data";
 //自定义组件
 import myHeader from "@/components/home/my-header";
 
+import myMap from "@/components/home/my-map";
 //api
 import { getAllOrgList } from "@/api/home/home";
 import { queryOrgList } from "@/api/home/home";
 
 export default {
   components: {
-    myHeader
+    myHeader,
+    myMap
   },
   data() {
     return {
@@ -230,3 +238,10 @@ export default {
   }
 };
 </script>
+
+<style scoped>
+.mymap {
+  height: 200px;
+  width: 300px;
+}
+</style>

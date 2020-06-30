@@ -58,10 +58,10 @@ export default [
     }
   },
   {
-    path: '/home',
+    path: '/test3',
     name: '我的测试页',
     component: () =>
-      import( /* webpackChunkName: "page" */ '@/page/test/home'),
+      import( /* webpackChunkName: "page" */ '@/page/test/test3'),
     meta: {
       keepAlive: true,
       isTab: false,

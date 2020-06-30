@@ -79,7 +79,10 @@
         <el-table-column prop="trainSubject" label="培训科目" width="180"></el-table-column>
         <el-table-column prop="trainForm" label="培训形式" width="180"></el-table-column>
         <el-table-column prop="orgId" label="详情">
-          <button @click="gotolink" class="btn btn-success">点击跳转页面</button>
+          <template slot-scope="scope">
+            <el-button @click="gotolink(scope.row)" type="text" size="small">点击跳转页面</el-button>
+            <button @click="gotolink(scope.row)" class="btn btn-success">点击跳转页面</button>
+          </template>
         </el-table-column>
       </el-table>
     </div>
@@ -249,21 +252,19 @@ export default {
         });
       });
     },
-    gotolink() {
-      //点击跳转至上次浏览页面
-      // this.$router.go(-1)
-
-      //指定跳转地址
-      //.replace("/orgDetail");
-
-      this.$router.push({
-        path: "/orgDetail",
-        name: "orgDetail",
-        params: {
-          orgId: this.orgId
-        }
-      });
-    }
+    gotolink(row) {
+        //点击跳转至上次浏览页面
+        // this.$router.go(-1)
+        //指定跳转地址
+        //.replace("/orgDetail");
+        this.$router.push({
+          path: "/orgDetail",
+          name: "orgDetail",
+          params: {
+            orgId: row.orgId
+          }
+        });
+      }
   }
 };
 </script>

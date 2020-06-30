@@ -2,6 +2,18 @@ import Layout from '@/page/index/'
 
 export default [
   {
+    path: "/orgDetail",
+    name: 'orgDetail',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/orgDetail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+
+  {
     path: '/home',
     name: '我的测试页',
     component: () =>

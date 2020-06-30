@@ -1,8 +1,8 @@
 <template>
   <div>
-    <div class="myMap">
+    <!-- <div class="myMap">
       <my-map></my-map>
-    </div>
+    </div>-->
     <div>
       <my-header></my-header>
     </div>
@@ -78,6 +78,9 @@
         <el-table-column prop="trainType" label="培训类别" width="180"></el-table-column>
         <el-table-column prop="trainSubject" label="培训科目" width="180"></el-table-column>
         <el-table-column prop="trainForm" label="培训形式" width="180"></el-table-column>
+        <el-table-column prop="orgId" label="详情">
+          <button @click="gotolink" class="btn btn-success">点击跳转页面</button>
+        </el-table-column>
       </el-table>
     </div>
   </div>
@@ -196,7 +199,9 @@ export default {
         trainForm: ""
       },
 
-      orgList: []
+      orgList: [],
+
+      orgId: 0
     };
   },
 
@@ -233,6 +238,30 @@ export default {
         this.queryForm.trainForm
       ).then(res => {
         this.orgList = res.data.data.orgList;
+        this.orgList.forEach(element => {
+          if (element.listType == 0) {
+            element.listType = "白名单";
+          } else if (element.listType == 1) {
+            element.listType = "黑名单";
+          } else {
+            element.listType = "灰名单";
+          }
+        });
+      });
+    },
+    gotolink() {
+      //点击跳转至上次浏览页面
+      // this.$router.go(-1)
+
+      //指定跳转地址
+      //.replace("/orgDetail");
+
+      this.$router.push({
+        path: "/orgDetail",
+        name: "orgDetail",
+        params: {
+          orgId: this.orgId
+        }
       });
     }
   }

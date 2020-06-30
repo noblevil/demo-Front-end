@@ -61,6 +61,7 @@ export default ({ mock }) => {
         json.data = {
             orgList: [
                 {
+                    orgId: 0,
                     orgName: "广州大学",
                     address: "北京市市辖区东城区",
                     unifiedCode: "11111",
@@ -71,6 +72,7 @@ export default ({ mock }) => {
 
                 },
                 {
+                    orgId: 1,
                     orgName: "广东工业大学",
                     address: "北京市市辖区东城区",
                     unifiedCode: "11111",
@@ -81,6 +83,7 @@ export default ({ mock }) => {
 
                 },
                 {
+                    orgId: 2,
                     orgName: "广东工业大学",
                     address: "北京市市辖区东城区",
                     unifiedCode: "11111",

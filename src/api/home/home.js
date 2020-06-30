@@ -1,9 +1,16 @@
 import request from '@/router/axios';
 
-export const getHome = () => {
+export const getOrgDetail = (orgId) => {
+
+    console.log(orgId);
+
     return request({
-        url: '/api/home',
+        url: '/api/orgDetail',
         method: 'get',
+        data: {
+            orgId,
+
+        }
     })
 }
 

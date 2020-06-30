@@ -43,3 +43,49 @@ export const queryOrgList = (
 
 }
 
+export const getTeacherListByOrgId = (orgId) => {
+
+    console.log(orgId);
+
+    return request({
+        url: '/api/teacherListByOrgId',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+}
+
+export const getCourseListByOrgId = (orgId) => {
+
+    console.log(orgId);
+
+    return request({
+        url: '/api/courseListByOrgId',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+}
+
+export const getClassCourseListByOrgId = (orgId) => {
+
+    console.log(orgId);
+
+    return request({
+        url: '/api/classCourseListByOrgId',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+}
+
+
+
+
+

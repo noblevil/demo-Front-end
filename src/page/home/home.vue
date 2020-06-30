@@ -253,18 +253,18 @@ export default {
       });
     },
     gotolink(row) {
-        //点击跳转至上次浏览页面
-        // this.$router.go(-1)
-        //指定跳转地址
-        //.replace("/orgDetail");
-        this.$router.push({
-          path: "/orgDetail",
-          name: "orgDetail",
-          params: {
-            orgId: row.orgId
-          }
-        });
-      }
+      //点击跳转至上次浏览页面
+      // this.$router.go(-1)
+      //指定跳转地址
+      //.replace("/orgDetail");
+      this.$router.push({
+        path: "/orgDetail",
+        name: "orgDetail",
+        params: {
+          orgId: row.orgId
+        }
+      });
+    }
   }
 };
 </script>

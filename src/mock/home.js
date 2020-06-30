@@ -1,11 +1,108 @@
 import Mock from 'mockjs'
 
-function getFakeHome() {
+function getTeacherListByOrgId() {
+    const json = { code: 200, success: true, msg: '机构详情' };
+    json.data = {
+        teachers: [
 
+            {
+                teachName: "刘晓洋",
+                countryNature: "大陆",
+                nationality: "中国",
+                highestEducation: "博士",
+                course: "管理学",
+                workType: "兼职",
+                teachQualifClass: "sdaw",
+                department: "wdw",
+                subject: "dwadw",
+                number: "sdw",
+                sex: "男"
+            },
+            {
+                teachName: "刘晓洋",
+                countryNature: "大陆",
+                nationality: "中国",
+                highestEducation: "博士",
+                course: "管理学",
+                workType: "兼职",
+                teachQualifClass: "sdaw",
+                department: "wdw",
+                subject: "dwadw",
+                number: "sdw",
+                sex: "女"
+            },
+
+            {
+                teachName: "刘晓洋",
+                countryNature: "大陆",
+                nationality: "中国",
+                highestEducation: "博士",
+                course: "管理学",
+                workType: "兼职",
+                teachQualifClass: "sdaw",
+                department: "wdw",
+                subject: "dwadw",
+                number: "sdw",
+                sex: "男"
+            }
+
+
+
+        ]
+
+    };
+    return json;
+}
+
+function getCourseListByOrgId() {
+    const json = { code: 200, success: true, msg: '机构详情' };
+    json.data = {
+        courses: [
+
+            {
+                level: "高级",
+                subject: "语文",
+                objGrade: "一年级",
+                courseName: "写作",
+                textbook: "《写作教程》",
+                publishingCompany: "人民大学出版社",
+                isbnCode: "SDSADAWDAS",
+            }
+
+
+        ]
+
+    };
+    return json;
+}
+
+function getClassCourseListByOrgId() {
+    const json = { code: 200, success: true, msg: '机构详情' };
+    json.data = {
+        classCourses: [
+
+            {
+                level: "高级",
+                subject: "语文",
+                objGrade: "一年级",
+                courseName: "写作",
+                textbook: "《写作教程》",
+                publishingCompany: "人民大学出版社",
+                isbnCode: "SDSADAWDAS",
+            }
+
+
+        ]
+
+    };
+    return json;
 }
 
 export default ({ mock }) => {
     if (!mock) return;
+    Mock.mock(/\/api\/classCourseListByOrgId/, 'get', getClassCourseListByOrgId);
+    Mock.mock(/\/api\/courseListByOrgId/, 'get', getCourseListByOrgId);
+    Mock.mock(/\/api\/teacherListByOrgId/, 'get', getTeacherListByOrgId);
     Mock.mock(/\/api\/orgDetail/, 'get', (getOrgDetail) => {
 
         var orgId = JSON.parse(getOrgDetail.body).orgId;

@@ -83,7 +83,7 @@ export default ({ mock }) => {
 
                 },
                 {
-                    orgId: 2,
+                    orgId: 3,
                     orgName: "广东工业大学",
                     address: "北京市市辖区东城区",
                     unifiedCode: "11111",

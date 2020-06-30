@@ -122,22 +122,22 @@
           </el-form>
 
           <el-table :data="teachers" stripe style="width: 100%">
-            <el-table-column prop="compName" label="教师姓名" width="180"></el-table-column>
-            <el-table-column prop="code" label="国籍姓名" width="180"></el-table-column>
-            <el-table-column prop="number" label="国籍" width="180"></el-table-column>
+            <el-table-column prop="teachName" label="教师姓名" width="180"></el-table-column>
+            <el-table-column prop="countryNature" label="国籍性质" width="180"></el-table-column>
+            <el-table-column prop="nationality" label="国籍" width="180"></el-table-column>
             <el-table-column
               prop="sex"
               label="性别"
               :filters="[{ text: '男', value: '男' }, { text: '女', value: '女' }, { text: '未知', value: '未知' }]"
               :filter-method="filterSex"
             ></el-table-column>
-            <el-table-column prop="department" label="最高学历"></el-table-column>
-            <el-table-column prop="department" label="目前任教课程"></el-table-column>
-            <el-table-column prop="department" label="工作类型"></el-table-column>
-            <el-table-column prop="department" label="任教资格分类"></el-table-column>
-            <el-table-column prop="department" label="资格种类"></el-table-column>
-            <el-table-column prop="department" label="任课学科"></el-table-column>
-            <el-table-column prop="department" label="证书号码"></el-table-column>
+            <el-table-column prop="highestEducation" label="最高学历"></el-table-column>
+            <el-table-column prop="course" label="目前任教课程"></el-table-column>
+            <el-table-column prop="workType" label="工作类型"></el-table-column>
+            <el-table-column prop="teachQualifClass" label="任教资格分类"></el-table-column>
+            <el-table-column prop="department" label="资格种类"></el-table-column>number
+            <el-table-column prop="subject" label="任课学科"></el-table-column>
+            <el-table-column prop="number" label="证书号码"></el-table-column>
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="课程介绍" name="third">
@@ -188,15 +188,13 @@
           </el-form>
 
           <el-table :data="courses" stripe style="width: 100%">
-            <el-table-column prop="compName" label="级别" width="180"></el-table-column>
-            <el-table-column prop="compName" label="学科" width="180"></el-table-column>
-            <el-table-column prop="code" label="对象年级" width="180"></el-table-column>
-            <el-table-column prop="number" label="课程名称" width="180"></el-table-column>
-            <el-table-column prop="department" label="课程班次"></el-table-column>
-            <el-table-column prop="department" label="课程总课次"></el-table-column>
-            <el-table-column prop="department" label="教材"></el-table-column>
-            <el-table-column prop="department" label="出版社"></el-table-column>
-            <el-table-column prop="department" label="发行号ISBN"></el-table-column>
+            <el-table-column prop="level" label="级别" width="180"></el-table-column>
+            <el-table-column prop="subject" label="学科" width="180"></el-table-column>
+            <el-table-column prop="objGrade" label="对象年级" width="180"></el-table-column>
+            <el-table-column prop="courseName" label="课程名称" width="180"></el-table-column>
+            <el-table-column prop="textbook" label="教材"></el-table-column>
+            <el-table-column prop="publishingCompany" label="出版社"></el-table-column>
+            <el-table-column prop="isbnCode" label="发行号ISBN"></el-table-column>
           </el-table>
         </el-tab-pane>
         <el-tab-pane label="班次介绍" name="fourth">
@@ -248,8 +246,8 @@
           </el-form>
 
           <el-table :data="classCourses" stripe style="width: 100%">
-            <el-table-column prop="compName" label="年级" width="180"></el-table-column>
-            <el-table-column prop="code" label="学科" width="180"></el-table-column>
+            <el-table-column prop="grade" label="年级" width="180"></el-table-column>
+            <el-table-column prop="subject" label="学科" width="180"></el-table-column>
             <el-table-column prop="number" label="班级名称" width="180"></el-table-column>
             <el-table-column prop="department" label="计划招生人数"></el-table-column>
             <el-table-column prop="compName" label="授课教师" width="180"></el-table-column>
@@ -267,7 +265,13 @@
 //自定义组件
 import myHeader from "@/components/home/my-header";
 import selectCountry from "@/components/demo/select-country";
-import { getOrgDetail } from "@/api/home/home";
+import {
+  getOrgDetail,
+  getTeacherListByOrgId,
+  getCourseListByOrgId,
+  getClassCourseListByOrgId
+} from "@/api/home/home";
+
 export default {
   components: {
     selectCountry,
@@ -435,21 +439,17 @@ export default {
       },
 
       activeName: "first",
-      teachers: [
-        {
-          compName: "刘晓洋",
-          sex: "男"
-        },
-        {
-          compName: "王大鱼",
-          sex: "男"
-        },
-        {
-          compName: "李醍醐",
-          sex: "女"
-        }
-      ],
 
+      //教师列表
+      teachers: [],
+
+      //课程列表
+      courses: [],
+
+      //班次列表
+      classCourses: [],
+
+      //机构的ID
       orgId: ""
     };
   },
@@ -460,6 +460,20 @@ export default {
     getOrgDetail(this.orgId).then(res => {
       this.institutionName = res.data.data.institutionName;
       this.institution = res.data.data.institution;
+    });
+
+    //得到教师的列表
+    getTeacherListByOrgId(this.orgId).then(res => {
+      this.teachers = res.data.data.teachers;
+    });
+
+    //得到课程的列表
+    getCourseListByOrgId(this.orgId).then(res => {
+      this.courses = res.data.data.courses;
+    });
+    //得到班次的列表
+    getClassCourseListByOrgId(this.orgId).then(res => {
+      this.classCourses = res.data.data.classCourses;
     });
   },
 

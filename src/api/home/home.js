@@ -1,5 +1,6 @@
 import request from '@/router/axios';
 
+//根据orgId得到机构详情
 export const getOrgDetail = (orgId) => {
 
 
@@ -14,6 +15,7 @@ export const getOrgDetail = (orgId) => {
     })
 }
 
+//根据orgId得到机构详情
 export const getAllOrgList = () => {
     return request({
         url: '/api/AllOrgList',
@@ -21,6 +23,7 @@ export const getAllOrgList = () => {
     })
 }
 
+//根据 筛选 得到机构列表
 export const queryOrgList = (
     orgName,
     address,
@@ -43,6 +46,7 @@ export const queryOrgList = (
 
 }
 
+//根据orgId  得到机构所属的所有教师列表
 export const getTeacherListByOrgId = (orgId) => {
 
 
@@ -57,6 +61,7 @@ export const getTeacherListByOrgId = (orgId) => {
     })
 }
 
+//根据orgId  得到机构所属的所有课程列表
 export const getCourseListByOrgId = (orgId) => {
 
 
@@ -71,6 +76,7 @@ export const getCourseListByOrgId = (orgId) => {
     })
 }
 
+//根据orgId  得到机构所属的所有班次列表
 export const getClassCourseListByOrgId = (orgId) => {
 
 
@@ -83,6 +89,57 @@ export const getClassCourseListByOrgId = (orgId) => {
 
         }
     })
+}
+
+//根据 筛选 得到教师列表
+export const queryTeacherList = (
+    orgId,
+) => {
+
+    return request({
+        url: '/api/queryTeacherList',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+
+
+}
+
+//根据 筛选 得到课程列表
+export const queryCourseList = (
+    orgId,
+) => {
+
+    return request({
+        url: '/api/queryTeacherListList',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+
+
+}
+
+//根据 筛选 得到班次列表
+export const queryClassCourseList = (
+    orgId,
+) => {
+
+    return request({
+        url: '/api/queryTeacherListList',
+        method: 'get',
+        data: {
+            orgId,
+
+        }
+    })
+
+
 }
 
 

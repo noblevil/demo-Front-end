@@ -246,14 +246,14 @@
           </el-form>
 
           <el-table :data="classCourses" stripe style="width: 100%">
-            <el-table-column prop="grade" label="年级" width="180"></el-table-column>
-            <el-table-column prop="subject" label="学科" width="180"></el-table-column>
-            <el-table-column prop="number" label="班级名称" width="180"></el-table-column>
-            <el-table-column prop="department" label="计划招生人数"></el-table-column>
-            <el-table-column prop="compName" label="授课教师" width="180"></el-table-column>
-            <el-table-column prop="code" label="课程开始日期" width="180"></el-table-column>
-            <el-table-column prop="number" label="课程结束日期" width="180"></el-table-column>
-            <el-table-column prop="department" label="课程上课日期"></el-table-column>
+            <el-table-column prop="studentGrade" label="年级" width="180"></el-table-column>
+            <el-table-column prop="trainSubject" label="学科" width="180"></el-table-column>
+            <el-table-column prop="className" label="班级名称" width="180"></el-table-column>
+            <el-table-column prop="studentNum" label="计划招生人数"></el-table-column>
+            <el-table-column prop="teacherName" label="授课教师" width="180"></el-table-column>
+            <el-table-column prop="startTime" label="课程开始日期" width="180"></el-table-column>
+            <el-table-column prop="endTime" label="课程结束日期" width="180"></el-table-column>
+            <el-table-column prop="FirstTime" label="课程上课日期"></el-table-column>
           </el-table>
         </el-tab-pane>
       </el-tabs>
@@ -435,7 +435,7 @@ export default {
         className: "",
         teacherName: "",
         startTime: "",
-        endTine: ""
+        endTime: ""
       },
 
       activeName: "first",

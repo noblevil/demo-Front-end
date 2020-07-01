@@ -41,6 +41,8 @@ function getAllOrgList() {
         ]
 
     };
+
+
     return json;
 }
 
@@ -107,6 +109,7 @@ export default ({ mock }) => {
 
         json.data.orgList = json.data.orgList.filter((item) => item.trainForm === trainForm);
 
+        console.log(json.data);
 
 
         return json;

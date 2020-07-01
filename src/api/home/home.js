@@ -2,7 +2,7 @@ import request from '@/router/axios';
 
 export const getOrgDetail = (orgId) => {
 
-    console.log(orgId);
+
 
     return request({
         url: '/api/orgDetail',
@@ -45,7 +45,7 @@ export const queryOrgList = (
 
 export const getTeacherListByOrgId = (orgId) => {
 
-    console.log(orgId);
+
 
     return request({
         url: '/api/teacherListByOrgId',
@@ -59,7 +59,7 @@ export const getTeacherListByOrgId = (orgId) => {
 
 export const getCourseListByOrgId = (orgId) => {
 
-    console.log(orgId);
+
 
     return request({
         url: '/api/courseListByOrgId',
@@ -73,7 +73,7 @@ export const getCourseListByOrgId = (orgId) => {
 
 export const getClassCourseListByOrgId = (orgId) => {
 
-    console.log(orgId);
+
 
     return request({
         url: '/api/classCourseListByOrgId',

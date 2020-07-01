@@ -204,7 +204,7 @@ export default {
 
       orgList: [],
 
-      orgId: 0
+      orgId: ""
     };
   },
 
@@ -230,7 +230,6 @@ export default {
       }
 
       this.queryForm.address = loc;
-      console.log(this.queryForm.address);
     },
     query() {
       queryOrgList(
@@ -257,6 +256,7 @@ export default {
       // this.$router.go(-1)
       //指定跳转地址
       //.replace("/orgDetail");
+
       this.$router.push({
         path: "/orgDetail",
         name: "orgDetail",

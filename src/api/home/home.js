@@ -108,7 +108,6 @@ export const queryTeacherList = (
         method: 'get',
         data: {
             orgId,
-            orgId,
             name,
             sex,
             countryNature,

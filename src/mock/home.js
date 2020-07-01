@@ -135,4 +135,12 @@ export default ({ mock }) => {
         };
         return json;
     });
+
+    //模拟 筛选 机构的教师 课程 班次
+    Mock.mock(/\/api\/queryTeacherList/, 'get', (queryTeacherList) => {
+        // var orgId = JSON.parse(getOrgDetail.body).orgId;
+
+        console.log(queryTeacherList.body);
+
+    });
 }

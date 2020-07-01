@@ -94,6 +94,13 @@ export const getClassCourseListByOrgId = (orgId) => {
 //根据 筛选 得到教师列表
 export const queryTeacherList = (
     orgId,
+    name,
+    sex,
+    countryNature,
+    workType,
+    teachQualifClass,
+    qualifClass,
+    subject
 ) => {
 
     return request({
@@ -101,6 +108,14 @@ export const queryTeacherList = (
         method: 'get',
         data: {
             orgId,
+            orgId,
+            name,
+            sex,
+            countryNature,
+            workType,
+            teachQualifClass,
+            qualifClass,
+            subject
 
         }
     })
@@ -111,6 +126,10 @@ export const queryTeacherList = (
 //根据 筛选 得到课程列表
 export const queryCourseList = (
     orgId,
+    coursegrade,
+    trainSubject,
+    studentRank,
+    studentGrade
 ) => {
 
     return request({
@@ -118,6 +137,10 @@ export const queryCourseList = (
         method: 'get',
         data: {
             orgId,
+            coursegrade,
+            trainSubject,
+            studentRank,
+            studentGrade
 
         }
     })
@@ -128,6 +151,12 @@ export const queryCourseList = (
 //根据 筛选 得到班次列表
 export const queryClassCourseList = (
     orgId,
+    trainSubject,
+    tudentGrade,
+    className,
+    teacherName,
+    startTime,
+    endTime
 ) => {
 
     return request({
@@ -135,6 +164,12 @@ export const queryClassCourseList = (
         method: 'get',
         data: {
             orgId,
+            trainSubject,
+            tudentGrade,
+            className,
+            teacherName,
+            startTime,
+            endTime
 
         }
     })

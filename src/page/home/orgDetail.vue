@@ -56,6 +56,8 @@
         <el-tab-pane label="机构位置" name="first">地图插件</el-tab-pane>
         <el-tab-pane label="教师介绍" name="second">
           <el-form ref="form" :model="queryTeacherForm" label-width="80px">
+            <el-button type="primary" @click="queryTeachers">查询</el-button>
+            <el-button type="info">重置</el-button>
             <el-form-item label="教师名称">
               <el-input v-model="queryTeacherForm.name"></el-input>
             </el-form-item>
@@ -142,6 +144,8 @@
         </el-tab-pane>
         <el-tab-pane label="课程介绍" name="third">
           <el-form ref="form" :model="queryTeacherForm" label-width="80px">
+            <el-button type="primary" @click="queryCourses">查询</el-button>
+            <el-button type="info">重置</el-button>
             <el-form-item label="级别">
               <el-select v-model="queryCourseForm.coursegrade" clearable placeholder="请选择">
                 <el-option
@@ -199,6 +203,8 @@
         </el-tab-pane>
         <el-tab-pane label="班次介绍" name="fourth">
           <el-form ref="form" :model="queryClassForm" label-width="80px">
+            <el-button type="primary" @click="queryClassCourses">查询</el-button>
+            <el-button type="info">重置</el-button>
             <el-form-item label="年级">
               <el-select v-model="queryClassForm.studentGrade" clearable placeholder="请选择">
                 <el-option
@@ -270,6 +276,11 @@ import {
   getTeacherListByOrgId,
   getCourseListByOrgId,
   getClassCourseListByOrgId
+} from "@/api/home/home";
+import {
+  queryTeacherList,
+  queryCourseList,
+  queryClassCourseList
 } from "@/api/home/home";
 
 export default {
@@ -480,6 +491,44 @@ export default {
   methods: {
     filterSex(value, row) {
       return row.sex === value;
+    },
+    queryTeachers() {
+      queryTeacherList(
+        this.orgId,
+        this.queryTeacherForm.name,
+        this.queryTeacherForm.sex,
+        this.queryTeacherForm.countryNature,
+        this.queryTeacherForm.workType,
+        this.queryTeacherForm.teachQualifClass,
+        this.queryTeacherForm.qualifClass,
+        this.queryTeacherForm.subject
+      ).then(res => {
+        this.teachers = res.data.data.teachers;
+      });
+    },
+    queryCourses() {
+      queryCourseList(
+        this.orgId,
+        this.queryCourseForm.coursegrade,
+        this.queryCourseForm.trainSubject,
+        this.queryCourseForm.studentRank,
+        this.queryCourseForm.studentGrade
+      ).then(res => {
+        this.courses = res.data.data.courses;
+      });
+    },
+    queryClassCourses() {
+      queryCourseList(
+        this.orgId,
+        this.queryClassForm.trainSubject,
+        this.queryClassForm.tudentGrade,
+        this.queryClassForm.className,
+        this.queryClassForm.teacherName,
+        this.queryClassForm.startTime,
+        this.queryClassForm.endTime
+      ).then(res => {
+        this.classCourses = res.data.data.classCourses;
+      });
     }
   }
 };

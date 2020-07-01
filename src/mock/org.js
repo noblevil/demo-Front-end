@@ -109,7 +109,7 @@ export default ({ mock }) => {
 
         json.data.orgList = json.data.orgList.filter((item) => item.trainForm === trainForm);
 
-        console.log(json.data);
+        console.log(json);
 
 
         return json;

@@ -258,7 +258,7 @@ export default {
       //.replace("/orgDetail");
 
       this.$router.push({
-        path: "/orgDetail",
+        //path: "/orgDetail",
         name: "orgDetail",
         params: {
           orgId: row.orgId

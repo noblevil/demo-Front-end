@@ -7,42 +7,42 @@ function getTeacherListByOrgId() {
 
             {
                 teachName: "刘晓洋",
-                countryNature: "大陆",
+                countryNature: "中国大陆",
                 nationality: "中国",
                 highestEducation: "博士",
-                course: "管理学",
-                workType: "兼职",
-                teachQualifClass: "sdaw",
-                department: "wdw",
-                subject: "dwadw",
-                number: "sdw",
+                isTeachQualifCert: "是",
+                workType: "全职",
+                teachQualifClass: "工程",
+                teachingSubject: "飞行技巧",
+                politicalStatus: "中共党员",
+                educationalInstitution: "CMU",
                 sex: "男"
             },
             {
-                teachName: "刘晓洋",
-                countryNature: "大陆",
+                teachName: "刘晓阳",
+                countryNature: "中国大陆",
                 nationality: "中国",
                 highestEducation: "博士",
-                course: "管理学",
+                isTeachQualifCert: "是",
                 workType: "兼职",
-                teachQualifClass: "sdaw",
-                department: "wdw",
-                subject: "dwadw",
-                number: "sdw",
+                teachQualifClass: "工程",
+                politicalStatus: "中共党员",
+                teachingSubject: "航天飞机构造",
+                educationalInstitution: "UCB",
                 sex: "女"
             },
 
             {
-                teachName: "刘晓洋",
-                countryNature: "大陆",
+                teachName: "刘晓扬",
+                countryNature: "中国大陆",
                 nationality: "中国",
                 highestEducation: "博士",
-                course: "管理学",
-                workType: "兼职",
-                teachQualifClass: "sdaw",
-                department: "wdw",
-                subject: "dwadw",
-                number: "sdw",
+                isTeachQualifCert: "是",
+                workType: "全职",
+                teachQualifClass: "工程",
+                politicalStatus: "中共党员",
+                teachingSubject: "飞行原理",
+                educationalInstitution: "MIT",
                 sex: "男"
             }
 
@@ -60,9 +60,9 @@ function getCourseListByOrgId() {
         courses: [
 
             {
-                level: "高级",
-                subject: "语文",
-                objGrade: "一年级",
+                courseLevel: "高级",
+                courseSubject: "语文",
+                studentGrade: "一年级",
                 courseName: "写作",
                 textbook: "《写作教程》",
                 publishingCompany: "人民大学出版社",
@@ -82,13 +82,15 @@ function getClassCourseListByOrgId() {
         classCourses: [
 
             {
-                level: "高级",
-                subject: "语文",
-                objGrade: "一年级",
-                courseName: "写作",
-                textbook: "《写作教程》",
-                publishingCompany: "人民大学出版社",
-                isbnCode: "SDSADAWDAS",
+                courseClassId: "高2020",
+                courseClassName: "飞行(2)班",
+                enrollNum: "30人",
+                teachId:"xxx",
+                courseSubject: "航天飞机构造",
+                teachName:"刘晓阳",
+                teachingTime: "周三上午",
+                startDate: "2020.7.7",
+                endDate: "2021.7.7",
             }
 
 
@@ -112,25 +114,33 @@ export default ({ mock }) => {
 
         const json = { code: 200, success: true, msg: '机构详情' };
         json.data = {
-            institutionName: "XXX培训机构",
+            // institutionName: "XXX培训机构",
             institution: {
                 orgId: 0,
-                establishedTime: "2020",
-                creditCode: "3453",
-                registeredAddress: "address",
-                qualificationCategory: "A",
-                businessAddress: "广东",
-                NameOfRepresentative: "hu",
-                creditDepartment: "广东省教育厅",
-                license: "办证许可证",
-                registrationDepartment: "登记部门",
-                legalEntityRegistrationUnit: "法人登记单位",
-                trainType: "培训类别",
-                institutionPhone: "188193523836",
-                trainContent: "语文",
-                trainObject: "中小学生",
-                enrollmentScope: "小学五年级",
-                trainForm: "在线"
+                orgName: "番禺航天培训班",
+                orgSimpleName: "番禺航培",
+                establishedDate: "2020",
+                orgPhone: "188193523836",
+                registeredAddress: "番禺区",
+                oftenAddress: "小谷围",
+                isInversyAbroad: "否",
+                schoolLicense: "航天培训许可证",
+                schoolLicenseDepartment: "工信部",
+                unifiedCode: "XXXXXXXXX",
+                trainType: "中学学科类",
+                trainContent: "航天飞机驾驶",
+                trainForm: "面授",
+                enrollObject: "高中",
+                enrollRegion: "广州市",
+                listType: "白名单",
+                linkmanOne: "常X1",
+                linkmanOnePhone: "155XXXX7777",
+                linkmanTwo: "常X2",
+                linkmanTwoPhone: "155XXXX8888",
+                bussinesLicense: "企业营业执照XXXXX",
+                relatedCertificates: "J-20",
+                qualificationCategory: "有办学资格证", 
+                nameOfRepresentative: "嘉德罗斯",
             },
         };
         return json;

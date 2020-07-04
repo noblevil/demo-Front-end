@@ -12,10 +12,7 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="10">
                 <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
-                  <tr>
-                    <td width="400px">机构名称</td>
-                    <td width="600px">{{institutionName}}</td>
-                  </tr>
+         
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td width="400px" v-if="index%2==0 && index > 0">{{labels[name]}}</td>
                     <td width="600px" v-if="index%2==0 && index > 0">{{value}}</td>
@@ -24,10 +21,7 @@
               </el-col>
               <el-col :span="10">
                 <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
-                  <tr>
-                    <td>&nbsp;</td>
-                    <td>&nbsp;</td>
-                  </tr>
+       
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td v-if="index%2==1" width="400px">{{labels[name]}}</td>
                     <td v-if="index%2==1" width="600px">{{value}}</td>
@@ -40,37 +34,21 @@
             <el-tabs v-model="activeName" type="card" @tab-click="handleClick">
               <el-tab-pane label="机构位置" name="first" style="heigh:500px">
                 <div>
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
                   <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
-                  <br />
-                  {{this.institution.businessAddress}}
+                  <br />   
+                  <br />              
+                  <br />               
+                  <br />                 
+                  <br />             
+                  <br />               
+                  <br />               
+                  <br />                
+                  <br />                
                   <br />
                 </div>
 
@@ -98,7 +76,7 @@
                 <el-form ref="form" :model="queryTeacherForm" label-width="80px">
                   <el-row type="flex" justify="center">
                     <el-form-item label="教师姓名">
-                      <el-input v-model="queryTeacherForm.name" style="width:200px"></el-input>
+                      <el-input v-model="queryTeacherForm.teachName" style="width:200px"></el-input>
                     </el-form-item>
 
                     <el-form-item label="性别">
@@ -185,7 +163,7 @@
                     </el-form-item>
 
                     <el-form-item label="任教学科">
-                      <el-input v-model="queryTeacherForm.subject" style="width:200px"></el-input>
+                      <el-input v-model="queryTeacherForm.teachingSubject" style="width:200px"></el-input>
                     </el-form-item>
 
                     <el-form-item>
@@ -205,13 +183,15 @@
                     :filters="[{ text: '男', value: '男' }, { text: '女', value: '女' }, { text: '未知', value: '未知' }]"
                     :filter-method="filterSex"
                   ></el-table-column>
-                  <el-table-column prop="highestEducation" label="最高学历"></el-table-column>
-                  <el-table-column prop="course" label="目前任教课程"></el-table-column>
+                  
+                  <el-table-column prop="teachingSubject" label="任课学科"></el-table-column>
                   <el-table-column prop="workType" label="工作类型"></el-table-column>
+                  <el-table-column prop="isTeachQualifCert" label="是否有教师资格证"></el-table-column>
                   <el-table-column prop="teachQualifClass" label="任教资格分类"></el-table-column>
-                  <el-table-column prop="department" label="资格种类"></el-table-column>number
-                  <el-table-column prop="subject" label="任课学科"></el-table-column>
-                  <el-table-column prop="number" label="证书号码"></el-table-column>
+                  <el-table-column prop="politicalStatus" label="政治面貌"></el-table-column>
+                  <el-table-column prop="highestEducation" label="最高学历"></el-table-column>
+                  <el-table-column prop="educationalInstitution" label="毕业院校"></el-table-column>
+                
                 </el-table>
               </el-tab-pane>
 
@@ -219,7 +199,7 @@
                 <el-form ref="form" :model="queryTeacherForm" label-width="80px">
                   <el-row type="flex" justify="center">
                     <el-form-item label="级别">
-                      <el-select v-model="queryCourseForm.coursegrade" clearable placeholder="请选择">
+                      <el-select v-model="queryCourseForm.courseLevel" clearable placeholder="请选择">
                         <el-option
                           v-for="(item, index) in coursegradeOptions"
                           :key="index"
@@ -282,9 +262,9 @@
                 </el-form>
 
                 <el-table :data="courses" stripe style="width: 100%">
-                  <el-table-column prop="level" label="级别" width="180"></el-table-column>
-                  <el-table-column prop="subject" label="学科" width="180"></el-table-column>
-                  <el-table-column prop="objGrade" label="对象年级" width="180"></el-table-column>
+                  <el-table-column prop="courseLevel" label="级别" width="180"></el-table-column>
+                  <el-table-column prop="courseSubject" label="学科" width="180"></el-table-column>
+                  <el-table-column prop="studentGrade" label="对象年级" width="180"></el-table-column>
                   <el-table-column prop="courseName" label="课程名称" width="180"></el-table-column>
                   <el-table-column prop="textbook" label="教材"></el-table-column>
                   <el-table-column prop="publishingCompany" label="出版社"></el-table-column>
@@ -306,7 +286,7 @@
                       </el-select>
                     </el-form-item>
                     <el-form-item label="班级名称">
-                      <el-input v-model="queryClassForm.className"></el-input>
+                      <el-input v-model="queryClassForm.courseClassName"></el-input>
                     </el-form-item>
                     
                   </el-row>
@@ -314,7 +294,7 @@
                   <el-row type="flex" justify="center">
 
                     <el-form-item label="学科">
-                      <el-select v-model="queryClassForm.trainSubject" clearable placeholder="请选择">
+                      <el-select v-model="queryClassForm.courseSubject" clearable placeholder="请选择">
                         <el-option
                           v-for="item in trainSubjectOptions"
                           :key="item.value"
@@ -326,20 +306,20 @@
  
 
                     <el-form-item label="授课教师">
-                      <el-input v-model="queryClassForm.teacherName"></el-input>
+                      <el-input v-model="queryClassForm.teachName"></el-input>
                     </el-form-item>
                   </el-row>
 
                   <el-row type="flex" justify="center">
                     <el-form-item label="课程起止日期">
                       <el-date-picker
-                        v-model="queryClassForm.startTime"
+                        v-model="queryClassForm.startDate"
                         type="date"
                         placeholder="开始日期"
                         :picker-options="pickerOptions0"
                       ></el-date-picker>
                       <el-date-picker
-                        v-model="queryClassForm.endTime"
+                        v-model="queryClassForm.endDate"
                         type="date"
                         placeholder="结束日期"
                         :picker-options="pickerOptions1"
@@ -358,14 +338,15 @@
                 </el-form>
 
                 <el-table :data="classCourses" stripe style="width: 100%">
-                  <el-table-column prop="studentGrade" label="年级" width="180"></el-table-column>
-                  <el-table-column prop="trainSubject" label="学科" width="180"></el-table-column>
-                  <el-table-column prop="className" label="班级名称" width="180"></el-table-column>
-                  <el-table-column prop="studentNum" label="计划招生人数"></el-table-column>
-                  <el-table-column prop="teacherName" label="授课教师" width="180"></el-table-column>
-                  <el-table-column prop="startTime" label="课程开始日期" width="180"></el-table-column>
-                  <el-table-column prop="endTime" label="课程结束日期" width="180"></el-table-column>
-                  <el-table-column prop="FirstTime" label="课程上课日期"></el-table-column>
+                  <el-table-column prop="courseClassId" label="年级" width="180"></el-table-column>
+                  <el-table-column prop="courseSubject" label="学科" width="180"></el-table-column>
+                  <el-table-column prop="courseClassName" label="班级名称" width="180"></el-table-column>
+                  <el-table-column prop="enrollNum" label="计划招生人数"></el-table-column>
+                  <el-table-column prop="teachName" label="授课教师" width="180"></el-table-column>
+                  <el-table-column prop="teachingTime" label="课程上课日期"></el-table-column>
+                  <el-table-column prop="startDate" label="课程开始日期" width="180"></el-table-column>
+                  <el-table-column prop="endDate" label="课程结束日期" width="180"></el-table-column>
+                  
                 </el-table>
               </el-tab-pane>
             </el-tabs>
@@ -465,42 +446,60 @@ export default {
         }
       ],
 
-      institution: {
-        establishedTime: "",
-        creditCode: "",
+      institution: { 
+        orgType:"",
+        orgName:"",
+        orgSimpleName:"",
+        establishedDate: "",
+        orgPhone: "",
         registeredAddress: "",
-        qualificationCategory: "",
-        businessAddress: "",
-        NameOfRepresentative: "",
-        creditDepartment: "",
-        license: "",
-        registrationDepartment: "",
-        legalEntityRegistrationUnit: "",
+        oftenAddress: "",
+        isInversyAbroad: "",
+        schoolLicense: "",
+        schoolLicenseDepartment: "",
+        unifiedCode: "",
         trainType: "",
-        institutionPhone: "",
         trainContent: "",
-        trainObject: "",
-        enrollmentScope: "",
-        trainForm: ""
+        trainForm: "",
+        enrollObject: "",
+        enrollRegion: "",
+        listType: "",
+        linkmanOne: "",
+        linkmanOnePhone: "",
+        linkmanTwo: "",
+        linkmanTwoPhone: "",
+        bussinesLicense: "",
+        relatedCertificates: "",     
+        qualificationCategory: "",     
+        nameOfRepresentative: "",
       },
 
       labels: {
-        establishedTime: "设立时间",
-        creditCode: "统一社会信用代码",
+        // orgType: "机构类型",
+        orgName: "机构名称",
+        orgSimpleName: "机构简称",
+        establishedDate: "设立时间",
+        orgPhone: "机构电话",
         registeredAddress: "注册地址",
-        qualificationCategory: "资质类别",
-        businessAddress: "实际经营地址",
-        NameOfRepresentative: "法定代表姓名",
-        creditDepartment: "发证机关",
-        license: "办证许可证",
-        registrationDepartment: "登记部门",
-        legalEntityRegistrationUnit: "法人登记单位",
+        oftenAddress: "实际经营地址",
+        isInversyAbroad: "是否有境外投资",
+        schoolLicense: "办学许可证",
+        schoolLicenseDepartment: "发证机关",
+        unifiedCode: "统一社会信用代码",
         trainType: "培训类别",
-        institutionPhone: "机构电话",
-        trainContent: "培训类别",
-        trainObject: "培训对象",
-        enrollmentScope: "招生范围",
-        trainForm: "培训形式"
+        trainContent: "培训内容",
+        trainForm: "培训形式",
+        enrollObject: "招生对象",
+        enrollRegion: "招生范围",
+        listType: "黑/白/灰名单",
+        linkmanOne: "常用联系人1",
+        linkmanOnePhone: "常用联系人1手机号",
+        linkmanTwo: "常用联系人2",
+        linkmanTwoPhone: "常用联系人2手机号",
+        bussinesLicense: "企业营业执照",
+        relatedCertificates: "相关证书",
+        qualificationCategory: "资质类别", 
+        nameOfRepresentative: "法定代表姓名",       
       },
 
       countryNatureOptions: {
@@ -597,29 +596,30 @@ export default {
 
       //教师查询表单
       queryTeacherForm: {
-        name: "",
+        teachName: "",
         sex: "",
         countryNature: "",
         workType: "",
         teachQualifClass: "",
-        qualifClass: "",
-        subject: ""
+        teachingSubject: "",
+        highestEducation: "",
+        nationality: "",
       },
       //课程查询表单
       queryCourseForm: {
-        coursegrade: "",
+        courseLevel: "",
         trainSubject: "",
         studentRank: "",
         studentGrade: ""
       },
       //班次查询表单
       queryClassForm: {
-        trainSubject: "",
+        courseSubject: "",
         studentGrade: "",
-        className: "",
-        teacherName: "",
-        startTime: "",
-        endTime: ""
+        CourseClassName: "",
+        teachName: "",
+        startDate: "",
+        endDate: ""
       },
 
       activeName: "first",
@@ -642,8 +642,9 @@ export default {
     this.orgId = this.$route.params.orgId;
 
     getOrgDetail(this.orgId).then(res => {
-      this.institutionName = res.data.data.institutionName;
+      // this.institutionName = res.data.data.institutionName;
       this.institution = res.data.data.institution;
+      // console.log("ddddddd"+res.data.data.institution);
     });
 
     //得到教师的列表
@@ -668,13 +669,13 @@ export default {
     queryTeachers() {
       queryTeacherList(
         this.orgId,
-        this.queryTeacherForm.name,
+        this.queryTeacherForm.teachName,
         this.queryTeacherForm.sex,
         this.queryTeacherForm.countryNature,
         this.queryTeacherForm.workType,
         this.queryTeacherForm.teachQualifClass,
         this.queryTeacherForm.qualifClass,
-        this.queryTeacherForm.subject
+        this.queryTeacherForm.teachingSubject
       ).then(res => {
         this.teachers = res.data.data.teachers;
       });
@@ -682,7 +683,7 @@ export default {
     queryCourses() {
       queryCourseList(
         this.orgId,
-        this.queryCourseForm.coursegrade,
+        this.queryCourseForm.courseLevel,
         this.queryCourseForm.trainSubject,
         this.queryCourseForm.studentRank,
         this.queryCourseForm.studentGrade
@@ -693,12 +694,12 @@ export default {
     queryClassCourses() {
       queryCourseList(
         this.orgId,
-        this.queryClassForm.trainSubject,
-        this.queryClassForm.tudentGrade,
-        this.queryClassForm.className,
-        this.queryClassForm.teacherName,
-        this.queryClassForm.startTime,
-        this.queryClassForm.endTime
+        this.queryClassForm.courseSubject,
+        this.queryClassForm.studentGrade,
+        this.queryClassForm.courseClassName,
+        this.queryClassForm.teachName,
+        this.queryClassForm.startDate,
+        this.queryClassForm.endDate,
       ).then(res => {
         this.classCourses = res.data.data.classCourses;
       });

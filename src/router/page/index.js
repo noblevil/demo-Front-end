@@ -26,7 +26,7 @@ export default [
   },
   {
     path: '/complaint',
-    name: '我的测试页',
+    name: '网上投诉',
     component: () =>
       import( /* webpackChunkName: "page" */ '@/page/home/complaint'),
     meta: {
@@ -35,6 +35,18 @@ export default [
       isAuth: false
     }
   },
+  {
+    path: '/addComplaint',
+    name: '新增投诉',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/addComplaint'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  
   {
     path: '/policy',
     name: '我的测试页',
@@ -47,6 +59,28 @@ export default [
     }
   },
 
+  {
+    path: '/userlogin',
+    name: '我的测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/login'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/register',
+    name: '我的测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/register'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
   {
     path: '/test',
     name: '我的测试页',

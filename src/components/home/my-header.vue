@@ -2,6 +2,7 @@
   <div>
     <h3>区块链智能教育平台</h3>
     <div class="menu">
+      <el-row>
       <el-menu
         :default-active="activeIndex"
         class="el-menu-demo"
@@ -18,6 +19,13 @@
           <a href="http://localhost:1888/#/policy">政策解读</a>
         </el-menu-item>
       </el-menu>
+
+      <div style=" position:absolute;right:50px;top:45px">
+        <i class="el-icon-user"></i>
+        <el-link href="http://localhost:1888/#/userlogin" >登录</el-link>|
+        <el-link href="http://localhost:1888/#/register" >注册</el-link>
+      </div>
+</el-row>
       <div class="line"></div>
       <el-divider content-position="right"></el-divider>
     </div>

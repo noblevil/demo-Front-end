@@ -1,12 +1,12 @@
 import request from '@/router/axios';
 
 //根据orgId得到机构详情
-export const getOrgDetail = (orgId) => {
+export const getOrgDetailById = (orgId) => {
 
 
 
     return request({
-        url: '/api/orgDetail',
+        url: '/blade-demo/orginfo/getOrgDetailById',
         method: 'get',
         data: {
             orgId,
@@ -18,7 +18,7 @@ export const getOrgDetail = (orgId) => {
 //根据orgId得到机构详情
 export const getAllOrgList = () => {
     return request({
-        url: '/api/AllOrgList',
+        url: '/blade-demo/orginfo/getAllOrgList',
         method: 'get',
     })
 }
@@ -26,17 +26,17 @@ export const getAllOrgList = () => {
 //根据 筛选 得到机构列表
 export const queryOrgList = (
     orgName,
-    address,
+    oftenAddress,
     trainType,
     trainSubject,
     trainForm) => {
 
     return request({
-        url: '/api/queryOrgList',
+        url: '/blade-demo/orginfo/queryOrgList',
         method: 'get',
         data: {
             orgName,
-            address,
+            oftenAddress,
             trainType,
             trainSubject,
             trainForm
@@ -47,12 +47,12 @@ export const queryOrgList = (
 }
 
 //根据orgId  得到机构所属的所有教师列表
-export const getTeacherListByOrgId = (orgId) => {
+export const getTeachListById = (orgId) => {
 
 
 
     return request({
-        url: '/api/teacherListByOrgId',
+        url: '/blade-demo/teachinfo/getTeachListById',
         method: 'get',
         data: {
             orgId,
@@ -62,12 +62,12 @@ export const getTeacherListByOrgId = (orgId) => {
 }
 
 //根据orgId  得到机构所属的所有课程列表
-export const getCourseListByOrgId = (orgId) => {
+export const getCourseListById = (orgId) => {
 
 
 
     return request({
-        url: '/api/courseListByOrgId',
+        url: '/blade-demo/course/getCourseListById',
         method: 'get',
         data: {
             orgId,
@@ -77,12 +77,12 @@ export const getCourseListByOrgId = (orgId) => {
 }
 
 //根据orgId  得到机构所属的所有班次列表
-export const getClassCourseListByOrgId = (orgId) => {
+export const getClassCourseListById = (orgId) => {
 
 
 
     return request({
-        url: '/api/classCourseListByOrgId',
+        url: '/blade-demo/course/getClassCourseListById',
         method: 'get',
         data: {
             orgId,
@@ -92,30 +92,30 @@ export const getClassCourseListByOrgId = (orgId) => {
 }
 
 //根据 筛选 得到教师列表
-export const queryTeacherList = (
+export const queryTeachList = (
+    // 筛选条件部分缺少资格种类
     orgId,
-    name,
+    teachName,
     sex,
     countryNature,
     workType,
     teachQualifClass,
-    qualifClass,
-    subject
+    isTeachQualifCert,
+    teachingSubject,
 ) => {
 
     return request({
-        url: '/api/queryTeacherList',
+        url: '/balde-demo/teachinfo/queryTeachList',
         method: 'get',
         data: {
             orgId,
-            name,
+            teachName,
             sex,
             countryNature,
             workType,
             teachQualifClass,
-            qualifClass,
-            subject
-
+            isTeachQualifCert,
+            teachingSubject,
         }
     })
 
@@ -125,22 +125,21 @@ export const queryTeacherList = (
 //根据 筛选 得到课程列表
 export const queryCourseList = (
     orgId,
-    coursegrade,
-    trainSubject,
+    courseLevel,
+    courseSubject,
     studentRank,
     studentGrade
 ) => {
 
     return request({
-        url: '/api/queryTeacherListList',
+        url: '/blade-demo/course/queryCourseList',
         method: 'get',
         data: {
             orgId,
-            coursegrade,
-            trainSubject,
+            courseLevel,
+            courseSubject,
             studentRank,
             studentGrade
-
         }
     })
 
@@ -150,25 +149,25 @@ export const queryCourseList = (
 //根据 筛选 得到班次列表
 export const queryClassCourseList = (
     orgId,
-    trainSubject,
-    tudentGrade,
-    className,
-    teacherName,
-    startTime,
-    endTime
+    courseSubject,
+    studentGrade,
+    CourseClassName,
+    teachName,
+    startDate,
+    endDate
 ) => {
 
     return request({
-        url: '/api/queryTeacherListList',
+        url: '/blade-demo/course/queryClassCourseList',
         method: 'get',
         data: {
             orgId,
-            trainSubject,
-            tudentGrade,
-            className,
-            teacherName,
-            startTime,
-            endTime
+            courseSubject,
+            studentGrade,
+            CourseClassName,
+            teachName,
+            startDate,
+            endDate
 
         }
     })

@@ -145,7 +145,7 @@
                         ></el-option>
                       </el-select>
                     </el-form-item>
-
+                    <!-- 这里需要再考虑 888888888888888 -->
                     <el-form-item label="资格种类">
                       <el-select
                         v-model="queryTeacherForm.qualifClass"
@@ -224,7 +224,7 @@
                   <el-row type="flex" justify="center">
                     <el-form-item label="学科">
                       <el-select
-                        v-model="queryTeacherForm.trainSubject"
+                        v-model="queryTeacherForm.courseSubject"
                         clearable
                         placeholder="请选择"
                       >
@@ -365,12 +365,12 @@ import selectCountry from "@/components/demo/select-country";
 
 import {
   getOrgDetail,
-  getTeacherListByOrgId,
-  getCourseListByOrgId,
-  getClassCourseListByOrgId
+  getTeachListById,
+  getCourseListById,
+  getClassCourseListById
 } from "@/api/home/home";
 import {
-  queryTeacherList,
+  queryTeachList,
   queryCourseList,
   queryClassCourseList
 } from "@/api/home/home";
@@ -648,16 +648,16 @@ export default {
     });
 
     //得到教师的列表
-    getTeacherListByOrgId(this.orgId).then(res => {
+    getTeachListById(this.orgId).then(res => {
       this.teachers = res.data.data.teachers;
     });
 
     //得到课程的列表
-    getCourseListByOrgId(this.orgId).then(res => {
+    getCourseListById(this.orgId).then(res => {
       this.courses = res.data.data.courses;
     });
     //得到班次的列表
-    getClassCourseListByOrgId(this.orgId).then(res => {
+    getClassCourseListById(this.orgId).then(res => {
       this.classCourses = res.data.data.classCourses;
     });
   },
@@ -667,7 +667,7 @@ export default {
       return row.sex === value;
     },
     queryTeachers() {
-      queryTeacherList(
+      queryTeachList(
         this.orgId,
         this.queryTeacherForm.teachName,
         this.queryTeacherForm.sex,

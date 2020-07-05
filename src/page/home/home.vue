@@ -210,7 +210,8 @@ export default {
 
   created() {
     getAllOrgList().then(res => {
-      this.orgList = res.data.data.orgList;
+      this.orgList = res.data.data;
+
       this.orgList.forEach(element => {
         if (element.listType == 0) {
           element.listType = "白名单";
@@ -239,7 +240,7 @@ export default {
         this.queryForm.trainSubject,
         this.queryForm.trainForm
       ).then(res => {
-        this.orgList = res.data.data.orgList;
+        this.orgList = res.data.data;
         this.orgList.forEach(element => {
           if (element.listType == 0) {
             element.listType = "白名单";

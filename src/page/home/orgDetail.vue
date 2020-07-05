@@ -12,7 +12,6 @@
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="10">
                 <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
-         
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td width="400px" v-if="index%2==0 && index > 0">{{labels[name]}}</td>
                     <td width="600px" v-if="index%2==0 && index > 0">{{value}}</td>
@@ -21,7 +20,6 @@
               </el-col>
               <el-col :span="10">
                 <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
-       
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td v-if="index%2==1" width="400px">{{labels[name]}}</td>
                     <td v-if="index%2==1" width="600px">{{value}}</td>
@@ -40,15 +38,15 @@
                   <br />
                   <br />
                   <br />
-                  <br />   
-                  <br />              
-                  <br />               
-                  <br />                 
-                  <br />             
-                  <br />               
-                  <br />               
-                  <br />                
-                  <br />                
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
+                  <br />
                   <br />
                 </div>
 
@@ -183,7 +181,7 @@
                     :filters="[{ text: '男', value: '男' }, { text: '女', value: '女' }, { text: '未知', value: '未知' }]"
                     :filter-method="filterSex"
                   ></el-table-column>
-                  
+
                   <el-table-column prop="teachingSubject" label="任课学科"></el-table-column>
                   <el-table-column prop="workType" label="工作类型"></el-table-column>
                   <el-table-column prop="isTeachQualifCert" label="是否有教师资格证"></el-table-column>
@@ -191,7 +189,6 @@
                   <el-table-column prop="politicalStatus" label="政治面貌"></el-table-column>
                   <el-table-column prop="highestEducation" label="最高学历"></el-table-column>
                   <el-table-column prop="educationalInstitution" label="毕业院校"></el-table-column>
-                
                 </el-table>
               </el-tab-pane>
 
@@ -288,11 +285,9 @@
                     <el-form-item label="班级名称">
                       <el-input v-model="queryClassForm.courseClassName"></el-input>
                     </el-form-item>
-                    
                   </el-row>
 
                   <el-row type="flex" justify="center">
-
                     <el-form-item label="学科">
                       <el-select v-model="queryClassForm.courseSubject" clearable placeholder="请选择">
                         <el-option
@@ -303,7 +298,6 @@
                         ></el-option>
                       </el-select>
                     </el-form-item>
- 
 
                     <el-form-item label="授课教师">
                       <el-input v-model="queryClassForm.teachName"></el-input>
@@ -325,8 +319,6 @@
                         :picker-options="pickerOptions1"
                       ></el-date-picker>
                     </el-form-item>
-
-   
                   </el-row>
 
                   <el-row type="flex" justify="center">
@@ -346,7 +338,6 @@
                   <el-table-column prop="teachingTime" label="课程上课日期"></el-table-column>
                   <el-table-column prop="startDate" label="课程开始日期" width="180"></el-table-column>
                   <el-table-column prop="endDate" label="课程结束日期" width="180"></el-table-column>
-                  
                 </el-table>
               </el-tab-pane>
             </el-tabs>
@@ -364,7 +355,7 @@ import myHeader from "@/components/home/my-header";
 import selectCountry from "@/components/demo/select-country";
 
 import {
-  getOrgDetail,
+  getOrgDetailById,
   getTeachListById,
   getCourseListById,
   getClassCourseListById
@@ -446,17 +437,17 @@ export default {
         }
       ],
 
-      institution: { 
-        orgType:"",
-        orgName:"",
-        orgSimpleName:"",
+      institution: {
+        orgType: "",
+        orgName: "",
+        orgSimplyName: "",
         establishedDate: "",
         orgPhone: "",
-        registeredAddress: "",
+        registerAddress: "",
         oftenAddress: "",
-        isInversyAbroad: "",
-        schoolLicense: "",
-        schoolLicenseDepartment: "",
+        isInvestAbroad: "",
+        schoolLicence: "",
+        schoolLicenceDepartment: "",
         unifiedCode: "",
         trainType: "",
         trainContent: "",
@@ -468,23 +459,24 @@ export default {
         linkmanOnePhone: "",
         linkmanTwo: "",
         linkmanTwoPhone: "",
-        bussinesLicense: "",
-        relatedCertificates: "",     
-        qualificationCategory: "",     
-        nameOfRepresentative: "",
+        businessLicense: "",
+        relatedCertificates: "",
+        qualificationCategory: "",
+        nameOfRepresentative: ""
       },
 
       labels: {
         // orgType: "机构类型",
         orgName: "机构名称",
-        orgSimpleName: "机构简称",
+        orgSimplyName: "机构简称",
         establishedDate: "设立时间",
         orgPhone: "机构电话",
-        registeredAddress: "注册地址",
+        orgType: "机构类型",
+        registerAddress: "注册地址",
         oftenAddress: "实际经营地址",
-        isInversyAbroad: "是否有境外投资",
-        schoolLicense: "办学许可证",
-        schoolLicenseDepartment: "发证机关",
+        isInvestAbroad: "是否有境外投资",
+        schoolLicence: "办学许可证",
+        schoolLicenceDepartment: "发证机关",
         unifiedCode: "统一社会信用代码",
         trainType: "培训类别",
         trainContent: "培训内容",
@@ -496,103 +488,210 @@ export default {
         linkmanOnePhone: "常用联系人1手机号",
         linkmanTwo: "常用联系人2",
         linkmanTwoPhone: "常用联系人2手机号",
-        bussinesLicense: "企业营业执照",
+        businessLicense: "企业营业执照",
         relatedCertificates: "相关证书",
-        qualificationCategory: "资质类别", 
-        nameOfRepresentative: "法定代表姓名",       
+        qualificationCategory: "资质类别",
+        nameOfRepresentative: "法定代表姓名"
       },
 
-      countryNatureOptions: {
-        0: "中国",
-        1: "港澳台",
-        2: "外国"
-      },
-      sexOptions: {
-        0: "男",
-        1: "女",
-        2: "未知"
-      },
-      workTypeOptions: {
-        0: "全职",
-        1: "兼职"
-      },
-      teachQualifClassOptions: { 0: "教师资格证", 1: "外专证", 2: "无" },
-      qualifClassOptions: {
-        0: "小学教师资格",
-        1: "初级中学教师资格",
-        2: "高级中学教师资格",
-        3: "高等学校教师资格",
-        4: "其他"
-      },
+      countryNatureOptions: [
+        {
+          value: "中国",
+          label: "中国"
+        },
+        {
+          value: "港澳台",
+          label: "港澳台"
+        },
+        {
+          value: "外国",
+          label: "外国"
+        }
+      ],
+      sexOptions: [
+        {
+          value: "男",
+          label: "男"
+        },
+        {
+          value: "女",
+          label: "女"
+        },
+        {
+          value: "未知",
+          label: "未知"
+        }
+      ],
 
-      coursegradeOptions: {
-        0: "初级",
-        1: "中级",
-        2: "高级"
-      },
+      workTypeOptions: [
+        {
+          value: "全职",
+          label: "全职"
+        },
+        {
+          value: "兼职",
+          label: "兼职"
+        }
+      ],
+
+      teachQualifClassOptions: [
+        {
+          value: "教师资格证",
+          label: "教师资格证"
+        },
+        {
+          value: "外专证",
+          label: "外专证"
+        },
+        {
+          value: "无",
+          label: "无"
+        }
+      ],
+      qualifClassOptions: [
+        {
+          value: "小学教师资格",
+          label: "小学教师资格"
+        },
+        {
+          value: "初级中学教师资格",
+          label: "初级中学教师资格"
+        },
+        {
+          value: "高级中学教师资格",
+          label: "高级中学教师资格"
+        },
+        {
+          value: "高等学校教师资格",
+          label: "高等学校教师资格"
+        },
+        {
+          value: "其他",
+          label: "其他"
+        }
+      ],
+
+      coursegradeOptions: [
+        {
+          value: "初级",
+          label: "初级"
+        },
+        {
+          value: "中级",
+          label: "中级"
+        },
+        {
+          value: "高级",
+          label: "高级"
+        }
+      ],
+
       trainSubjectOptions: [
         {
-          value: 0,
+          value: "语文",
           label: "语文"
         },
         {
-          value: 1,
+          value: "数学",
           label: "数学"
         },
         {
-          value: 2,
+          value: "英语",
           label: "英语"
         },
         {
-          value: 3,
+          value: "物理",
           label: "物理"
         },
         {
-          value: 4,
+          value: "化学",
           label: "化学"
         },
         {
-          value: 5,
+          value: "生物",
           label: "生物"
         },
         {
-          value: 6,
+          value: "历史",
           label: "历史"
         },
         {
-          value: 7,
+          value: "地理",
           label: "地理"
         },
 
         {
-          value: 8,
+          value: "政治",
           label: "政治"
         }
       ],
-      studentRankOptions: {
-        0: "小学",
-        1: "初中",
-        2: "高中",
-        3: "中高职学生",
-        4: "大学生",
-        5: "幼儿",
-        6: "成人",
-        7: "老年"
-      },
-      studentGradeOptions: {
-        1: "一年级",
-        2: "二年级",
-        3: "三年级",
-        4: "四年级",
-        5: "五年级",
-        6: "六年级",
-        7: "七年级",
-        8: "八年级",
-        9: "高一",
-        10: "高二",
-        11: "高三",
-        0: "其他"
-      },
+      studentRankOptions: [
+        {
+          value: "小学",
+          label: "小学"
+        },
+        {
+          value: "初中",
+          label: "初中"
+        },
+        {
+          value: "高中",
+          label: "高中"
+        },
+        {
+          value: "中高职学生",
+          label: "中高职学生"
+        },
+        {
+          value: "大学生",
+          label: "大学生"
+        }
+      ],
+      studentGradeOptions: [
+        {
+          value: "一年级",
+          label: "一年级"
+        },
+        {
+          value: "二年级",
+          label: "二年级"
+        },
+        {
+          value: "三年级",
+          label: "三年级"
+        },
+        {
+          value: "四年级",
+          label: "四年级"
+        },
+        {
+          value: "五年级",
+          label: "五年级"
+        },
+        { value: "六年级", label: "六年级" },
+        {
+          value: "七年级",
+          label: "七年级"
+        },
+        {
+          value: "八年级",
+          label: "八年级"
+        },
+        {
+          value: "高一",
+          label: "高一"
+        },
+
+        {
+          value: "高二",
+          label: "高二"
+        },
+
+        {
+          value: "高三",
+          label: "高三"
+        }
+      ],
 
       //教师查询表单
       queryTeacherForm: {
@@ -603,7 +702,7 @@ export default {
         teachQualifClass: "",
         teachingSubject: "",
         highestEducation: "",
-        nationality: "",
+        nationality: ""
       },
       //课程查询表单
       queryCourseForm: {
@@ -641,24 +740,30 @@ export default {
     //得到传来的参数 orgId
     this.orgId = this.$route.params.orgId;
 
-    getOrgDetail(this.orgId).then(res => {
+    console.log("第一个函数前");
+
+    getOrgDetailById(this.orgId).then(res => {
       // this.institutionName = res.data.data.institutionName;
-      this.institution = res.data.data.institution;
+      console.log(res);
+
+      this.institution = res.data.data;
       // console.log("ddddddd"+res.data.data.institution);
     });
 
+    console.log("第一个函数后");
+
     //得到教师的列表
     getTeachListById(this.orgId).then(res => {
-      this.teachers = res.data.data.teachers;
+      this.teachers = res.data.data;
     });
 
     //得到课程的列表
     getCourseListById(this.orgId).then(res => {
-      this.courses = res.data.data.courses;
+      this.courses = res.data.data;
     });
     //得到班次的列表
     getClassCourseListById(this.orgId).then(res => {
-      this.classCourses = res.data.data.classCourses;
+      this.classCourses = res.data.data;
     });
   },
 
@@ -677,7 +782,7 @@ export default {
         this.queryTeacherForm.qualifClass,
         this.queryTeacherForm.teachingSubject
       ).then(res => {
-        this.teachers = res.data.data.teachers;
+        this.teachers = res.data.data;
       });
     },
     queryCourses() {
@@ -688,7 +793,7 @@ export default {
         this.queryCourseForm.studentRank,
         this.queryCourseForm.studentGrade
       ).then(res => {
-        this.courses = res.data.data.courses;
+        this.courses = res.data.data;
       });
     },
     queryClassCourses() {
@@ -699,9 +804,9 @@ export default {
         this.queryClassForm.courseClassName,
         this.queryClassForm.teachName,
         this.queryClassForm.startDate,
-        this.queryClassForm.endDate,
+        this.queryClassForm.endDate
       ).then(res => {
-        this.classCourses = res.data.data.classCourses;
+        this.classCourses = res.data.data;
       });
     }
   }

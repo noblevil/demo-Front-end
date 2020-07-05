@@ -27,7 +27,7 @@ demo({ mock: false });
 
 blog({ mock: false });
 
-home({ mock: true });
-org({ mock: true });
+home({ mock: false });
+org({ mock: false });
 
 

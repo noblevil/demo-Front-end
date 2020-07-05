@@ -6,9 +6,9 @@ export const getOrgDetailById = (orgId) => {
 
 
     return request({
-        url: '/blade-demo/orginfo/getOrgDetailById',
+        url: '/api/blade-demo/orginfo/getOrgDetailById',
         method: 'get',
-        data: {
+        params: {
             orgId,
 
         }
@@ -18,7 +18,7 @@ export const getOrgDetailById = (orgId) => {
 //根据orgId得到机构详情
 export const getAllOrgList = () => {
     return request({
-        url: '/blade-demo/orginfo/getAllOrgList',
+        url: '/api/blade-demo/orginfo/getAllOrgList',
         method: 'get',
     })
 }
@@ -32,9 +32,10 @@ export const queryOrgList = (
     trainForm) => {
 
     return request({
-        url: '/blade-demo/orginfo/queryOrgList',
+        url: '/api/blade-demo/orginfo/queryOrgList',
         method: 'get',
-        data: {
+
+        params: {
             orgName,
             oftenAddress,
             trainType,
@@ -52,9 +53,9 @@ export const getTeachListById = (orgId) => {
 
 
     return request({
-        url: '/blade-demo/teachinfo/getTeachListById',
+        url: '/api/blade-demo/teachinfo/getTeachListById',
         method: 'get',
-        data: {
+        params: {
             orgId,
 
         }
@@ -67,9 +68,9 @@ export const getCourseListById = (orgId) => {
 
 
     return request({
-        url: '/blade-demo/course/getCourseListById',
+        url: '/api/blade-demo/course/getCourseListById',
         method: 'get',
-        data: {
+        params: {
             orgId,
 
         }
@@ -82,9 +83,9 @@ export const getClassCourseListById = (orgId) => {
 
 
     return request({
-        url: '/blade-demo/course/getClassCourseListById',
+        url: '/api/blade-demo/course/getClassCourseListById',
         method: 'get',
-        data: {
+        params: {
             orgId,
 
         }
@@ -105,9 +106,10 @@ export const queryTeachList = (
 ) => {
 
     return request({
-        url: '/balde-demo/teachinfo/queryTeachList',
+        url: '/api/blade-demo/teachinfo/queryTeachList',
+
         method: 'get',
-        data: {
+        params: {
             orgId,
             teachName,
             sex,
@@ -132,9 +134,9 @@ export const queryCourseList = (
 ) => {
 
     return request({
-        url: '/blade-demo/course/queryCourseList',
+        url: '/api/blade-demo/course/queryCourseList',
         method: 'get',
-        data: {
+        params: {
             orgId,
             courseLevel,
             courseSubject,
@@ -158,9 +160,9 @@ export const queryClassCourseList = (
 ) => {
 
     return request({
-        url: '/blade-demo/course/queryClassCourseList',
+        url: '/api/blade-demo/course/queryClassCourseList',
         method: 'get',
-        data: {
+        params: {
             orgId,
             courseSubject,
             studentGrade,

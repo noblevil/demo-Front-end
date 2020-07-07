@@ -54,8 +54,8 @@
                 <table cellpadding="10px" style="line-height: 40px;text-align: center;width: 350px;margin-left: 25px">
                   <tr>教师资格证号码：</tr>
                   <tr>
-                    <el-form-item prop="">
-                    <el-input v-model="input" placeholder="请输入内容" style="width: 300px"></el-input>
+                    <el-form-item prop="certificateNumber">
+                    <el-input v-model="other.certificateNumber" placeholder="请输入内容" style="width: 300px"></el-input>
                     </el-form-item>
                   </tr>
                   <tr>
@@ -199,9 +199,14 @@
           userName:'',
           userPassword:'',
           confirmPassword:'',
+          certificateNumber:'',
+          teachQualificationClass: '',
 
         },
         otherRules: {
+          certificateNumber:[
+            {required: true, message: "请输入教师资格证号码", trigger: "blur"},
+          ],
           teacherCertification: [
             {required: true, message: "请输入用户性别", trigger: "change"}
           ],

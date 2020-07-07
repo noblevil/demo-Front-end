@@ -266,7 +266,7 @@
 </template>
 
 <script>
-  import {getProfile} from '@/api/profile/profile'
+
 
 
     export default {
@@ -1344,12 +1344,11 @@
       },
 
       created(){
-        getProfile().then(res => {
-          console.log(res)
+
           //console.log(this.$store.state)
 
 
-        })
+
       },
 
 

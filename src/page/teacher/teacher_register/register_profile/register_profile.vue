@@ -200,7 +200,7 @@
 </template>
 
 <script>
-  import {getProfile} from '@/api/profile/profile'
+
 
 
     export default {
@@ -1289,10 +1289,7 @@
           console.log(sessionStorage.getItem('profile'))
           this.teacher = JSON.parse(sessionStorage.getItem('profile'))
         }
-        getProfile().then(res => {
-          console.log(res)
-          //console.log(this.$store.state)
-        })
+
 
       },
 

@@ -113,7 +113,7 @@
 </template>
 
 <script>
-  import {getInstitution} from '@/api/institution/institution'
+  //import {getInstitution} from '@/api/institution/institution'
 
   export default {
 

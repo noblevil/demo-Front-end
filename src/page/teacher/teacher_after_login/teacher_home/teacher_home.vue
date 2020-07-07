@@ -92,7 +92,7 @@
 </template>
 
 <script>
-import {getTeacherAfterLoginTeacherHome} from '@/api/teacher_after_login/teacher_after_login'
+//import {getTeacherAfterLoginTeacherHome} from '@/api/teacher_after_login/teacher_after_login'
 
   export default {
 
@@ -108,13 +108,15 @@ import {getTeacherAfterLoginTeacherHome} from '@/api/teacher_after_login/teacher
 
     },
     created() {
-      getTeacherAfterLoginTeacherHome().then(res => {
+      /*getTeacherAfterLoginTeacherHome().then(res => {
         console.log(res)
         this.comments=res.data.data.comments;
         this.courses=res.data.data.courses;
         console.log(this.comments)
         console.log(this.courses)
       })
+      */
+
     },
 
 

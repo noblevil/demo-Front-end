@@ -35,6 +35,7 @@ export  const teacherRegister = (profile,myInstitution,teacherDetail,experiences
       idNum:profile.certificateNumber,
       nativePlace:profile.nativePlace,
       politicalStatus:profile.politicalStatus,
+      experiences:[],
     },
   })
 }

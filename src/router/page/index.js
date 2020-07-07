@@ -46,7 +46,7 @@ export default [
       isAuth: false
     }
   },
-  
+
   {
     path: '/policy',
     name: '我的测试页',
@@ -201,6 +201,176 @@ export default [
     }]
 
   },
+
+  //teacher-login
+  {
+    path: '/teacher-login',
+    name: '教师主界面',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_login/teacher_login/teacher_login'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  //teacher-after-login
+  {
+    path: '/teacher-after-login/teacher-home',
+    name: '教师主界面',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_home/teacher_home'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-course-detail',
+    name: '课程详情',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_course_detail/teacher_course_detail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-institution',
+    name: '信息维护所在培训机构',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_institution/teacher_institution'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-detail',
+    name: '信息维护学历专业技术职称',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_detail/teacher_detail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-profile',
+    name: '信息维护基本信息',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_profile/teacher_profile'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-experience',
+    name: '信息维护工作经历',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_experience/teacher_experience'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-other',
+    name: '信息维护其他',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_other/teacher_other'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-password',
+    name: '修改密码',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_password/teacher_password'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-after-login/teacher-test',
+    name: '测试页',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_test/teacher_test'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  //teacher_register
+  {
+    path: '/teacher-register/register-profile',
+    name: '教师注册基本信息',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_register/register_profile/register_profile'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-register/register-institution',
+    name: '教师注册所在培训机构',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_register/register_institution/register_institution'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-register/register-detail',
+    name: '教师注册学历专业技术职称',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_register/register_detail/register_detail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-register/register-experience',
+    name: '教师注册工作经历',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_register/register_experience/register_experience'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/teacher-register/register-other',
+    name: '教师注册其他',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_register/register_other/register_other'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+
   {
     path: '*',
     redirect: '/404'

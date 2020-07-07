@@ -9,18 +9,9 @@
     </div>
 
     <el-row>
-      <el-carousel :interval="0" arrow="never" height="300px" width="100%" type="card">
+      <el-carousel indicator-position="outside">
         <el-carousel-item v-for="item in dataimg" :key="item">
-          <div class="grid-content">
-            <el-col :md="12" :offset="6">
-              <div>
-                <img :src="item.src" />
-                <p class="italictext">{{item.txt}}</p>
-                <span class="service">{{item.txt2}}</span>
-                <p class="last">{{item.txt3}}</p>
-              </div>
-            </el-col>
-          </div>
+          <img :src="item.src" />
         </el-carousel-item>
       </el-carousel>
     </el-row>
@@ -133,27 +124,12 @@ export default {
   data() {
     return {
       dataimg: [
-        // {
-        //   src: require("../../public/img/home/img1.png"),
-        //   txt:
-        //     '"Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis, mi neque euismod dui, eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna."',
-        //   txt2: "一站式服务",
-        //   txt3: "Miami, FL"
-        // },
         {
-          src: require("../../../public/img/home/img2.jpg"),
-          txt:
-            '"Sed egestas, ante et vulputate volutpat, eros pede semper est, vitae luctus metus libero eu augue. Morbi purus libero, faucibus adipiscing, commodo quis, gravida id, est. Sed lectus. Praesent elementum hendrerit tortor."',
-          txt2: "国际服务",
-          txt3: "Greensboro, NC"
+          src: require("../../../public/img/home/img1.jpg")
+        },
+        {
+          src: require("../../../public/img/home/img2.jpg")
         }
-        // {
-        //   src: require("../../public/img/home/img3.jpg"),
-        //   txt:
-        //     '"Praesent elementum hendrerit tortor. Sed semper lorem at felis. Vestibulum volutpat, lacus a ultrices sagittis eu pulvinar nunc sapien ornare nisl. Phasellus pede arcu, dapibus eu, fermentum et, dapibus sed, urna."',
-        //   txt2: "全网渠道",
-        //   txt3: "Charlotte, NC"
-        // }
       ],
 
       total: 0, //总条数
@@ -345,10 +321,17 @@ export default {
 
 .el-footer {
   text-align: center;
-
   font-size: 13px;
   width: 100%;
   height: 70px;
   background-color: rgb(204, 204, 204);
+}
+.el-carousel {
+  text-align: center;
+}
+
+.el-carousel__item img {
+  line-height: 400px;
+  margin: 0;
 }
 </style>

@@ -7,6 +7,8 @@ import demo from './demo'
 import blog from './blog'
 import home from './home'
 import org from './org'
+import complaint from './complaint'
+
 /**
  * 模拟数据mock
  *
@@ -27,7 +29,11 @@ demo({ mock: false });
 
 blog({ mock: false });
 
+
 home({ mock: false });
 org({ mock: false });
+
+complaint({ mock: true });
+
 
 

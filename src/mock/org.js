@@ -60,6 +60,7 @@ export default ({ mock }) => {
     Mock.mock(/\/api\/queryOrgList/, 'get', (queryOrgList) => {
 
         var trainForm = JSON.parse(queryOrgList.body).trainForm;
+        console.log(trainForm);
 
 
         const json = { code: 200, success: true, msg: '带参数查询机构详情' };

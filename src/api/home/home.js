@@ -10,7 +10,6 @@ export const getOrgDetailById = (orgId) => {
         method: 'get',
         params: {
             orgId,
-
         }
     })
 }
@@ -177,7 +176,58 @@ export const queryClassCourseList = (
 
 }
 
+//获取所有投诉列表-xxy
+export const getAllComplaintList = () => {
+    return request({
+        url: '/api/AllComplaintList',
+        method: 'get',
+    })
+}
 
 
+//根据 筛选 得到投诉列表-xxy
+export const queryComplaintList = (
+      //address,
+      //complaintType,
+      complaintOrgName,
+       ) => {
+         return request({
+        url: '/api/queryComplaintList',
+        method: 'get',
+        data: {
+            //address,
+            //complaintType,
+            complaintOrgName,
+        }
+    },
+    console.log(complaintOrgName))
 
+}
+//新增投诉列表-xxy
+export const addComplaintList = (
+      address,
+      complaintType,
+      complaintOrgName,
+      complaintTitle,
+      complaintContent,
+       ) => {
+         return request({
+        url: '/api/queryComplaintList',
+        method: 'post',
+        data: {
+          address,
+          complaintType,
+          complaintOrgName,
+          complaintTitle,
+          complaintContent,
+        }
+    },
+    console.log(address),
+    console.log(complaintType),
+    console.log(complaintOrgName),
+    console.log(complaintTitle),
+    console.log(complaintContent)
+    
+    )
 
+}

@@ -42,25 +42,26 @@
 
  <div>
   <el-table
-        :data="tableData"
+        :data="complaintList"
         style="width: 100%">
 
         <el-table-column
-          prop="complaint_id"
+          prop="complaintId"
           label="序号"
           width="50">
         </el-table-column>
 
         <el-table-column
-          prop="org_id"
+          prop="orgId"
           label="投诉机构ID"
           width="100">
         </el-table-column>
 
         <el-table-column
-          prop="org_name"
+          prop="complaintOrgName"
           label="投诉机构名">
         </el-table-column>
+
 
         <el-table-column
           prop="content"
@@ -82,9 +83,17 @@ import { regionData, CodeToText } from "element-china-area-data";
 
 import myHeader from "@/components/home/my-header";
 
+import { getAllComplaintList } from "@/api/home/home";
+import { queryComplaintList } from "@/api/home/home";
+
 export default {
   components: {
     myHeader
+  },
+  created() {
+    getAllComplaintList().then(res => {
+      this.complaintList = res.data.data.complaintList;
+    });
   },
   data() {
 
@@ -107,28 +116,28 @@ export default {
         }
       ],
 
-      tableData: [{
-        complaint_id: '1',
-        org_id: '7886',
-        org_name:'韦博开心豆',
-        content:'欺诈学费，无证经营',
-        suggest:'进入调查'
-      }, {
-        complaint_id: '2',
-        org_id: '1234',
-        org_name:'随便编的',
-        content:'欺诈学费，无证经营',
-        suggest:'进入调查'
-      }],
+      // tableData: [{
+      //   complaint_id: '1',
+      //   org_id: '7886',
+      //   org_name:'韦博开心豆',
+      //   content:'欺诈学费，无证经营',
+      //   suggest:'进入调查'
+      // }, {
+      //   complaint_id: '2',
+      //   org_id: '1234',
+      //   org_name:'随便编的',
+      //   content:'欺诈学费，无证经营',
+      //   suggest:'进入调查'
+      // }],
 
       //查询表单
-      queryForm: {
+        queryForm: {
         address: "",
         complaintType: "",
         complaintOrgName: "",
-
       },
-    }
+        complaintList: [],
+  };
   },
 
   methods:{
@@ -139,8 +148,19 @@ export default {
       }
 
       this.queryForm.address = loc;
-    }
+    },
+
+    query() {
+      console.log(this.queryForm.complaintOrgName,),
+      queryComplaintList(
+        //this.queryForm.address,
+        //this.queryForm.complaintType,
+        this.queryForm.complaintOrgName,
+      ).then(res => {
+        this.complaintList = res.data.data.complaintList;
+      })
+    },
+  },
   }
-};
 
 </script>

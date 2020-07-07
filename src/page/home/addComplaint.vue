@@ -3,12 +3,10 @@
   <div>
     <my-header></my-header>
   </div>
-   <div class="complaintQueryForm">
-    <el-form :inline="true" ref="form" :model="queryForm" label-width="100px">
+    <div class="complaintAddForm">
+    <el-form :inline="true" ref="form" :model="addComplaintForm" label-width="100px">
 
-
-        <el-col >网上投诉</el-col>
-
+        <el-col >新增投诉</el-col>
        <el-row>
          <el-form-item label="请选择区域：">
         <el-cascader
@@ -20,8 +18,8 @@
         </el-cascader>
       </el-form-item>
 
-           <el-form-item label="投诉类别：">
-           <el-select v-model="queryForm.complaintType" clearable placeholder="请选择">
+            <el-form-item label="投诉类别：">
+           <el-select v-model="addComplaintForm.complaintType" clearable placeholder="请选择">
              <el-option
                v-for="item in complaintTypeOptions"
                :key="item.value"
@@ -34,23 +32,23 @@
 
     <el-row>
       <el-form-item label="投诉机构名称：" label-width="120px">
-        <el-input style="width:360px" placeholder="请输入" v-model="allComplaintForm.complaintOrgName" clearable></el-input>
+        <el-input style="width:360px" placeholder="请输入" v-model="addComplaintForm.complaintOrgName" clearable></el-input>
       </el-form-item>
      </el-row>
 
      <el-row>
        <el-form-item label="投诉标题：" label-width="120px">
-         <el-input style="width:360px" placeholder="请输入" v-model="allComplaintForm.complaintTitle" clearable></el-input>
+         <el-input style="width:360px" placeholder="请输入" v-model="addComplaintForm.complaintTitle" clearable></el-input>
        </el-form-item>
       </el-row>
 
       <el-row>
         <el-form-item label="投诉内容：" label-width="120px">
-          <el-input style="width:360px"    type="textarea"  :autosize="{ minRows: 3}" placeholder="请输入" v-model="allComplaintForm.complaintContent" clearable></el-input>
+          <el-input style="width:360px"    type="textarea"  :autosize="{ minRows: 3}" placeholder="请输入" v-model="addComplaintForm.complaintContent" clearable></el-input>
         </el-form-item>
        </el-row>
 
-<el-button style="margin:0 auto" type="primary" @click="query">保存</el-button>
+<el-button style="margin:0 auto" type="primary" @click="submit">提交</el-button>
     </el-form>
   </div>
 
@@ -60,7 +58,7 @@
 
 <script>
 import { regionData, CodeToText } from "element-china-area-data";
-
+import { addComplaintList } from "@/api/home/home";
 import myHeader from "@/components/home/my-header";
 
 export default {
@@ -88,11 +86,13 @@ export default {
         }
       ],
 
-      //查询表单
-      allComplaintForm: {
+      //添加表单
+      addComplaintForm: {
         address: "",
         complaintType: "",
         complaintOrgName: "",
+        complaintTitle:"",
+        complaintContent:"",
       },
     }
   },
@@ -104,9 +104,25 @@ export default {
         loc += CodeToText[this.selectedOptions[i]];
       }
 
-      this.allComplaintForm.address = loc;
-    }
-  }
-};
+      this.addComplaintForm.address = loc;
+    },
+  submit() {
+    console.log(this.addComplaintForm.address),
+    console.log(this.addComplaintForm.complaintType),
+    console.log(this.addComplaintForm.complaintOrgName),
+    console.log(this.addComplaintForm.complaintTitle),
+    console.log(this.addComplaintForm.complaintContent),
+    addComplaintList(
+       this.addComplaintForm.address,
+       this.addComplaintForm.complaintType,
+       this.addComplaintForm.complaintOrgName,
+       this.addComplaintForm.complaintTitle,
+       this.addComplaintForm.complaintContent,
+    ).then(res => {
+      this.complaintList = res.data.data.complaintList;
+    })
+  },
+}
+}
 
 </script>

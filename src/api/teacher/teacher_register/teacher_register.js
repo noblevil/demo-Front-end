@@ -24,3 +24,7 @@ export  const UploadFiles = (formData) => {
 
   })
 }
+
+export const getInstitution = () =>{
+
+}

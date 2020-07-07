@@ -85,10 +85,10 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in sexOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in sexOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -102,10 +102,10 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in countryNatureOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in countryNatureOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -118,10 +118,10 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in workTypeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in workTypeOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -136,10 +136,10 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in teachQualifClassOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in teachQualifClassOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -152,10 +152,10 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in qualifClassOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in qualifClassOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -198,10 +198,10 @@
                     <el-form-item label="级别">
                       <el-select v-model="queryCourseForm.courseLevel" clearable placeholder="请选择">
                         <el-option
-                          v-for="(item, index) in coursegradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in coursegradeOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -209,10 +209,10 @@
                     <el-form-item label="招生对象学段">
                       <el-select v-model="queryTeacherForm.studentRank" clearable placeholder="请选择">
                         <el-option
-                          v-for="(item, index) in studentRankOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in studentRankOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -241,10 +241,10 @@
                         placeholder="请选择"
                       >
                         <el-option
-                          v-for="(item, index) in studentGradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in studentGradeOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -273,12 +273,16 @@
                 <el-form ref="form" :model="queryClassForm" label-width="80px">
                   <el-row type="flex" justify="center">
                     <el-form-item label="年级">
+                      <!-- v-for="item in trainSubjectOptions"
+              :key="item.value"
+              :label="item.label"
+                      :value="item.value"-->
                       <el-select v-model="queryClassForm.studentGrade" clearable placeholder="请选择">
                         <el-option
-                          v-for="(item, index) in studentGradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in studentGradeOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
@@ -293,8 +297,8 @@
                         <el-option
                           v-for="item in trainSubjectOptions"
                           :key="item.value"
-                          :value="item.value"
                           :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>

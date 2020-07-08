@@ -111,6 +111,21 @@
               <el-radio v-model="other.incumbency" label="否">否</el-radio>
               </el-form-item>
             </td>
+            <td></td>
+
+            <td style="padding-top: 2px">工作类型：</td><td><template>
+            <el-form-item prop="teachQualifClass" >
+              <el-select v-model="other.teachQualifClass"  placeholder="请选择">
+                <el-option
+                  v-for="item in teachQualifClass"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+          </td>
           </tr>
         </table>
         </el-form>
@@ -192,6 +207,21 @@
         uploadIcon:'el-icon-upload2',
         uploadText:'教师资格证（上传附件）',
 
+        teachQualifClass:[
+          {
+            value:'教师资格证',
+            label:'教师资格证',
+          },
+          {
+            value:'外专证',
+            label:'外专证',
+          },
+          {
+            value:'无',
+            label:'无',
+          }
+        ],
+
 
         other:{
           teacherCertification: '',
@@ -200,10 +230,13 @@
           userPassword:'',
           confirmPassword:'',
           certificateNumber:'',
-          teachQualificationClass: '',
+          teachQualifClass: '',
 
         },
         otherRules: {
+          teachQualifClass:[
+            {required: true, message: "请输入任教资格分类", trigger: "blur"},
+          ],
           certificateNumber:[
             {required: true, message: "请输入教师资格证号码", trigger: "blur"},
           ],
@@ -356,18 +389,15 @@
 
               teacherRegister(profile,myInstitution,teacherDetail,experiences,other).then(res => {
                 console.log(res)
+                console.log(1)
               })
-              //const keys=Object.keys(this.other);
-              //for(let index=0; index < keys.length; index++){
-              //  sessionStorage.setItem(keys[index],this.other[keys[index]]);
-              //}
-
-            }).catch(() => {
-              this.$message({
-                type: 'info',
-                message: '取消提交'
-              });
-            });
+            })
+             // .catch(() => {
+            //  this.$message({
+            //    type: 'info',
+            //    message: '取消提交'
+            //  });
+           // });
 
 
           } else {

@@ -19,7 +19,7 @@ export  const teacherRegister = (profile,myInstitution,teacherDetail,experiences
       sex:profile.sex,//教师性别
       teachBirth:profile.birthDate,//教师出生日期
       teachingSubject:myInstitution[0].teachingSubject,//教师授课学科
-      isTeachQualifCert:other.teacherCertification,
+      isTeachQualifCert:other.teacherCertification,//是否有教师资格证
       teachQualifClass:other.teachQualifClass,
       certificateNum:other.certificateNumber,
       professionalTitle:teacherDetail.title,

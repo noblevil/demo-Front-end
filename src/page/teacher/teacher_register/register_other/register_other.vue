@@ -419,13 +419,12 @@
 
 
 
-            })
-             // .catch(() => {
-            //  this.$message({
-            //    type: 'info',
-            //    message: '取消提交'
-            //  });
-           // });
+            }).catch(() => {
+              this.$message({
+                type: 'info',
+                message: '取消提交'
+              });
+            });
 
 
           } else {

@@ -19,7 +19,8 @@ export  const teacherRegister = (profile,myInstitution,teacherDetail,experiences
       sex:profile.sex,//教师性别
       teachBirth:profile.birthDate,//教师出生日期
       teachingSubject:'',//教师授课学科
-      isTeachQualifClass:other.teacherCertification,
+      isTeachQualifCert:other.teacherCertification,
+      teachQualifClass:'',
       certificateNum:other.certificateNumber,
       professionalTitle:teacherDetail.title,
       countryNature:'',
@@ -52,5 +53,10 @@ export  const UploadFiles = (formData) => {
 }
 
 export const getInstitution = () =>{
+  return request({
+    url: '/api/getInstitution',
+    method: 'get',
+
+  })
 
 }

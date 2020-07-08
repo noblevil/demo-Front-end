@@ -51,7 +51,8 @@
               </el-option>
             </el-select>
             </el-form-item>
-          </template></td>
+          </template>
+          </td>
           </tr>
           <tr>
             <td style="padding-top: 2px">性别：</td>
@@ -154,8 +155,19 @@
             </td>
           </tr>
           <tr>
-            <td></td>
-            <td></td>
+            <td style="padding-top: 2px">国籍性质：</td><td><template>
+            <el-form-item prop="countryNature" >
+              <el-select v-model="teacher.countryNature"  placeholder="请选择">
+                <el-option
+                  v-for="item in countryNature"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+          </td>
             <td></td>
             <td>
             </td>
@@ -217,6 +229,20 @@
             value: '选项1',
             label: '身份证'
           },],
+          countryNature:[
+            {
+              value:'中国大陆',
+              label:'中国大陆'
+            },
+            {
+              value:'港澳台',
+              label:'港澳台'
+            },
+            {
+              value:'外国',
+              label:'外国'
+            },
+          ],
           teacher:{
             name: '',
             sex: '',
@@ -227,6 +253,7 @@
             certificateType: '',
             certificateNumber: '',
             birthDate: '',
+            countryNature:'',
             region: '',
             nativePlace: '',
             politicalStatus: '',
@@ -266,6 +293,9 @@
             birthDate: [
               {required: true, message: "请输入出生日期", trigger: "blur"},
 
+            ],
+            countryNature:[
+              {required: true, message: "请输入国籍性质", trigger: "blur"},
             ],
             region: [
               {required: true, message: "请输入国家地区", trigger: "blur"},

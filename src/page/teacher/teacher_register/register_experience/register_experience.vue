@@ -35,14 +35,17 @@
               <td>工作职位：</td><td><el-input v-model="item.position" placeholder="请输入内容"></el-input></td>
             </tr>
             <tr>
-              <td>工作单位：</td><td><el-input v-model="item.institution" placeholder="请输入内容"></el-input></td>
+              <td>工作单位：</td><td><el-input v-model="item.orgName" placeholder="请输入内容"></el-input></td>
+            </tr>
+            <tr>
+              <td>工作类型：</td><td><el-input v-model="item.workType" placeholder="请输入内容"></el-input></td>
             </tr>
             <tr>
               <td>所授科目：</td>
               <td>
                 <el-select v-model="item.subject" placeholder="请选择">
                   <el-option
-                    v-for="item in options"
+                    v-for="item in courseSubject"
                     :key="item.value"
                     :label="item.label"
                     :value="item.value">
@@ -56,7 +59,7 @@
 
                 <el-date-picker
                   style="width: 200px"
-                  v-model="item.dateBegin"
+                  v-model="item.startTime"
                   align="right"
                   type="date"
                   placeholder="选择日期"
@@ -74,7 +77,7 @@
 
                 <el-date-picker
                   style="width: 200px"
-                  v-model="item.dateEnd"
+                  v-model="item.endTime"
                   align="right"
                   type="date"
                   placeholder="选择日期"
@@ -127,7 +130,7 @@
       return {
         items:[],
 
-        options: [{
+        courseSubject: [{
           value: '选项1',
           label: '语文'
         }, {
@@ -215,10 +218,11 @@
       addExperience(){
         let obj={
           position:'',
-          institution:'',
+          orgName:'',
           subject:'',
-          dateBegin:'',
-          dateEnd:''
+          workType:'',
+          startTime:'',
+          endTime:''
         }
         this.items.push(obj);
       },

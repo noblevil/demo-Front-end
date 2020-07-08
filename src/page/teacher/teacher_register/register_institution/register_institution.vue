@@ -77,7 +77,7 @@
           </tr>
           <tr>
             <td>学科:</td>
-            <td><el-select v-model="item.mySubject" placeholder="请选择">
+            <td><el-select v-model="teachingSubject" placeholder="请选择">
               <el-option
                 v-for="item in item.courseSubject"
                 :key="item.value"
@@ -123,9 +123,10 @@
         pageSize: 3,
         pageSizes: [3, 6, 9],
         currentPage: 1,
+        teachingSubject:'',
 
         selectedInstitution: [],
-        institutions: [{orgId: '', orgName: '', courseSubject: '', mySubject: '',}],
+        institutions: [{orgId: '', orgName: '', courseSubject: '', teachingSubject: this.teachingSubject,}],
         //myInstitution:[{orgId:'',orgName:'',courseSubject:''}],
 
 

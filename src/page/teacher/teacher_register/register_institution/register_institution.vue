@@ -35,11 +35,11 @@
           <el-checkbox-group v-model="selectedInstitution" >
             <el-checkbox-button v-for="(institution,index) in institutions"
                                 v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize"
-                                @change="addInstitution"
+
                                 :value="institution"
                                 :label="institution"
                                 :key="institution"
-                                style="padding: 50px;margin: 30px">{{institution.name}}<br>{{institution.number}}</el-checkbox-button>
+                                style="padding: 50px;margin: 30px">{{institution.orgName}}<br>{{institution.orgId}}</el-checkbox-button>
           </el-checkbox-group>
           <!--
           <el-radio v-for="(institution,index) in institutions"
@@ -67,19 +67,19 @@
 
       </div></el-col>
       <el-col :span="6"><div class="grid-content bg-purple">
-        <div v-for="item in myInstitution" :key="item">
+        <div v-for="item in selectedInstitution" :key="item">
         <table cellpadding="20">
           <tr>
-            <td>机构名称：</td><td>{{item.name}}</td>
+            <td>机构名称：</td><td>{{item.orgName}}</td>
           </tr>
           <tr>
-            <td>机构编号：</td><td>{{item.number}}</td>
+            <td>机构编号：</td><td>{{item.orgId}}</td>
           </tr>
           <tr>
             <td>学科:</td>
-            <td><el-select v-model="item.subject" placeholder="请选择">
+            <td><el-select v-model="item.mySubject" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in item.courseSubject"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
@@ -120,29 +120,16 @@
 
     data() {
       return {
-        pageSize:3,
-        pageSizes:[3,6,9],
-        currentPage:1,
+        pageSize: 3,
+        pageSizes: [3, 6, 9],
+        currentPage: 1,
 
-        selectedInstitution:[],
-        //selectedIndex:0,
-        //selectedInstitution:{name:'',number:''},
-        institutions:[{name:'',number:''}],
-        myInstitution:[{name:'',number:'',subject:''}],
+        selectedInstitution: [],
+        institutions: [{orgId: '', orgName: '', courseSubject: '', mySubject: '',}],
+        //myInstitution:[{orgId:'',orgName:'',courseSubject:''}],
 
-        options: [{
-          value: '',
-          label: ''
-        }, {
-          value: '',
-          label: ''
-        }, {
-          value: '',
-          label: ''
-        }],
 
       }
-
 
     },
     created(){
@@ -151,8 +138,8 @@
       }
       getInstitution().then(res => {
         console.log(res)
-        this.options=res.data.data.options;
-        this.institutions=res.data.data.institutions;
+        this.institutions=res.data.data.institutions
+        //console.log(this.institutions)
 
       })
     },
@@ -212,24 +199,34 @@
 
       //},
 
-      addInstitution(){
-        console.log(this.selectedInstitution)
+      /*addInstitution(){
         let objs=[];
         for (let index = 0; index < this.selectedInstitution.length; index++) {
           let obj={
-            name:this.selectedInstitution[index].name,
-            number:this.selectedInstitution[index].number,
-            subject:''
+            orgId:this.selectedInstitution[index].orgId,
+            orgName:this.selectedInstitution[index].orgName,
+            courseSubject:JSON.stringify(this.selectedInstitution[index].courseSubject),
           };
-          objs.push(obj)
+          console.log(this.selectedInstitution[index].courseSubject)
+          //obj.courseSubject=this.selectedInstitution[index].courseSubject
+          objs.push(JSON.parse(JSON.stringify(obj)))
         }
         this.myInstitution=objs;
         console.log(this.myInstitution)
-      },
+      },*/
+
+      //log(index){
+       // console.log(this.selectedInstitution[this.selectedInstitution.length-1])
+       // this.selectedInstitution[this.selectedInstitution.length-1]=JSON.stringify(this.institutions[index])
+      //  this.selectedInstitution[this.selectedInstitution.length-1]=JSON.parse(this.selectedInstitution[this.selectedInstitution.length-1])
+       // console.log(this.selectedInstitution[this.selectedInstitution.length-1])
+        //console.log(this.selectedInstitution)
+        //console.log(this.selectedInstitution[0].orgId)
+      //},
 
       submit(){
-        console.log(this.myInstitution);
-        sessionStorage.setItem('myInstitution',JSON.stringify(this.myInstitution))
+        //console.log(this.myInstitution);
+        sessionStorage.setItem('myInstitution',JSON.stringify(this.selectedInstitution))
         console.log(JSON.parse(sessionStorage.getItem('myInstitution')))
       }
 

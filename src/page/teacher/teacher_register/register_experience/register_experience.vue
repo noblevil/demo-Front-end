@@ -37,9 +37,7 @@
             <tr>
               <td>工作单位：</td><td><el-input v-model="item.orgName" placeholder="请输入内容"></el-input></td>
             </tr>
-            <tr>
-              <td>工作类型：</td><td><el-input v-model="item.workType" placeholder="请输入内容"></el-input></td>
-            </tr>
+
             <tr>
               <td>所授科目：</td>
               <td>
@@ -220,7 +218,6 @@
           position:'',
           orgName:'',
           subject:'',
-          workType:'',
           startTime:'',
           endTime:''
         }

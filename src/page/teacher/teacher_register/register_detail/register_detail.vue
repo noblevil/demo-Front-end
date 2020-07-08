@@ -94,6 +94,21 @@
               <el-input v-model="teacherDetail.institutionWithDegree" id="institutionWithDegree" placeholder="请输入内容"></el-input>
               </el-form-item>
             </td>
+
+            <td></td>
+            <td style="padding-top: 2px">工作类型：</td><td><template>
+            <el-form-item prop="workType" >
+              <el-select v-model="teacherDetail.workType"  placeholder="请选择">
+                <el-option
+                  v-for="item in workType"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+          </td>
           </tr>
         </table>
         </el-form>
@@ -135,6 +150,20 @@
   export default {
     data() {
       return {
+        workType:[
+          {
+            value:'兼职',
+            label:'兼职'
+          },
+          {
+            value:'全职',
+            label:'全职'
+          },
+
+        ],
+
+
+
         teacherDetail:{
           qualification: '',
           major: '',
@@ -143,6 +172,7 @@
           degree: '',
           title: '',
           institutionWithDegree: '',
+          workType:'',
         },
 
         /*sessionKeys:[
@@ -157,6 +187,10 @@
 
 
         teacherDetailRules:{
+          workType:[
+            {required: true, message: "请输入工作类型", trigger: "blur"},
+
+          ],
           qualification: [
             {required: true, message: "请输入最高学历", trigger: "blur"},
           ],

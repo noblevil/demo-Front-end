@@ -20,10 +20,10 @@ export  const teacherRegister = (profile,myInstitution,teacherDetail,experiences
       teachBirth:profile.birthDate,//教师出生日期
       teachingSubject:'',//教师授课学科
       isTeachQualifCert:other.teacherCertification,
-      teachQualifClass:'',
+      teachQualifClass:other.teachQualifClass,
       certificateNum:other.certificateNumber,
       professionalTitle:teacherDetail.title,
-      countryNature:'',
+      countryNature:profile.countryNature,
       nationality:profile.region,
       highestEducation:teacherDetail.qualification,
       educationInstitution:teacherDetail.institutionWithQualification,
@@ -31,12 +31,13 @@ export  const teacherRegister = (profile,myInstitution,teacherDetail,experiences
       degreeObtainedInstitution:teacherDetail.institutionWithDegree,
       major:teacherDetail.major,
       graduationDate:teacherDetail.graduatedDate,
-      workType:'',
+      workType:teacherDetail.workType,
       idType:profile.certificateType,
       idNum:profile.certificateNumber,
       nativePlace:profile.nativePlace,
       politicalStatus:profile.politicalStatus,
-      experiences:[],
+      workExperiences:experiences,
+      organs:myInstitution
     },
   })
 }

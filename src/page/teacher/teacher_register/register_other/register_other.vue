@@ -382,15 +382,43 @@
               let teacherDetail=JSON.parse(sessionStorage.getItem('teacherDetail'))
               let experiences=JSON.parse(sessionStorage.getItem('experiences'))
               let other=JSON.parse(sessionStorage.getItem('other'))
+              if(profile===null){
+                this.$router.push({path: "/teacher-register/register-profile"});
+                this.$message({
+                  type: 'error',
+                  message: '请提交以下信息!'
+                });
+              }else if(myInstitution===null){
+                this.$router.push({path: "/teacher-register/register-institution"});
+                this.$message({
+                  type: 'error',
+                  message: '请提交以下信息!'
+                });
+              }else if(teacherDetail===null){
+                this.$router.push({path: "/teacher-register/register-detail"});
+                this.$message({
+                  type: 'error',
+                  message: '请提交以下信息!'
+                });
+              }else if(experiences===null){
+                this.$router.push({path: "/teacher-register/register-experience"});
+                this.$message({
+                  type: 'error',
+                  message: '请提交以下信息!'
+                });
+              }else{
+                teacherRegister(profile,myInstitution,teacherDetail,experiences,other).then(res => {
+                  console.log(res)
+                  console.log(1)
+                })
+
+              }
 
 
 
 
 
-              teacherRegister(profile,myInstitution,teacherDetail,experiences,other).then(res => {
-                console.log(res)
-                console.log(1)
-              })
+
             })
              // .catch(() => {
             //  this.$message({

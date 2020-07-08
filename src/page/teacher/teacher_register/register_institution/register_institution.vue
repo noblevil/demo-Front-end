@@ -135,7 +135,7 @@
     },
     created(){
       if(sessionStorage.getItem('myInstitution')) {
-        this.myInstitution = JSON.parse(sessionStorage.getItem('myInstitution'))
+        this.selectedInstitution = JSON.parse(sessionStorage.getItem('myInstitution'))
       }
       getInstitution().then(res => {
         console.log(res)

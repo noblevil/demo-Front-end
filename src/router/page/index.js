@@ -370,6 +370,28 @@ export default [
       isAuth: false
     }
   },
+  {
+    path: '/org/register',
+    name: '机构注册',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/org/orgRegister'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+    path: '/org/login',
+    name: '机构登录后页面',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/org/orgLogin'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
 
   // {
   //   path: '*',

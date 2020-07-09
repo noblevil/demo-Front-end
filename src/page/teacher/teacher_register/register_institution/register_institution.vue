@@ -25,9 +25,9 @@
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="14"><div class="grid-content bg-purple">
         <div style="margin-top: 15px;">
-          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+          <el-input placeholder="请输入内容" v-model="keyWords" class="input-with-select">
 
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button @click="query" slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
 
@@ -115,11 +115,14 @@
 
 <script>
   import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
+  import {searchInstitution} from "@/api/teacher/teacher_register/teacher_register";
 
   export default {
 
     data() {
       return {
+        keyWords:'',
+
         pageSize: 3,
         pageSizes: [3, 6, 9],
         currentPage: 1,
@@ -142,8 +145,10 @@
         this.institutions=res.data.data.institutions
         //console.log(this.institutions)
 
+
       })
     },
+
 
 
     methods: {
@@ -172,6 +177,16 @@
       lastStep(){
         this.$router.push({path: "/teacher-register/register-profile"});
       },
+
+      //搜索机构
+      query(){
+        searchInstitution(this.keyWords).then(res => {
+          console.log(res)
+          this.institutions=res.data.data.institutions
+        })
+      },
+
+
 
 
 

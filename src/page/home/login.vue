@@ -30,7 +30,7 @@
           </el-form-item>
         </el-row>
 
-        <el-button style="margin:0 auto" type="primary" @click="query">登录</el-button>
+        <el-button style="margin:20 auto" type="primary" @click="query">登录</el-button>
       </el-form>
     </div>
   </div>
@@ -63,3 +63,14 @@ export default {
   }
 };
 </script>
+
+<style>
+.loginForm {
+  padding-top: 100px;
+  text-align: center;
+}
+
+.el-form-item {
+  padding-top: 20px;
+}
+</style>

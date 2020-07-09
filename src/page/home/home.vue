@@ -18,8 +18,13 @@
 
     <div class="orgQueryForm">
       <el-form :inline="true" ref="queryForm" :model="queryForm" :rules="rules" label-width="100px">
-        <el-form-item label="请选择区域：" prop="address">
+        <el-form-item label="机构名称：" prop="orgName">
+          <el-input style="width: 140px" placeholder="请输入" v-model="queryForm.orgName" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="选择区域：" prop="address">
           <el-cascader
+            style="width: 100px"
             size="large"
             :options="regionOptions"
             v-model="selectedOptions"
@@ -27,12 +32,8 @@
           ></el-cascader>
         </el-form-item>
 
-        <el-form-item label="机构名称：" prop="orgName">
-          <el-input placeholder="请输入" v-model="queryForm.orgName" clearable></el-input>
-        </el-form-item>
-
         <el-form-item label="培训类别：" prop="trainType">
-          <el-select v-model="queryForm.trainType" clearable placeholder="请选择">
+          <el-select style="width: 110px" v-model="queryForm.trainType" clearable placeholder="请选择">
             <el-option
               v-for="item in trainTypeOptions"
               :key="item.value"
@@ -43,7 +44,12 @@
         </el-form-item>
 
         <el-form-item label="培训科目：" prop="trainSubject">
-          <el-select v-model="queryForm.trainSubject" clearable placeholder="请选择">
+          <el-select
+            style="width: 110px"
+            v-model="queryForm.trainSubject"
+            clearable
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in trainSubjectOptions"
               :key="item.value"
@@ -54,7 +60,7 @@
         </el-form-item>
 
         <el-form-item label="培训形式：" prop="trainForm">
-          <el-select v-model="queryForm.trainForm" clearable placeholder="请选择">
+          <el-select style="width: 110px" v-model="queryForm.trainForm" clearable placeholder="请选择">
             <el-option
               v-for="item in trainFormOptions"
               :key="item.value"
@@ -63,13 +69,13 @@
             ></el-option>
           </el-select>
         </el-form-item>
-      </el-form>
 
-      <el-button type="primary" @click="query">查询</el-button>
-      <el-button type="info" @click="reset">重置</el-button>
+        <el-button style="width: 100px" type="primary" @click="query">查询</el-button>
+        <el-button style="width: 100px" type="info" @click="reset">重置</el-button>
+      </el-form>
     </div>
 
-    <div class="orgList">
+    <div class="orgList" style="height: 190px">
       <el-table
         :data="orgList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
         stripe
@@ -316,7 +322,7 @@ export default {
 }
 
 .el-form-item {
-  width: 260px;
+  width: 250px;
 }
 
 .el-footer {
@@ -333,5 +339,22 @@ export default {
 .el-carousel__item img {
   line-height: 400px;
   margin: 0;
+}
+
+.el-footer {
+  height: 100px;
+  line-height: 60px;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.orgQueryForm {
+  padding-bottom: 5px;
+  padding-top: 10px;
+}
+
+.orgList {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 </style>

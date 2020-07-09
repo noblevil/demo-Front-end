@@ -61,3 +61,18 @@ export const getInstitution = () =>{
   })
 
 }
+
+export const searchInstitution = (keyWords) =>{
+  console.log(keyWords)
+  return request({
+    url: '/api/searchInstitution',
+    method: 'post',
+    data:{
+      keyWords:keyWords,
+    }
+
+  })
+
+}
+
+

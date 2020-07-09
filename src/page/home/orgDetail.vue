@@ -193,7 +193,7 @@
               </el-tab-pane>
 
               <el-tab-pane label="课程介绍" name="third">
-                <el-form :inline="true" ref="form" :model="queryTeacherForm" label-width="100px">
+                <el-form :inline="true" ref="form" :model="queryCourseForm" label-width="100px">
                   <el-form-item label="级别">
                     <el-select v-model="queryCourseForm.courseLevel" clearable placeholder="请选择">
                       <el-option
@@ -206,7 +206,7 @@
                   </el-form-item>
 
                   <el-form-item label="招生对象学段">
-                    <el-select v-model="queryTeacherForm.studentRank" clearable placeholder="请选择">
+                    <el-select v-model="queryCourseForm.studentRank" clearable placeholder="请选择">
                       <el-option
                         v-for="item in studentRankOptions"
                         :key="item.value"
@@ -217,7 +217,7 @@
                   </el-form-item>
 
                   <el-form-item label="学科" label-width="50px">
-                    <el-select v-model="queryTeacherForm.courseSubject" clearable placeholder="请选择">
+                    <el-select v-model="queryCourseForm.courseSubject" clearable placeholder="请选择">
                       <el-option
                         v-for="item in trainSubjectOptions"
                         :key="item.value"
@@ -228,7 +228,7 @@
                   </el-form-item>
 
                   <el-form-item label="招生对象年级">
-                    <el-select v-model="queryTeacherForm.studentGrade" clearable placeholder="请选择">
+                    <el-select v-model="queryCourseForm.studentGrade" clearable placeholder="请选择">
                       <el-option
                         v-for="item in studentGradeOptions"
                         :key="item.value"
@@ -310,7 +310,7 @@
                 <el-table :data="classCourses" stripe style="width: 100%">
                   <el-table-column prop="courseClassId" label="年级" width="180"></el-table-column>
                   <el-table-column prop="courseSubject" label="学科" width="180"></el-table-column>
-                  <el-table-column prop="courseClassName" label="班级名称" width="180"></el-table-column>
+                  <el-table-column prop="className" label="班级名称" width="180"></el-table-column>
                   <el-table-column prop="enrollNum" label="计划招生人数"></el-table-column>
                   <el-table-column prop="teachName" label="授课教师" width="180"></el-table-column>
                   <el-table-column prop="teachingTime" label="课程上课日期"></el-table-column>
@@ -685,7 +685,7 @@ export default {
       //课程查询表单
       queryCourseForm: {
         courseLevel: "",
-        trainSubject: "",
+        courseSubject: "",
         studentRank: "",
         studentGrade: ""
       },
@@ -724,6 +724,8 @@ export default {
 
       this.institution = res.data.data;
       // console.log("ddddddd"+res.data.data.institution);
+      delete this.institution["listType"];
+      delete this.institution["nameOfRepresentative"];
     });
 
     //得到教师的列表
@@ -763,7 +765,7 @@ export default {
       queryCourseList(
         this.orgId,
         this.queryCourseForm.courseLevel,
-        this.queryCourseForm.trainSubject,
+        this.queryCourseForm.courseSubject,
         this.queryCourseForm.studentRank,
         this.queryCourseForm.studentGrade
       ).then(res => {

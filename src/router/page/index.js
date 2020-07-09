@@ -371,8 +371,8 @@ export default [
     }
   },
 
-  {
-    path: '*',
-    redirect: '/404'
-  }
+  // {
+  //   path: '*',
+  //   redirect: '/404'
+  // }
 ]

@@ -18,18 +18,6 @@
           </el-form-item>
         </el-row>
 
-        <el-row>
-          <el-form-item label="账号">
-            <el-input style="width:360px" placeholder="Email" clearable></el-input>
-          </el-form-item>
-        </el-row>
-
-        <el-row>
-          <el-form-item label="密码">
-            <el-input style="width:360px" placeholder="请输入密码" clearable show-password></el-input>
-          </el-form-item>
-        </el-row>
-
         <el-button style="margin:0 auto" type="primary" @click="query">注册</el-button>
       </el-form>
     </div>
@@ -44,3 +32,10 @@ export default {
   }
 };
 </script>
+
+<style>
+.registerForm {
+  padding-top: 100px;
+  text-align: center;
+}
+</style>

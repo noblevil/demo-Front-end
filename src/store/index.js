@@ -7,6 +7,10 @@ import logs from './modules/logs'
 import dict from './modules/dict'
 import getters from './getters'
 
+function storeLocalStore(state) {
+  window.localStorage.setItem("userMsg", JSON.stringify(state));
+}
+
 Vue.use(Vuex)
 const store = new Vuex.Store({
   modules: {

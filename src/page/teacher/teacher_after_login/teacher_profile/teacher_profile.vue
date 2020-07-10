@@ -208,6 +208,7 @@ export default {
       },
 
       created(){
+          console.log(sessionStorage)
         getProfile(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
           console.log(res)
           this.profile=res.data.data.profile

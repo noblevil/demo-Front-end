@@ -138,20 +138,7 @@
   export default {
     data() {
       return {
-        items:[{
-          position:'主任',
-          institution:'大学',
-          subject:'计算机',
-          dateBegin:'2020-04-02',
-          dateEnd:'2020-05-20'
-        },
-          {
-            position:'教师',
-            institution:'大学',
-            subject:'政治',
-            dateBegin:'2020-01-21',
-            dateEnd:'2020-04-18'
-        }],
+        items:[],
 
         options: [{
           value: '选项1',
@@ -256,10 +243,10 @@
       addExperience(){
         let obj={
           position:'',
-          institution:'',
+          orgName:'',
           subject:'',
-          dateBegin:'',
-          dateEnd:''
+          startTime:'',
+          endTime:''
         }
         this.items.push(obj);
       },

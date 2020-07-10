@@ -145,11 +145,7 @@
 
     },
     created(){
-      getInstitution().then(res => {
-        console.log(res)
-        this.options=res.data.data.options;
-        this.institutions=res.data.data.institutions;
-      })
+
     },
 
 

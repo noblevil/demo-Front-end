@@ -50,14 +50,14 @@
             <td style="padding-top: 2px">最高学历：</td>
             <td>
               <el-form-item prop="qualification">
-              <el-input v-model="teacherDetail.qualification" id="qualification" @change="saveForm('qualification')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.highestEducation" id="qualification"  placeholder="teacherDetail.highestEducation"></el-input>
               </el-form-item>
             </td>
             <td width="200px"></td>
             <td style="padding-top: 2px">所学专业：</td>
             <td>
               <el-form-item prop="major">
-              <el-input v-model="teacherDetail.major" id="major" @change="saveForm('major')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.major" id="major"  placeholder="teacherDetail.major"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -65,7 +65,7 @@
             <td style="padding-top: 2px">学历获得院校或机构：</td>
             <td>
               <el-form-item prop="institutionWithQualification">
-              <el-input v-model="teacherDetail.institutionWithQualification" id="institutionWithQualification" @change="saveForm('institutionWithQualification')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.educationalInstitution" id="institutionWithQualification"  placeholder="teacherDetail.educationalInstitution"></el-input>
               </el-form-item>
             </td>
             <td></td>
@@ -75,11 +75,11 @@
               <el-form-item prop="graduatedDate">
               <el-date-picker
                 style="width: 200px"
-                v-model="teacherDetail.graduatedDate"
-                id="graduatedDate" @change="saveForm('graduatedDate')"
+                v-model="teacherDetail.graduationDate"
+                id="graduatedDate"
                 align="right"
                 type="date"
-                placeholder="选择日期"
+                placeholder="teacherDetail.graduationDate"
                 :picker-options="pickerOptions">
               </el-date-picker>
               </el-form-item>
@@ -90,14 +90,14 @@
             <td style="padding-top: 2px">最高学位：</td>
             <td>
               <el-form-item prop="degree">
-              <el-input v-model="teacherDetail.degree" id="degree" @change="saveForm('degree')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.highestDegree" id="degree"  placeholder="teacherDetail.highestDegree"></el-input>
               </el-form-item>
             </td>
             <td></td>
             <td style="padding-top: 2px">专业技术职称：</td>
             <td>
               <el-form-item prop="title">
-              <el-input v-model="teacherDetail.title" id="title" @change="saveForm('title')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.professionalTitle" id="title"  placeholder="teacherDetail.professionalTitle"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -105,7 +105,7 @@
             <td style="padding-top: 2px">学位获得院校或机构：</td>
             <td>
               <el-form-item prop="institutionWithDegree">
-              <el-input v-model="teacherDetail.institutionWithDegree" id="institutionWithDegree" @change="saveForm('institutionWithDegree')" placeholder="请输入内容"></el-input>
+              <el-input v-model="teacherDetail.degreeObtainedInstitution" id="institutionWithDegree" @change="saveForm('institutionWithDegree')" placeholder="teacherDetail.degreeObtainedInstitution"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -151,17 +151,20 @@
 </template>
 
 <script>
+  import {getDetail} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
   export default {
     data() {
       return {
         teacherDetail:{
-          qualification: '',
+          highestEducation: '',
           major: '',
-          institutionWithQualification: '',
-          graduatedDate: '',
-          degree: '',
-          title: '',
-          institutionWithDegree: '',
+          educationalInstitution: '',
+          graduationDate: '',
+          highestDegree: '',
+          degreeObtainedInstitution: '',
+          professionalTitle: '',
+
         },
         teacherDetailRules:{
           qualification: [
@@ -222,15 +225,11 @@
 
 
     },
-    mounted() {
-      //this.teacherDetail.qualification=sessionStorage.getItem("qualification")
-      //this.teacherDetail.institutionWithQualification=sessionStorage.getItem("institutionWithQualification")
-      //this.teacherDetail.institutionWithDegree=sessionStorage.getItem("institutionWithDegree")
-      //this.teacherDetail.title=sessionStorage.getItem("title")
-      //this.teacherDetail.degree=sessionStorage.getItem("degree")
-      //this.teacherDetail.graduatedDate=sessionStorage.getItem("graduatedDate")
-      //this.teacherDetail.major=sessionStorage.getItem("major")
-
+    created() {
+      getDetail(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
+        console.log(res)
+        this.teacherDetail=res.data.data.teacherDetail
+      })
     },
     methods: {
       handleClick(tab, event) {
@@ -281,11 +280,7 @@
         this.$router.push({path: "/institution"});
       },
 
-      saveForm(string){
-        let sessionItem=document.getElementById(string).value;
-        sessionStorage.setItem(string, sessionItem);
 
-      },
 
 
 
@@ -303,13 +298,7 @@
       },
       resetForm(formName) {
         this.$refs[formName].resetFields();
-        sessionStorage.removeItem("qualification")
-        sessionStorage.removeItem("institutionWithQualification")
-        sessionStorage.removeItem("institutionWithDegree")
-        sessionStorage.removeItem("title")
-        sessionStorage.removeItem("degree")
-        sessionStorage.removeItem("graduatedDate")
-        sessionStorage.removeItem("major")
+
       },
 
 

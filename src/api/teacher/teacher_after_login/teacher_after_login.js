@@ -4,16 +4,19 @@ import request from '@/router/axios';
 export const getProfile = (teachAccount) =>{
   console.log(teachAccount)
   return request({
-    url: '/api/getProfile',
-    method: 'post',
-    data:{
-      teachAccount:teachAccount,
+    url: '/api/teachinfo/getProfile',
+    method: 'get',
+    params:{
+      teachAccount,
     }
-
   })
-
 }
 
+
+
+
+
+/////////////////////////////////////////////
 export const getDetail = (teachAccount) =>{
   console.log(teachAccount)
   return request({
@@ -34,6 +37,19 @@ export const getMyInstitution = (teachAccount) =>{
     method: 'post',
     data:{
       teachAccount:teachAccount,
+    }
+
+  })
+
+}
+
+export const teacherLogin = (userName,passWord) =>{
+  return request({
+    url: '/api/teacherLogin',
+    method: 'post',
+    data:{
+      userName:userName,
+      passWord:passWord
     }
 
   })

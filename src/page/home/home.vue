@@ -19,7 +19,7 @@
     <div class="orgQueryForm">
       <el-form :inline="true" ref="queryForm" :model="queryForm" :rules="rules" label-width="100px">
         <el-form-item label="机构名称：" prop="orgName">
-          <el-input style="width: 140px" placeholder="请输入" v-model="queryForm.orgName" clearable></el-input>
+          <el-input style="width: 140px" placeholder="请输入机构名称" v-model="queryForm.orgName" clearable></el-input>
         </el-form-item>
 
         <el-form-item label="选择区域：" prop="address">
@@ -97,6 +97,7 @@
         </el-table-column>
       </el-table>
     </div>
+
     <div class="pagination">
       <el-pagination
         @size-change="handleSizeChange"
@@ -109,10 +110,12 @@
     </div>
 
     <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
+
   </div>
 </template>
 
 <script>
+
 import { regionData, CodeToText } from "element-china-area-data";
 //自定义组件
 import myHeader from "@/components/home/my-header";

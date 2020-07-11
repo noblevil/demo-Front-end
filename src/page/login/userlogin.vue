@@ -1,4 +1,5 @@
 <template>
+
   <el-form class="login-form"
            status-icon
            :rules="loginRules"
@@ -14,6 +15,7 @@
         <i slot="prefix" class="icon-quanxian"/>
       </el-input>
     </el-form-item>
+
     <el-form-item prop="username">
       <el-input size="small"
                 @keyup.enter.native="handleLogin"
@@ -22,7 +24,9 @@
                 :placeholder="$t('login.username')">
         <i slot="prefix" class="icon-yonghu"/>
       </el-input>
+
     </el-form-item>
+
     <el-form-item prop="password">
       <el-input size="small"
                 @keyup.enter.native="handleLogin"
@@ -34,6 +38,7 @@
         <i slot="prefix" class="icon-mima"/>
       </el-input>
     </el-form-item>
+
     <el-form-item v-if="this.website.captchaMode" prop="code">
       <el-row :span="24">
         <el-col :span="16">
@@ -53,12 +58,14 @@
         </el-col>
       </el-row>
     </el-form-item>
+
     <el-form-item>
       <el-button type="primary"
                  size="small"
                  @click.native.prevent="handleLogin"
                  class="login-submit">{{$t('login.submit')}}
       </el-button>
+
     </el-form-item>
   </el-form>
 </template>

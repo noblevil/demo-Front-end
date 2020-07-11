@@ -2,9 +2,6 @@ import request from '@/router/axios';
 
 //根据orgId得到机构详情
 export const getOrgDetailById = (orgId) => {
-
-
-
     return request({
         url: '/api/blade-demo/orginfo/getOrgDetailById',
         method: 'get',
@@ -17,7 +14,7 @@ export const getOrgDetailById = (orgId) => {
 //根据orgId得到机构详情
 export const getAllOrgList = () => {
     return request({
-        url: '/api/blade-demo/orginfo/getAllOrgList',
+        url: '/api/orginfo/getAllOrgList',
         method: 'get',
     })
 }
@@ -31,7 +28,7 @@ export const queryOrgList = (
     trainForm) => {
 
     return request({
-        url: '/api/blade-demo/orginfo/queryOrgList',
+        url: '/api/orginfo/queryOrgList',
         method: 'get',
 
         params: {
@@ -105,7 +102,7 @@ export const queryTeachList = (
 ) => {
 
     return request({
-        url: '/api/blade-demo/teachinfo/queryTeachList',
+        url: '/api/teachinfo/queryTeachList',
 
         method: 'get',
         params: {
@@ -227,7 +224,7 @@ export const addComplaintList = (
     console.log(complaintOrgName),
     console.log(complaintTitle),
     console.log(complaintContent)
-    
+
     )
 
 }

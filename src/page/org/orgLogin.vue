@@ -191,8 +191,12 @@
               </div>
             </div>
           </div>
-          <div v-else-if="stepActive === 4">教师管理</div>
-          <div v-else>培训课程</div>
+          <div v-else-if="stepActive === 4">
+          <teachermanager></teachermanager>
+          </div>
+          <div v-else>
+            <course></course>
+          </div>
         </el-main>
       </el-container>
     </el-container>
@@ -202,8 +206,12 @@
 
 <script>
 import myHeader from "@/components/home/my-header";
+import Teachermanager from "./teachermanager";
+import Course from "./course";
 export default {
   components: {
+    Course,
+    Teachermanager,
     myHeader,
   },
   data() {

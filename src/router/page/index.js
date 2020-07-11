@@ -392,6 +392,17 @@ export default [
       isAuth: false
     }
   },
+  {
+    path: '/org/teachermanager',
+    name: '教师管理',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/org/teachermanager'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
 
   // {
   //   path: '*',

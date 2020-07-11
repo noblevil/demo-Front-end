@@ -1,6 +1,6 @@
 export default {
   tip: '提示',
-  title: 'Saber企业级开发平台',
+  title: '区块链智能教育平台',
   logoutTip: '退出系统, 是否继续?',
   submitText: '确定',
   cancelText: '取消',
@@ -67,7 +67,7 @@ export default {
   },
   login: {
     title: '登录 ',
-    info: 'BladeX 企业级开发平台',
+    info: '区块链智能教育平台',
     tenantId: '请输入租户ID',
     username: '请输入账号',
     password: '请输入密码',

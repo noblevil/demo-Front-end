@@ -47,6 +47,8 @@ function getAllOrgList() {
 }
 
 
+
+
 // function queryOrgList() { //queryForm
 
 //     // console.log(queryForm.trainForm);

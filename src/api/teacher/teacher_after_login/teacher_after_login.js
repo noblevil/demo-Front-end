@@ -26,3 +26,16 @@ export const getDetail = (teachAccount) =>{
   })
 
 }
+
+export const getMyInstitution = (teachAccount) =>{
+  console.log(teachAccount)
+  return request({
+    url: '/api/getMyInstitution',
+    method: 'post',
+    data:{
+      teachAccount:teachAccount,
+    }
+
+  })
+
+}

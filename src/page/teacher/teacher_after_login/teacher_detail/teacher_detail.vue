@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-bg" justify="center">
       <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
-        <table  style="color: #e5e9f2" cellpadding="2px">
+        <table   cellpadding="2px">
           <tr>
             <td rowspan="2">xxx老师</td>
             <td rowspan="2">
@@ -20,12 +20,11 @@
     <el-row type="flex" class="row-bg" justify="center">
       <div class="line"></div>
       <el-menu
-        :default-active="activeIndex2"
+        default-active="3"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
-        background-color="#20222a"
-        text-color="#fff"
+
+        text-color="#000000"
         active-text-color="#409EFF">
         <el-menu-item index="1" @click="profile">基本信息</el-menu-item>
         <el-menu-item index="2" @click="institution">所在培训机构</el-menu-item>
@@ -37,7 +36,7 @@
     </el-row>
 
     <el-row type="flex" class="row-bg" justify="center">
-      <el-col :span="18"><div class="grid-content bg-purple">
+      <el-col :span="12"><div class="grid-content bg-purple">
         <el-form
 
           :rules="teacherDetailRules"
@@ -53,7 +52,7 @@
               <el-input v-model="teacherDetail.highestEducation" id="qualification"  placeholder="teacherDetail.highestEducation"></el-input>
               </el-form-item>
             </td>
-            <td width="200px"></td>
+            <td width="100px"></td>
             <td style="padding-top: 2px">所学专业：</td>
             <td>
               <el-form-item prop="major">
@@ -116,12 +115,7 @@
     </el-row>
 
     <el-row type="flex" class="row-bg" justify="end">
-
-      <el-col :span="2" style="margin-top: 20px">
-        <el-row>
-          <el-button  @click="submitForm('teacherDetail')" >表单检验</el-button>
-        </el-row>
-      </el-col>
+      
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
@@ -317,10 +311,10 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    background: #000000;
   }
   .bg-purple {
-    background: #20222a;
+    background: #FFFFFF;
   }
   .bg-purple-light {
     background: #e5e9f2;
@@ -329,13 +323,13 @@
     border-radius: 4px;
     min-height: 36px;
     text-align: center;
-    color: #e5e9f2;
+    color: #000000;
     padding-top: 10px;
 
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #20222a;
+    background-color: #FFFFFF;
   }
 
 </style>

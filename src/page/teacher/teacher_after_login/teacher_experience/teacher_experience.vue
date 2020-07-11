@@ -289,6 +289,8 @@
     padding: 10px 0;
     background-color: #20222a;
   }
+
+
   .text {
     font-size: 14px;
   }

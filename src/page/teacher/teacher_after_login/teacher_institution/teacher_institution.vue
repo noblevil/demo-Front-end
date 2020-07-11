@@ -1,13 +1,15 @@
 <template>
   <div>
     <el-row type="flex" class="row-bg" justify="center">
-      <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
+      <el-col :span="24"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
-        <table  style="color: #e5e9f2" cellpadding="2px">
+        <table   cellpadding="2px">
           <tr>
             <td rowspan="2">xxx老师</td>
             <td rowspan="2">
-              <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
+              <div class="grid-content bg-purple">
+                <div class="el-icon-user-solid" style="height: 20px"></div>
+              </div>
             </td>
             <td ><el-button @click="gotoInfo(teacherId)">信息维护</el-button></td>
           </tr>
@@ -18,14 +20,12 @@
       </el-col>
     </el-row>
     <el-row type="flex" class="row-bg" justify="center">
-    <div class="line"></div>
     <el-menu
-      :default-active="activeIndex2"
+      default-active="2"
       class="el-menu-demo"
       mode="horizontal"
-      @select="handleSelect"
-      background-color="#20222a"
-      text-color="#fff"
+      background-color="#FFFFFF"
+      text-color="#000000"
       active-text-color="#409EFF">
       <el-menu-item index="1" @click="profile">基本信息</el-menu-item>
       <el-menu-item index="2" @click="institution">所在培训机构</el-menu-item>
@@ -33,26 +33,28 @@
       <el-menu-item index="4" @click="experience">工作经历</el-menu-item>
       <el-menu-item index="5" @click="other">其他</el-menu-item>
     </el-menu>
+      <div class="line"></div>
     </el-row>
+
+
 
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="14"><div class="grid-content bg-purple">
         <div style="margin-top: 15px;">
-          <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+          <el-input placeholder="请输入内容" v-model="keyWords" class="input-with-select">
 
-            <el-button slot="append" icon="el-icon-search"></el-button>
+            <el-button @click="query" slot="append" icon="el-icon-search"></el-button>
           </el-input>
         </div>
 
         <div style="margin-top: 50px;border: #e5e9f2 1px solid;padding: 50px">
-          <el-radio v-for="(institution,index) in institutions"
-                    v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize"
-                    v-model="selectedIndex"
-                    :value="index"
-                    :label="index" border
-                    style="width: 200px;height: 100px;padding-top: 40px;margin: 30px" @change="onChange">
-            {{institution.name}}<br>{{institution.number}}
-          </el-radio>
+          <el-checkbox-group v-model="selectedInstitution" >
+            <el-checkbox-button v-for="(institution,index) in institutions"
+                                v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize"
+                                :value="institution"
+                                :label="institution"
+                                :key="institution">{{institution.orgName}}<br>{{institution.orgId}}</el-checkbox-button>
+          </el-checkbox-group>
         </div>
 
         <el-pagination
@@ -67,29 +69,117 @@
         </el-pagination>
 
       </div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple">
-        <table cellpadding="20">
-          <tr>
-            <td>机构名称：</td><td>{{selectedInstitution.name}}</td>
-          </tr>
-          <tr>
-            <td>机构编号：</td><td>{{selectedInstitution.number}}</td>
-          </tr>
-          <tr>
-            <td>学科:</td>
-            <td><el-select v-model="myInstitution.subject" placeholder="请选择">
+      <el-col :span="8"><div class="grid-content bg-purple">
+        <el-table
+          :data="myInstitution"
+          height="250px"
+          border
+          style="width: 100%">
+          <el-table-column
+            fixed
+            prop="orgName"
+            label="机构名称"
+            width="100">
+          </el-table-column>
+          <el-table-column
+            prop="orgId"
+            label="机构编号"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="teachingSubject"
+            label="学科"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="orgTeachStatus"
+            label="机构与教师的状态状态"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+              <el-button v-if="scope.row.orgTeachStatus==='入职状态1'" @click="handleClick(scope.row,e='确认入职')" type="text" size="small">确认入职</el-button>
+              <el-button v-else-if="scope.row.orgTeachStatus==='在职状态2'" @click="handleClick(scope.row,e='申请离职')" type="text" size="small">申请离职</el-button>
+            </template>
+          </el-table-column>
+        </el-table>
+
+
+
+        <el-table
+          :data="selectedInstitution"
+          height="250px"
+          border
+          style="width: 100%">
+          <el-table-column
+            fixed
+            prop="orgName"
+            label="机构名称"
+            width="150">
+          </el-table-column>
+          <el-table-column
+            prop="orgId"
+            label="机构编号"
+            width="150">
+          </el-table-column>
+
+          <el-table-column
+            label="学科"
+            width="200">
+            <template slot-scope="scope">
+            <el-select v-model="scope.row.teachingSubject" placeholder="请选择">
               <el-option
-                v-for="item in options"
+                v-for="item in scope.row.courseSubject"
                 :key="item.value"
                 :label="item.label"
                 :value="item.value">
               </el-option>
-            </el-select></td>
-          </tr>
-        </table>
-      </div></el-col>
-    </el-row>
+            </el-select>
+            </template>
+          </el-table-column>
+          <el-table-column
+            fixed="right"
+            label="操作"
+            width="100">
+            <template slot-scope="scope">
+              <el-button  @click="applyInstitution" type="text" size="small">申请加入</el-button>
 
+            </template>
+          </el-table-column>
+
+        </el-table>
+
+
+
+        <!--<div v-for="item in selectedInstitution" :key="item">
+          <table cellpadding="20">
+            <tr>
+              <td>机构名称：</td><td>{{item.orgName}}</td>
+            </tr>
+            <tr>
+              <td>机构编号：</td><td>{{item.orgId}}</td>
+            </tr>
+            <tr>
+              <td>学科:</td>
+              <td><el-select v-model="teachingSubject" placeholder="请选择">
+                <el-option
+                  v-for="item in item.courseSubject"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select></td>
+            </tr>
+          </table>
+        </div>-->
+      </div>
+
+      </el-col>
+    </el-row>
+<!--
     <el-row type="flex" class="row-bg" justify="end">
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
@@ -106,53 +196,53 @@
           <el-button>返回</el-button>
         </el-row>
       </el-col>
-    </el-row>
+    </el-row>-->
 
 
   </div>
 </template>
 
 <script>
-  //import {getInstitution} from '@/api/institution/institution'
+  import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
+  import {searchInstitution} from "@/api/teacher/teacher_register/teacher_register";
+  import {getMyInstitution} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
   export default {
 
     data() {
       return {
-        pageSize:3,
-        pageSizes:[3,6,9],
-        currentPage:1,
+        keyWords:'',
+
+        pageSize: 3,
+        pageSizes: [3, 6, 9],
+        currentPage: 1,
+        teachingSubject:'',
+
+        selectedInstitution: [],
+        myInstitution:[],
+        institutions: [{orgId: '', orgName: '', courseSubject: '', teachingSubject: this.teachingSubject,}],
+        //myInstitution:[{orgId:'',orgName:'',courseSubject:''}],
 
 
-        selectedIndex:0,
-        selectedInstitution:{name:'',number:''},
-        institutions:[{name:'',number:''}],
-        myInstitution:{name:'',number:'',subject:''},
-
-        options: [{
-          value: '',
-          label: ''
-        }, {
-          value: '',
-          label: ''
-        }, {
-          value: '',
-          label: ''
-        }],
 
       }
 
-
     },
     created(){
-
+      if(sessionStorage.getItem('myInstitution')) {
+        this.selectedInstitution = JSON.parse(sessionStorage.getItem('myInstitution'))
+      }
+      getInstitution().then(res => {
+        this.institutions=res.data.data.institutions
+      })
+      getMyInstitution(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
+        this.myInstitution=res.data.data.institutions
+      })
     },
 
 
     methods: {
-      handleClick(tab, event) {
-        console.log(tab, event);
-      },
+
       institution(){
         this.$router.push({path: "/teacher-after-login/teacher-institution"});
       },
@@ -168,6 +258,16 @@
       experience(){
         this.$router.push({path: "/teacher-after-login/teacher-experience"});
       },
+
+      //搜索机构
+      query(){
+        searchInstitution(this.keyWords).then(res => {
+          console.log(res)
+          this.institutions=res.data.data.institutions
+        })
+      },
+
+
 
       gotoInfo(teacherId)
       {
@@ -208,17 +308,71 @@
       },
 
 
+      handleClick(row,e) {
+        console.log(row);
+        console.log(e)
+        if(e==='确认入职'){
+          this.$confirm('是否确认入职?', '确认入职', {
+            confirmButtonText: '确认',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.$message({
+              type: 'success',
+              message: '信息已提交!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消'
+            });
+          });
 
-      onChange(){
-
-        this.selectedInstitution=this.institutions[this.selectedIndex];
+        }else {
+          this.$confirm('提出离职申请?', '申请离职', {
+            confirmButtonText: '确定',
+            cancelButtonText: '取消',
+            type: 'warning'
+          }).then(() => {
+            this.$message({
+              type: 'success',
+              message: '信息已提交!'
+            });
+          }).catch(() => {
+            this.$message({
+              type: 'info',
+              message: '已取消'
+            });
+          });
+        }
 
       },
-      submit(){
-        this.myInstitution.name=this.selectedInstitution.name;
-        this.myInstitution.number=this.selectedInstitution.number;
 
-        console.log(this.myInstitution)
+      applyInstitution(){
+        this.$prompt('请输入邮箱', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          inputPattern: /[\w!#$%&'*+/=?^_`{|}~-]+(?:\.[\w!#$%&'*+/=?^_`{|}~-]+)*@(?:[\w](?:[\w-]*[\w])?\.)+[\w](?:[\w-]*[\w])?/,
+          inputErrorMessage: '邮箱格式不正确'
+        }).then(({ value }) => {
+          this.$message({
+            type: 'success',
+            message: '邮箱' + value + '已发送'
+          });
+        }).catch(() => {
+          this.$message({
+            type: 'info',
+            message: '取消输入'
+          });
+        });
+
+      },
+
+
+
+
+      submit(){
+
       }
 
     }
@@ -236,10 +390,10 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    background: #000000;
   }
   .bg-purple {
-    background: #20222a;
+    background: #FFFFFF;
   }
   .bg-purple-light {
     background: #e5e9f2;
@@ -248,13 +402,13 @@
     border-radius: 4px;
     min-height: 36px;
     text-align: center;
-    color: #e5e9f2;
+    color: #000000;
     padding-top: 10px;
 
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #20222a;
+    background-color: #FFFFFF;
   }
 
 </style>

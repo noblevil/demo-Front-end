@@ -3,7 +3,9 @@
   <el-container>
     <el-header>Header</el-header>
     <el-main>
-      main
+      <el-input v-model="userName" placeholder="请输入内容"></el-input>
+      <el-input placeholder="请输入密码" v-model="passWord" show-password></el-input>
+      <el-button type="primary" @click="login">登录</el-button>
     </el-main>
     <el-footer>Footer</el-footer>
   </el-container>
@@ -11,8 +13,23 @@
 </template>
 
 <script>
+  import {teacherLogin} from '@/api/teacher/teacher_after_login/teacher_after_login'
     export default {
-        name: "teacher_test"
+        name: "teacher_test",
+      data(){
+          return{
+            userName:'',
+            passWord:''
+
+          }
+      },
+      methods:{
+          login(){
+            teacherLogin(this.userName,this.passWord).then(res=>{
+              console.log(res)
+            })
+          }
+      },
     }
 </script>
 

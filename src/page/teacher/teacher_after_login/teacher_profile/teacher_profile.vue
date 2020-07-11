@@ -47,35 +47,35 @@
           <table cellpadding="20">
             <tr>
               <td>姓名：</td>
-              <td>{{profile.teachName}}</td>
+              <td>{{teachInfo.teachName}}</td>
               <td></td>
               <td width="100px"></td>
               <td>证件类型：</td>
-              <td>{{profile.idType}}</td>
+              <td>{{teachInfo.idType}}</td>
             </tr>
             <tr>
               <td>性别：</td>
-              <td>{{profile.sex}}</td>
+              <td>{{teachInfo.sex}}</td>
               <td></td>
               <td width="200px"></td>
               <td>证件号码：</td>
-              <td>{{profile.idNum}}</td>
+              <td>{{teachInfo.idNum}}</td>
             </tr>
             <tr>
               <td>手机号码：</td>
-              <td>{{profile.teachPhone}}</td>
+              <td>{{teachAccount.teachPhone}}</td>
               <td><el-button>修改</el-button></td>
               <td width="200px"></td>
               <td>出生日期：</td>
-              <td>{{profile.teachBirth}}</td>
+              <td>{{teachInfo.teachBirth}}</td>
             </tr>
             <tr>
               <td>邮箱：</td>
-              <td>{{profile.teachEmail}}</td>
+              <td>{{teachAccount.teachEmail}}</td>
               <td><el-button>修改</el-button></td>
               <td width="200px"></td>
               <td>国家地区：</td>
-              <td>{{profile.nationality}}</td>
+              <td>{{teachInfo.nationality}}</td>
             </tr>
             <tr>
               <td></td>
@@ -83,7 +83,7 @@
               <td></td>
               <td width="200px"></td>
               <td>籍贯：</td>
-              <td>{{profile.nationality}}</td>
+              <td>{{teachInfo.nationality}}</td>
             </tr>
             <tr>
               <td></td>
@@ -92,7 +92,7 @@
               <td width="200px"></td>
               <td>政治面貌：</td>
               <td>
-                <el-input  v-model="profile.politicalStatus" placeholder="profile.politicalStatus"></el-input>
+                <el-input  v-model="teachInfo.politicalStatus" placeholder="profile.politicalStatus"></el-input>
               </td>
             </tr>
             <tr>
@@ -151,20 +151,12 @@ export default {
       },
       data() {
         return {
-          profile: {
-            teachName: '',
-            sex: '',
-            teachPhone:'',
-            teachEmail:'',
-            idType:'',
-            idNum:'',
-            teachBirth:'',
-            nationality:'',
-            nativePlace:'',
-            politicalStatus:''
-            //address
-          },
-          profileRules: {},
+          teachAccount:{},
+          teachInfo:{},
+          relOrgTeach:{},
+
+
+
 
 
           pickerOptions: {
@@ -199,10 +191,16 @@ export default {
 
       created(){
           console.log(sessionStorage)
-        getProfile(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
+        getProfile('110').then(res => {
           console.log(res)
-          this.profile=res.data.data.profile
+          this.teachAccount=res.data.data.teachAccount
+          this.teachInfo=res.data.data.teachInfo
+          this.relOrgTeach=res.data.data.relOrgTeach
+          console.log(this.teachAccount)
+          console.log(this.teachInfo)
+          console.log(this.relOrgTeach)
         })
+
 
       },
 

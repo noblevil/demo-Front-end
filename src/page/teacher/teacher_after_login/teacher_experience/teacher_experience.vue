@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-bg" justify="center">
       <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
-        <table  style="color: #e5e9f2" cellpadding="2px">
+        <table  cellpadding="2px">
           <tr>
             <td rowspan="2">xxx老师</td>
             <td rowspan="2">
@@ -20,12 +20,11 @@
     <el-row type="flex" class="row-bg" justify="center">
       <div class="line"></div>
       <el-menu
-        :default-active="activeIndex2"
+        default-active="4"
         class="el-menu-demo"
         mode="horizontal"
-        @select="handleSelect"
-        background-color="#20222a"
-        text-color="#fff"
+
+        text-color="#000000"
         active-text-color="#409EFF">
         <el-menu-item index="1" @click="profile">基本信息</el-menu-item>
         <el-menu-item index="2" @click="institution">所在培训机构</el-menu-item>
@@ -36,8 +35,10 @@
     </el-row>
 
     <el-row type="flex" class="row-bg" justify="space-around">
-      <el-col :span="18"><div class="grid-content bg-purple">
-        <el-card v-for="(item,index) in items" :key="item" class="box-card">
+      <el-col :span="22"><div class="grid-content bg-purple">
+
+        <el-card v-for="(item,index) in items" :key="item" class="box-card" >
+          <div style="border: #e5e9f2 1px solid;padding: 50px">
           <div slot="header" class="clearfix">
             <span>经历{{index+1}}</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="deleteExperience(index,1)"><i class="el-icon-circle-close"></i></el-button>
@@ -97,7 +98,9 @@
             </td>
             </tr>
           </table>
+          </div>
         </el-card>
+
 
 
 
@@ -269,10 +272,10 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    background: #000000;
   }
   .bg-purple {
-    background: #20222a;
+    background: #FFFFFF;
   }
   .bg-purple-light {
     background: #e5e9f2;
@@ -281,13 +284,13 @@
     border-radius: 4px;
     min-height: 36px;
     text-align: center;
-    color: #e5e9f2;
+    color: #000000;
     padding-top: 10px;
 
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #20222a;
+    background-color: #FFFFFF;
   }
 
 

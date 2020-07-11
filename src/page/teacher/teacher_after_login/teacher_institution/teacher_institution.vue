@@ -153,64 +153,35 @@
         </el-table>
 
 
-
-        <!--<div v-for="item in selectedInstitution" :key="item">
-          <table cellpadding="20">
-            <tr>
-              <td>机构名称：</td><td>{{item.orgName}}</td>
-            </tr>
-            <tr>
-              <td>机构编号：</td><td>{{item.orgId}}</td>
-            </tr>
-            <tr>
-              <td>学科:</td>
-              <td><el-select v-model="teachingSubject" placeholder="请选择">
-                <el-option
-                  v-for="item in item.courseSubject"
-                  :key="item.value"
-                  :label="item.label"
-                  :value="item.value">
-                </el-option>
-              </el-select></td>
-            </tr>
-          </table>
-        </div>-->
       </div>
 
       </el-col>
     </el-row>
-<!--
-    <el-row type="flex" class="row-bg" justify="end">
-      <el-col :span="2" style="margin-top: 20px">
-        <el-row>
-          <el-button>下一步</el-button>
-        </el-row>
-      </el-col>
-      <el-col :span="2" style="margin-top: 20px">
-        <el-row>
-          <el-button @click="submit">提交</el-button>
-        </el-row>
-      </el-col>
-      <el-col :span="2" style="margin-top: 20px">
-        <el-row>
-          <el-button>返回</el-button>
-        </el-row>
-      </el-col>
-    </el-row>-->
+
 
 
   </div>
 </template>
 
 <script>
+  import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
+
   import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
   import {searchInstitution} from "@/api/teacher/teacher_register/teacher_register";
   import {getMyInstitution} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
+
 
   export default {
 
     data() {
       return {
+        teachInfo:{},
+        relOrgTeach:{},
+
+
+
         keyWords:'',
 
         pageSize: 3,
@@ -237,6 +208,14 @@
       })
       getMyInstitution(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
         this.myInstitution=res.data.data.institutions
+      })
+
+
+      getProfile('110').then(res => {
+        console.log(res)
+        this.teachInfo=res.data.data.teachInfo
+        this.relOrgTeach=res.data.data.relOrgTeach
+
       })
     },
 

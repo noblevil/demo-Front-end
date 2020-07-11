@@ -39,46 +39,46 @@
       <el-col :span="12"><div class="grid-content bg-purple">
         <el-form
 
-          :rules="teacherDetailRules"
-          ref="teacherDetail"
-          :model="teacherDetail"
-          id="teacherDetail"
+          :rules="teachInfoRules"
+          ref="teachInfo"
+          :model="teachInfo"
+          id="teachInfo"
           label-width="0">
         <table cellpadding="20">
           <tr>
             <td style="padding-top: 2px">最高学历：</td>
             <td>
-              <el-form-item prop="qualification">
-              <el-input v-model="teacherDetail.highestEducation" id="qualification"  placeholder="teacherDetail.highestEducation"></el-input>
+              <el-form-item prop="highestEducation">
+              <el-input v-model="teachInfo.highestEducation"   placeholder="teachInfo.highestEducation"></el-input>
               </el-form-item>
             </td>
             <td width="100px"></td>
             <td style="padding-top: 2px">所学专业：</td>
             <td>
               <el-form-item prop="major">
-              <el-input v-model="teacherDetail.major" id="major"  placeholder="teacherDetail.major"></el-input>
+              <el-input v-model="teachInfo.major"  placeholder="teacherDetail.major"></el-input>
               </el-form-item>
             </td>
           </tr>
           <tr>
             <td style="padding-top: 2px">学历获得院校或机构：</td>
             <td>
-              <el-form-item prop="institutionWithQualification">
-              <el-input v-model="teacherDetail.educationalInstitution" id="institutionWithQualification"  placeholder="teacherDetail.educationalInstitution"></el-input>
+              <el-form-item prop="educationalInstitution">
+              <el-input v-model="teachInfo.educationalInstitution"  placeholder="teachInfo.educationalInstitution"></el-input>
               </el-form-item>
             </td>
             <td></td>
             <td style="padding-top: 2px">毕业时间：</td><td>
             <div style="width: 200px">
 
-              <el-form-item prop="graduatedDate">
+              <el-form-item prop="graduationDate">
               <el-date-picker
                 style="width: 200px"
-                v-model="teacherDetail.graduationDate"
+                v-model="teachInfo.graduationDate"
                 id="graduatedDate"
                 align="right"
                 type="date"
-                placeholder="teacherDetail.graduationDate"
+                placeholder="teachInfo.graduationDate"
                 :picker-options="pickerOptions">
               </el-date-picker>
               </el-form-item>
@@ -88,23 +88,23 @@
           <tr>
             <td style="padding-top: 2px">最高学位：</td>
             <td>
-              <el-form-item prop="degree">
-              <el-input v-model="teacherDetail.highestDegree" id="degree"  placeholder="teacherDetail.highestDegree"></el-input>
+              <el-form-item prop="highestDegree">
+              <el-input v-model="teachInfo.highestDegree"  placeholder="teachInfo.highestDegree"></el-input>
               </el-form-item>
             </td>
             <td></td>
             <td style="padding-top: 2px">专业技术职称：</td>
             <td>
-              <el-form-item prop="title">
-              <el-input v-model="teacherDetail.professionalTitle" id="title"  placeholder="teacherDetail.professionalTitle"></el-input>
+              <el-form-item prop="professionalTitle">
+              <el-input v-model="teachInfo.professionalTitle"   placeholder="teachInfo.professionalTitle"></el-input>
               </el-form-item>
             </td>
           </tr>
           <tr>
             <td style="padding-top: 2px">学位获得院校或机构：</td>
             <td>
-              <el-form-item prop="institutionWithDegree">
-              <el-input v-model="teacherDetail.degreeObtainedInstitution" id="institutionWithDegree" @change="saveForm('institutionWithDegree')" placeholder="teacherDetail.degreeObtainedInstitution"></el-input>
+              <el-form-item prop="degreeObtainedInstitution">
+              <el-input v-model="teachInfo.degreeObtainedInstitution"  placeholder="teachInfo.degreeObtainedInstitution"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -115,7 +115,7 @@
     </el-row>
 
     <el-row type="flex" class="row-bg" justify="end">
-      
+
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
@@ -145,41 +145,36 @@
 </template>
 
 <script>
-  import {getDetail} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  //import {getDetail} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
   export default {
     data() {
       return {
-        teacherDetail:{
-          highestEducation: '',
-          major: '',
-          educationalInstitution: '',
-          graduationDate: '',
-          highestDegree: '',
-          degreeObtainedInstitution: '',
-          professionalTitle: '',
+        teachInfo:{},
 
-        },
-        teacherDetailRules:{
-          qualification: [
+
+
+        teachInfoRules:{
+          highestEducation: [
             {required: true, message: "请输入最高学历", trigger: "blur"},
           ],
           major: [
             {required: true, message: "请输入所学专业", trigger: "blur"},
           ],
-          institutionWithQualification: [
+          educationalInstitution: [
             {required: true, message: "请输入学历获得院校或机构", trigger: "blur"},
           ],
-          graduatedDate: [
+          graduationDate: [
             {required: true, message: "请输入毕业时间", trigger: "blur"},
           ],
-          degree: [
+          highestDegree: [
             {required: true, message: "请输入最高学位", trigger: "blur"},
           ],
-          title: [
+          professionalTitle: [
             {required: true, message: "请输入专业技术职称", trigger: "blur"},
           ],
-          institutionWithDegree: [
+          degreeObtainedInstitution: [
             {required: true, message: "请输入学位获得院校或机构", trigger: "blur"},
           ],
 
@@ -219,11 +214,13 @@
 
 
     },
-    created() {
-      getDetail(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
+    created(){
+      getProfile('110').then(res => {
         console.log(res)
-        this.teacherDetail=res.data.data.teacherDetail
+        this.teachInfo=res.data.data.teachInfo
       })
+
+
     },
     methods: {
       handleClick(tab, event) {
@@ -331,6 +328,10 @@
     padding: 10px 0;
     background-color: #FFFFFF;
   }
+
+
+
+
 
 </style>
 

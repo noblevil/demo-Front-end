@@ -7,7 +7,7 @@
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -95,7 +95,7 @@
                 <el-input  v-model="teachInfo.politicalStatus" placeholder="profile.politicalStatus"></el-input>
               </td>
             </tr>
-            <tr>
+            <!--<tr>
               <td></td>
               <td></td>
               <td></td>
@@ -104,7 +104,7 @@
               <td>
                 <el-input   placeholder="请输入内容"></el-input>
               </td>
-            </tr>
+            </tr>-->
 
           </table>
         </el-form>
@@ -190,15 +190,11 @@ export default {
       },
 
       created(){
-          console.log(sessionStorage)
         getProfile('110').then(res => {
           console.log(res)
           this.teachAccount=res.data.data.teachAccount
           this.teachInfo=res.data.data.teachInfo
           this.relOrgTeach=res.data.data.relOrgTeach
-          console.log(this.teachAccount)
-          console.log(this.teachInfo)
-          console.log(this.relOrgTeach)
         })
 
 
@@ -274,9 +270,7 @@ export default {
 <style scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

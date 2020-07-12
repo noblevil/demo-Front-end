@@ -13,6 +13,27 @@ export const getProfile = (teachAccount) =>{
 }
 
 
+//获取所有机构信息
+export const getOrgList = () =>{
+  return request({
+    url: '/api/orginfo/getAllOrgList',
+    method: 'get',
+  })
+}
+
+
+//模糊搜索机构
+export const seracrchOrg = (condition) =>{
+  return request({
+    url: '/api/orginfo/searchOrg',
+    method: 'get',
+    params:{
+      condition,
+    }
+  })
+}
+
+
 
 
 

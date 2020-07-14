@@ -23,7 +23,7 @@
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="10"><div class="grid-content bg-purple" style="padding: 50px;border: #e5e9f2 1px solid;" >
         <h3>家长（学生）的评价</h3>
-        <el-card class="box-card" v-for="comment in comments" style="margin-top: 5px" >
+        <el-card class="box-card" v-for="comment in comments" :key='comment' style="margin-top: 5px" >
           <table cellpadding="10px">
             <tr>
               <td>用户名:</td><td>{{comment.userName}}</td>
@@ -63,7 +63,7 @@
       </div></el-col>
       <el-col :span="10"><div class="grid-content bg-purple" style="padding: 50px;border: #e5e9f2 1px solid;">
         <h3>本人课程</h3>
-        <el-button  style="width: 700px;margin-left: 0px;margin-top: 5px" v-for="course in courses" @click="gotoDetail(course.courseId)" >
+        <el-button  style="width: 700px;margin-left: 0px;margin-top: 5px" v-for="course in courses" :key='course' @click="gotoDetail(course.courseId)" >
         <el-card class="box-card" >
           <table cellpadding="10px">
             <tr>
@@ -160,7 +160,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   &:last-child {

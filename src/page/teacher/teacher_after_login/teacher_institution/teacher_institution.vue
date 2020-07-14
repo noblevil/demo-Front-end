@@ -50,10 +50,10 @@
         <div style="margin-top: 50px;border: #e5e9f2 1px solid;padding: 50px">
           <el-checkbox-group v-model="selectedInstitution" >
             <el-checkbox-button v-for="(institution,index) in institutions"
-                                v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize"
+                                
                                 :value="institution"
                                 :label="institution"
-                                :key="institution">{{institution.orgName}}<br>{{institution.orgId}}</el-checkbox-button>
+                                :key="institution"><div v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize">{{institution.orgName}}<br>{{institution.orgId}}</div></el-checkbox-button>
           </el-checkbox-group>
         </div>
 
@@ -144,8 +144,7 @@
             fixed="right"
             label="操作"
             width="100">
-            <!-- eslint-disable-next-line -->
-            <template slot-scope="scope">
+            <template >
               <el-button  @click="applyInstitution" type="text" size="small">申请加入</el-button>
 
             </template>
@@ -166,6 +165,8 @@
 
 <script>
   import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  import {getOrgList} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  import {seracrchOrg} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
 
   import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
@@ -362,9 +363,7 @@
 <style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

@@ -144,6 +144,7 @@
             fixed="right"
             label="操作"
             width="100">
+            <!-- eslint-disable-next-line -->
             <template slot-scope="scope">
               <el-button  @click="applyInstitution" type="text" size="small">申请加入</el-button>
 
@@ -358,7 +359,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   &:last-child {

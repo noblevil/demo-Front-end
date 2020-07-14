@@ -285,7 +285,7 @@ import {getOrgByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_af
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   

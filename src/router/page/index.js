@@ -314,6 +314,17 @@ export default [
       isAuth: false
     }
   },
+  {
+    path: '/teacher-after-login/empty',
+      name: '空白页',
+      component: () =>
+        import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_institution/empty'),
+      meta: {
+        keepAlive: true,
+        isTab: false,
+        isAuth: false
+      }
+    },
   //teacher_register
   {
     path: '/teacher-register/register-profile',

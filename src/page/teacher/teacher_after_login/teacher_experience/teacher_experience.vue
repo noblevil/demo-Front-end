@@ -5,7 +5,7 @@
       <el-col :span="2">
         <table  cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -34,8 +34,8 @@
       </el-menu>
     </el-row>
 
-    <el-row type="flex" class="row-bg" justify="space-around">
-      <el-col :span="22"><div class="grid-content bg-purple">
+    <el-row type="flex" class="row-bg" justify="center">
+      <el-col :span="6"><div class="grid-content bg-purple">
 
         
 
@@ -50,12 +50,12 @@
               <td>工作职位：</td><td><el-input v-model="item.position" placeholder="请输入内容"></el-input></td>
             </tr>-->
             <tr>
-              <td>工作单位：</td><td><el-input  v-model="orgInfo[index].orgName" :placeholder="orgInfo[index].orgName"></el-input></td>
+              <td>工作单位：</td><td><el-input :disabled="true"  v-model="orgInfo[index].orgName" :placeholder="orgInfo[index].orgName"></el-input></td>
             </tr>
             <tr>
               <td>所授科目：</td>
               <td>
-                <el-select  :placeholder="teachInfo.teachingSubject" v-model="teachInfo.teachingSubject">
+                <el-select  :placeholder="teachInfo.teachingSubject" :disabled="true" v-model="teachInfo.teachingSubject">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -70,6 +70,7 @@
               <div style="width: 200px">
 
                 <el-date-picker
+                :disabled="true"
                   style="width: 200px"
                   v-model="item.startTime"
                   align="right"
@@ -88,6 +89,7 @@
               <div style="width: 200px">
 
                 <el-date-picker
+                :disabled="true"
                   style="width: 200px"
                   v-model="item.endTime"
                   align="right"
@@ -255,10 +257,10 @@ import {getOrgByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_af
 
 
       nextStep(){
-        this.$router.push({path: "/other"});
+        this.$router.push({path: "/teacher-after-login/teacher-other"});
       },
       lastStep(){
-        this.$router.push({path: "/detail"});
+        this.$router.push({path: "/teacher-after-login/teacher-detail"});
       },
 
 

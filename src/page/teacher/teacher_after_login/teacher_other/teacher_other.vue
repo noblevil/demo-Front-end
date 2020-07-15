@@ -5,7 +5,7 @@
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -36,8 +36,107 @@
     </el-row>
 
     <el-row type="flex" class="row-bg" justify="center">
-      <el-col :span="8"><div class="grid-content bg-purple" >
+      <el-col :span="14"><div class="grid-content bg-purple" >
+          <el-form
+          :rules="teachInfoRules"
+          ref="teachInfo"
+          :model="teachInfo"
+          id="teachInfo"
+        >
         <table cellpadding="10px" >
+          <tr>
+            <td style="padding-top: 2px">教师资格证：</td>
+            <td>
+              <el-form-item prop="isTeachQualifCertication">
+              <el-radio v-model="teachInfo.isTeachQualifCert" label="是">是</el-radio>
+              <el-radio v-model="teachInfo.isTeachQualifCert" label="否">否</el-radio>
+              </el-form-item>
+            </td>
+            <td width="100px">
+            </td>
+            <td style="padding-top: 2px">账户名：</td>
+            <td>
+              <el-form-item prop="teachAccount">
+              <el-input v-model="teachAccount.teachAccount" :placeholder="teachAccount.teachAccount" :disabled="true"></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td rowspan="3">
+              <div style="border: #e5e9f2 1px solid;width: 400px;height: 210px">
+                <table cellpadding="10px" style="line-height: 40px;text-align: center;width: 350px;margin-left: 25px">
+                  <tr>教师资格证号码：</tr>
+                  <tr>
+                    <el-form-item prop="certificateNum">
+                    <el-input v-model="teachInfo.certificateNum" :placeholder="teachInfo.certificateNum" style="width: 300px"></el-input>
+                    </el-form-item>
+                  </tr>
+                  <tr>
+                    <el-upload
+                      :before-upload="beforeUpload"
+                      :on-progress="onProgress"
+                      :on-success="onSuccess"
+                      :on-error="onError"
+                      class="upload-demo"
+                      ref="upload"
+                      action="string"
+                      name="文件"
+                      :http-request="UploadImage"
+                      :on-preview="handlePreview"
+                      :on-remove="handleRemove"
+                      :before-remove="beforeRemove"
+                      :limit="1"
+                      :on-exceed="handleExceed"
+                      :file-list="fileList">
+                      <el-button size="small" type="primary" style="width: 300px" :icon="uploadIcon">{{uploadText}}</el-button>
+                      <!--<div slot="tip" class="el-upload__tip">只能上传jpg/png文件，且不超过500kb</div>-->
+                    </el-upload>
+                  </tr>
+                </table>
+              </div>
+            </td>
+            <td>
+            </td>
+            <td style="padding-top: 2px">用户密码：</td>
+            <td>
+              <el-form-item prop="passwd">
+              <el-input placeholder="请输入密码" v-model="teachAccount.passwd" show-password></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+            </td>
+            <td style="padding-top: 2px">确认密码:</td>
+            <td>
+              <el-form-item prop="confirmPassword">
+              <el-input placeholder="请输入密码" v-model="teachAccount.passwd" show-password></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+          <tr></tr>
+          <!--<tr>
+            <td style="padding-top: 2px">是否在职：</td>
+            <td>
+              <el-form-item prop="incumbency">
+              <el-radio v-model="other.incumbency" label="是">是</el-radio>
+              <el-radio v-model="other.incumbency" label="否">否</el-radio>
+              </el-form-item>
+            </td>
+            <td></td>
+
+           
+          </tr>-->
+        </table>
+        </el-form>
+
+
+
+
+
+        <!--<table cellpadding="10px" >
           <tr>
             <td>教师资格证：</td><td><el-radio v-model="radio" label="1">有</el-radio>
             <el-radio v-model="radio" label="2">无</el-radio></td>
@@ -76,11 +175,11 @@
             <td>是否在职：</td><td><el-radio v-model="radio" label="1">是</el-radio>
             <el-radio v-model="radio" label="2">否</el-radio></td>
           </tr>
-        </table>
+        </table>-->
 
 
       </div></el-col>
-      <el-col :span="6"><div class="grid-content bg-purple">
+      <el-col :span="4"><div class="grid-content bg-purple">
         <div style="margin-top: 60px">
           其他专业证书：
         <el-upload
@@ -132,7 +231,7 @@
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button type="primary">提交</el-button>
+          <el-button type="primary"  @click="submitForm('teachInfo')">提交</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
@@ -147,9 +246,19 @@
 </template>
 
 <script>
+
+import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
   export default {
     data() {
       return {
+        teachAccount:{},
+        teachInfo:{},
+
+
+
+
         activeName: 'second',
         radio1:'',
         fileList: [{name: 'food.jpeg', url: 'https://fuss10.elemecdn.com/3/63/4e7f3a15429bfda99bce42a18cdd1jpeg.jpeg?imageMogr2/thumbnail/360x360/format/webp/quality/100'}],
@@ -165,6 +274,16 @@
 
 
     },
+
+
+    created(){
+        getProfile('110').then(res => {
+          console.log(res)
+          this.teachAccount=res.data.data.teachAccount
+          this.teachInfo=res.data.data.teachInfo    
+        })
+    },
+
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
@@ -253,13 +372,53 @@
       },
       handleDownload(file) {
         console.log(file);
-      }
+      },
+
+
+      submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+
+
+                this.$confirm("是否确认提交信息？", '确认提交信息', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  dangerouslyUseHTMLString:true,
+                  type: 'warning'
+                }).then(() => {
+                  changeTeachByTeachId(this.teachInfo.teachId,this.teachAccount,this.teachInfo).then(res =>{
+                    if(res){
+                        this.$router.push({path: "/teacher-after-login/empty",query:{name:'other'}});
+                    }
+                  })
+                  this.$message({
+                    type: 'success',
+                    message: '提交成功!'
+                  });
+                }).catch(() => {
+                  this.$message({
+                    type: 'info',
+                    message: '取消提交'
+                  });
+                });
+              } else {
+                console.log('error submit!!');
+                this.$message({
+                  type: 'error',
+                  message: '格式错误!'
+                });
+                return false;
+              }
+            });
+          },
+
+
 
     }
   };
 </script>
 
-<style lang="less" scoped>
+<style scoped>
   .el-row {
     margin-bottom: 20px;
   

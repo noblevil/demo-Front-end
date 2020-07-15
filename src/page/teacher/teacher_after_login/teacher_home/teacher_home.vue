@@ -63,7 +63,7 @@
       </div></el-col>
       <el-col :span="10"><div class="grid-content bg-purple" style="padding: 50px;border: #e5e9f2 1px solid;">
         <h3>本人课程</h3>
-        <el-button  style="width: 700px;margin-left: 0px;margin-top: 5px" v-for="course in courses" :key='course' @click="gotoDetail(course.courseId)" >
+        <el-button  style="width: 700px;margin-left: 0px;margin-top: 5px" v-for="course in courseList" :key='course' @click="gotoDetail(course.courseId)" >
         <el-card class="box-card" >
           <table cellpadding="10px">
             <tr>
@@ -71,12 +71,20 @@
               <td>{{course.courseName}}</td>
             </tr>
             <tr>
-              <td>课程时间：</td>
-              <td>{{course.courseDuration}}</td>
+              <td>课程级别：</td>
+              <td>{{course.courseLevel}}</td>
             </tr>
             <tr>
-              <td>上课时间：</td>
-              <td>{{course.classTime}}</td>
+              <td>课程所属学科：</td>
+              <td>{{course.courseSubject}}</td>
+            </tr>
+            <tr>
+              <td>课程有效期：</td>
+              <td>{{course.validPeriod}}</td>
+            </tr>
+            <tr>
+              <td>课程内容介绍：</td>
+              <td>{{course.courseIntro}}</td>
             </tr>
           </table>
         </el-card>
@@ -92,12 +100,17 @@
 </template>
 
 <script>
-//import {getTeacherAfterLoginTeacherHome} from '@/api/teacher_after_login/teacher_after_login'
+
+import {getTeachCourseByTeachAccount} from '@/api/teacher/teacher_after_login/teacher_after_login'
 
   export default {
 
     data() {
       return{
+        courseList:[],
+
+
+
         Id:1,
         teacherId:1,
         comments:[],
@@ -107,17 +120,17 @@
 
 
     },
-    created() {
-      /*getTeacherAfterLoginTeacherHome().then(res => {
-        console.log(res)
-        this.comments=res.data.data.comments;
-        this.courses=res.data.data.courses;
-        console.log(this.comments)
-        console.log(this.courses)
-      })
-      */
+    
 
-    },
+     created(){
+        getTeachCourseByTeachAccount('110').then(res => {
+          //console.log(res)
+          this.courseList=res.data.data
+          console.log(this.courseList)
+        })
+
+
+      },
 
 
 

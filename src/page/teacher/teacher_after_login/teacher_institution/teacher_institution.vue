@@ -1,11 +1,11 @@
 <template>
   <div>
     <el-row type="flex" class="row-bg" justify="center">
-      <el-col :span="24"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
+      <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple">
                 <div class="el-icon-user-solid" style="height: 20px"></div>
@@ -121,6 +121,7 @@
           :data="selectedInstitution"
           height="250px"
           border
+          empty-text="请选择机构"
           style="width: 100%">
           <el-table-column
             fixed
@@ -163,6 +164,19 @@
 
       </div>
 
+      </el-col>
+    </el-row>
+    <el-row type="flex" class="row-bg" justify="end">
+      <el-col :span="2" style="margin-top: 20px">
+        <el-row>
+          <el-button @click="nextStep" type="info">下一步</el-button>
+        </el-row>
+      </el-col>
+      
+      <el-col :span="2" style="margin-top: 20px">
+        <el-row>
+          <el-button @click="lastStep" type="info">返回</el-button>
+        </el-row>
       </el-col>
     </el-row>
 
@@ -275,6 +289,14 @@
         this.$router.push({path: "/teacher-after-login/teacher-experience"});
       },
 
+
+      nextStep(){
+        this.$router.push({path: "/teacher-after-login/teacher-detail"});
+      },
+      lastStep(){
+        this.$router.push({path: "/teacher-after-login/teacher-profile"});
+      },
+
       //搜索机构
       query(){
         seracrchOrg(this.condition).then(res => {
@@ -333,9 +355,13 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            changeOrgTeachStatus(teachId,orgId,2)
-            this.$router.push({path: "/teacher-after-login/empty"});
-            //window.location.reload()
+            changeOrgTeachStatus(teachId,orgId,2).then(res => {
+              console.log(res)
+              if(res){
+              this.$router.push({path: "/teacher-after-login/empty",query:{name:'institution'}});
+              }
+              })
+            //this.$router.push({path: "/teacher-after-login/empty",query:{name:'institution'}});
             this.$message({
               type: 'success',
               message: '信息已提交!'
@@ -353,10 +379,13 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
-            changeOrgTeachStatus(teachId,orgId,1)
-            this.$router.push({path: "/teacher-after-login/empty"});
-            //window.location.reload()
-            //this.$router.replace({path: "/teacher-after-login/teacher-institution"});
+            changeOrgTeachStatus(teachId,orgId,1).then(res =>{
+              if(res){
+                this.$router.push({path: "/teacher-after-login/empty",query:{name:'institution'}});
+              }
+            })
+            //this.$router.push({path: "/teacher-after-login/empty",query:{name:'institution'}});
+            
             this.$message({
               type: 'success',
               message: '信息已提交!'

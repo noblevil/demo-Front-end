@@ -70,10 +70,10 @@ export const getTeachCourseByTeachAccount = (teachAccount) =>{
   })
 }
 //根据teachAccount修改教师账户和教师信息
-export const changeTeachByTeachAccount = (teachId,teachAccount,teachInfo) =>{
+export const changeTeachByTeachId = (teachId,teachAccount,teachInfo) =>{
   
-  request({
-    url: '/api/teachinfo/changeTeachByTeachAccount',
+  return request({
+    url: '/api/teachinfo/changeTeachByTeachId',
     method: 'post',
     data :{
       teachId,

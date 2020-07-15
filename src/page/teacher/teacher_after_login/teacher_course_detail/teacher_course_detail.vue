@@ -21,19 +21,24 @@
 
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="22"><div class="grid-content bg-purple">
-        <table cellpadding="20">
-          <tr>
-            <td>课程名：</td><td></td>
-          </tr>
-          <tr>
-            <td>课程时间：</td><td></td>
-          </tr>
-          <tr>
-            <td>上课时间：</td><td></td>
-          </tr>
-          <tr>
-            <td>上课地点：</td><td></td>
-          </tr>
+       <table cellpadding="20">
+            <tr>
+              <td>课程名：</td>
+              <td>{{courseList[0].courseName}}</td>
+            </tr>
+            <tr>
+              <td>课程类别：</td>
+              <td>{{courseList[0].courseSubject}}</td>
+            </tr>
+            <tr>
+              <td>课程年级：</td>
+              <td>{{courseList[0].courseLevel}}</td>
+              
+            </tr>
+            <tr>
+              <td>课程时长：</td>
+              <td>{{courseList[0].totalLessons}}</td>
+            </tr>
           <tr>
             <td>学员名单：</td>
             <td>
@@ -192,9 +197,23 @@
 </template>
 
 <script>
+  import {getCourse} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  
   export default {
+    name: "course" ,
+    props:{
+      values:{
+        type: Array ,
+        default: function(){
+          return []
+        }
+      }
+    },
+
     data() {
       return {
+        courseList:[],
+
         value:3.7,
         activeName: 'second',
         pickerOptions: {
@@ -282,9 +301,15 @@
 
     },
     created() {
-      console.log(this.$route.query.id)
+      //console.log(this.$route.query.id)
+      
+      getCourse('110').then(res => {
+          console.log(res)
+          this.courseList=res.data.data
+      })
     },
 
+  
     methods: {
       handleClick(tab, event) {
         console.log(tab, event);
@@ -321,7 +346,7 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   &:last-child {

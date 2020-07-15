@@ -7,7 +7,7 @@
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -40,74 +40,137 @@
       <el-col :span="12"><div class="grid-content bg-purple">
         <el-form
 
-          :rules="profileRules"
-          ref="profile"
-          :model="profile"
-          label-width="0">
-          <table cellpadding="20">
-            <tr>
-              <td>姓名：</td>
-              <td>{{teachInfo.teachName}}</td>
-              <td></td>
-              <td width="100px"></td>
-              <td>证件类型：</td>
-              <td>{{teachInfo.idType}}</td>
-            </tr>
-            <tr>
-              <td>性别：</td>
-              <td>{{teachInfo.sex}}</td>
-              <td></td>
-              <td width="200px"></td>
-              <td>证件号码：</td>
-              <td>{{teachInfo.idNum}}</td>
-            </tr>
-            <tr>
-              <td>手机号码：</td>
-              <td>{{teachAccount.teachPhone}}</td>
-              <td><el-button>修改</el-button></td>
-              <td width="200px"></td>
-              <td>出生日期：</td>
-              <td>{{teachInfo.teachBirth}}</td>
-            </tr>
-            <tr>
-              <td>邮箱：</td>
-              <td>{{teachAccount.teachEmail}}</td>
-              <td><el-button>修改</el-button></td>
-              <td width="200px"></td>
-              <td>国家地区：</td>
-              <td>{{teachInfo.nationality}}</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td width="200px"></td>
-              <td>籍贯：</td>
-              <td>{{teachInfo.nationality}}</td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td width="200px"></td>
-              <td>政治面貌：</td>
-              <td>
-                <el-input  v-model="teachInfo.politicalStatus" placeholder="profile.politicalStatus"></el-input>
-              </td>
-            </tr>
-            <tr>
-              <td></td>
-              <td></td>
-              <td></td>
-              <td width="200px"></td>
-              <td>居住地址：</td>
-              <td>
-                <el-input   placeholder="请输入内容"></el-input>
-              </td>
-            </tr>
+                 :rules="teachInfoRules"
+                 ref="teachInfo"
+                 :model="teachInfo"
+                 label-width="0">
+        <table cellpadding="20" >
+          <tr>
+            <td style="padding-top: 2px">姓名：</td>
+            <td >
+              <el-form-item prop="name" >
+            <el-input v-model="teachInfo.teachName"  :placeholder="teachInfo.name"></el-input>
+            </el-form-item>
+            
+            <td width="200px">
+            </td>
+            <td style="padding-top: 2px">证件类型：</td><td><template>
+            <el-form-item prop="idType" >
+            <el-select v-model="teachInfo.idType"  :placeholder="teachInfo.idType">
+              <el-option
+                v-for="item in certificateType"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+              </el-option>
+            </el-select>
+            </el-form-item>
+          </template>
+          </td>
+          </tr>
+          <tr>
+            <td style="padding-top: 2px">性别：</td>
+            <td>
+              <el-form-item prop="sex">
+              <el-radio v-model="teachInfo.sex"  label="男">男</el-radio><el-radio v-model="teachInfo.sex"  label="女">女</el-radio>
+              </el-form-item>
+            </td>
+            <td >
+            </td>
+            <td style="padding-top: 2px">证件号码：</td>
+            <td>
+              <el-form-item prop="idNum">
+              <el-input v-model.number="teachInfo.idNum" :placeholder="teachInfo.idNum"></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding-top: 2px">手机号：</td>
+            <td>
+              <el-form-item prop="teachPhone">
+              <el-input v-model.number="teachAccount.teachPhone" :placeholder="teachAccount.teachPhone"></el-input>
+              </el-form-item>
+            </td>
+            <td >
+            </td>
+            <td style="padding-top: 2px">出生日期：</td>
+            <td>
+            <div style="width: 200px">
+              <el-form-item prop="teachBirth">
+              <el-date-picker style="width: 200px"
+                              v-model="teachInfo.teachBirth"
+                              align="right"
+                              type="date"
+                              :placeholder="teachBirth"
+                              :picker-options="pickerOptions">
+              </el-date-picker>
+              </el-form-item>
+            </div>
+            </td>
+          </tr>
+          <tr>
+            <td style="padding-top: 2px">邮箱：</td>
+            <td>
+              <el-form-item prop="teachEmail">
+              <el-input v-model="teachAccount.teachEmail" :placeholder="teachAccount.teachEmail" :disabled="true"></el-input>
+              </el-form-item>
+            </td>
+            <td >
+            </td>
+            <td style="padding-top: 2px">国家地区:</td>
+            <td>
+              <template>
+            <el-form-item prop="nationality">
+            <el-select placeholder="请选择国家区号" :value="value" @input="change($event)" v-model="teachInfo.nationality">
+              <el-option v-for="item in options" :key="item.value" :label="`${item.name}(${item.en})  +${item.tel}`" :value="item.tel">
+              </el-option>
+            </el-select>
+            </el-form-item>
+            </template>
+          </td>
 
-          </table>
+
+          </tr>
+          <tr>
+            <td style="padding-top: 2px">国籍性质：</td><td><template>
+            <el-form-item prop="countryNature" >
+              <el-select v-model="teachInfo.countryNature"  :placeholder="teachInfo.countryNature">
+                <el-option
+                  v-for="item in countryNature"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+          </td>
+            <td>
+            </td>
+            <td style="padding-top: 2px">籍贯：</td>
+            <td>
+              <el-form-item prop="nativePlace">
+            <el-input v-model="teachInfo.nativePlace" :placeholder="teachInfo.nativePlace"></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+          <tr>
+            <td></td>
+            <td>
+            
+            </td>
+            <td>
+            </td>
+            <td style="padding-top: 2px">政治面貌：</td>
+            <td>
+              <el-form-item prop="politicalStatus">
+              <el-input v-model="teachInfo.politicalStatus" :placeholder="teachInfo.politicalStatus"></el-input>
+              </el-form-item>
+            </td>
+          </tr>
+        </table>
         </el-form>
+
       </div></el-col>
 
 
@@ -117,18 +180,18 @@
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="resetForm('teacher')">重置</el-button>
+          <el-button @click="resetForm('teacher')" type="info">重置</el-button>
         </el-row>
       </el-col>
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>下一步</el-button>
+          <el-button type="info">下一步</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>提交</el-button>
+          <el-button type="primary" @click="submitForm('teachInfo')">提交</el-button>
         </el-row>
        </el-col>
 
@@ -140,6 +203,7 @@
 <script>
 
 import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+import {changeTeachByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
 export default {
         name: "profile",
@@ -154,6 +218,28 @@ export default {
           teachAccount:{},
           teachInfo:{},
           relOrgTeach:{},
+
+
+
+
+          certificateType:[{
+            value: '选项1',
+            label: '身份证'
+          },],
+          countryNature:[
+            {
+              value:'中国大陆',
+              label:'中国大陆'
+            },
+            {
+              value:'港澳台',
+              label:'港澳台'
+            },
+            {
+              value:'外国',
+              label:'外国'
+            },
+          ],
 
 
 
@@ -190,15 +276,14 @@ export default {
       },
 
       created(){
-          console.log(sessionStorage)
         getProfile('110').then(res => {
-          console.log(res)
+          //console.log(res)
           this.teachAccount=res.data.data.teachAccount
           this.teachInfo=res.data.data.teachInfo
           this.relOrgTeach=res.data.data.relOrgTeach
+          console.log(this.teachInfo.teachId)
           console.log(this.teachAccount)
           console.log(this.teachInfo)
-          console.log(this.relOrgTeach)
         })
 
 
@@ -250,11 +335,33 @@ export default {
           submitForm(formName) {
             this.$refs[formName].validate((valid) => {
               if (valid) {
-                console.log('error submit!!');
-                alert('submit!');
+
+
+                this.$confirm("是否确认提交信息？", '确认提交信息', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  dangerouslyUseHTMLString:true,
+                  type: 'warning'
+                }).then(() => {
+                  changeTeachByTeachAccount(this.teachInfo.teachId,this.teachAccount,this.teachInfo)
+                  this.$message({
+                    type: 'success',
+                    message: '提交成功!'
+                  });
+                  //存储到sessionStorage
+                  //sessionStorage.setItem('profile',JSON.stringify(this.teacher))
+                }).catch(() => {
+                  this.$message({
+                    type: 'info',
+                    message: '取消提交'
+                  });
+                });
               } else {
                 console.log('error submit!!');
-                //return callback(new Error('格式错误'));
+                this.$message({
+                  type: 'error',
+                  message: '格式错误!'
+                });
                 return false;
               }
             });
@@ -271,12 +378,10 @@ export default {
     }
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

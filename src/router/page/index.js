@@ -58,7 +58,39 @@ export default [
       isAuth: false
     }
   },
-
+  {
+    path: "/policyDetail",
+    name: 'policyDetail',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/policyDetail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+ {
+    path: "/noticeDetail",
+    name: 'noticeDetail',
+    component: () =>
+      import( /* webpackChunkName: "page" */ '@/page/home/noticeDetail'),
+    meta: {
+      keepAlive: true,
+      isTab: false,
+      isAuth: false
+    }
+  },
+  {
+     path: "/complaintDetail",
+     name: 'complaintDetail',
+     component: () =>
+       import( /* webpackChunkName: "page" */ '@/page/home/complaintDetail'),
+     meta: {
+       keepAlive: true,
+       isTab: false,
+       isAuth: false
+     }
+   },
   {
     path: '/userlogin',
     name: '我的测试页',
@@ -314,6 +346,17 @@ export default [
       isAuth: false
     }
   },
+  {
+    path: '/teacher-after-login/empty',
+      name: '空白页',
+      component: () =>
+        import( /* webpackChunkName: "page" */ '@/page/teacher/teacher_after_login/teacher_institution/empty'),
+      meta: {
+        keepAlive: true,
+        isTab: false,
+        isAuth: false
+      }
+    },
   //teacher_register
   {
     path: '/teacher-register/register-profile',

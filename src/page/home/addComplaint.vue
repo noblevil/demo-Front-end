@@ -118,9 +118,7 @@ export default {
        this.addComplaintForm.complaintOrgName,
        this.addComplaintForm.complaintTitle,
        this.addComplaintForm.complaintContent,
-    ).then(res => {
-      this.complaintList = res.data.data.complaintList;
-    })
+    )
   },
 }
 }

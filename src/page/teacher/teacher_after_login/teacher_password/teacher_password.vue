@@ -83,8 +83,8 @@
         </table>
         </el-form>
 
-        <el-button  @click="submitForm('teacherDetail')" >提交</el-button>
-        <el-button  @click="submitForm('teacherDetail')" >返回</el-button>
+        <el-button  @click="submitForm('teacherDetail')" type="primary">提交</el-button>
+        <el-button  @click="submitForm('teacherDetail')" type="info">返回</el-button>
 
 
 
@@ -251,18 +251,16 @@
 <style scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    background: #000000;
   }
   .bg-purple {
-    background: #20222a;
+    background: #FFFFFF;
   }
   .bg-purple-light {
     background: #e5e9f2;
@@ -271,14 +269,15 @@
     border-radius: 4px;
     min-height: 36px;
     text-align: center;
-    color: #e5e9f2;
+    color: #000000;
     padding-top: 10px;
 
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #20222a;
+    background-color: #FFFFFF;
   }
+
 
 </style>
 

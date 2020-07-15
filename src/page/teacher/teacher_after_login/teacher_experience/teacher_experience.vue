@@ -37,24 +37,25 @@
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="22"><div class="grid-content bg-purple">
 
-        <el-card v-for="(item,index) in items" :key="item" class="box-card" >
-          <div style="border: #e5e9f2 1px solid;padding: 50px">
-          <div slot="header" class="clearfix">
+        
+
+          <div style="border: #e5e9f2 1px solid;padding: 50px;width:350px" v-for="(item,index) in relOrgTeach" :key="item">
+          <!--<div slot="header" class="clearfix">
             <span>经历{{index+1}}</span>
             <el-button style="float: right; padding: 3px 0" type="text" @click="deleteExperience(index,1)"><i class="el-icon-circle-close"></i></el-button>
-          </div>
+          </div>-->
 
           <table cellpadding="10px">
-            <tr>
+            <!--<tr>
               <td>工作职位：</td><td><el-input v-model="item.position" placeholder="请输入内容"></el-input></td>
-            </tr>
+            </tr>-->
             <tr>
-              <td>工作单位：</td><td><el-input v-model="item.institution" placeholder="请输入内容"></el-input></td>
+              <td>工作单位：</td><td><el-input  v-model="orgInfo[index].orgName" :placeholder="orgInfo[index].orgName"></el-input></td>
             </tr>
             <tr>
               <td>所授科目：</td>
               <td>
-                <el-select v-model="item.subject" placeholder="请选择">
+                <el-select  :placeholder="teachInfo.teachingSubject" v-model="teachInfo.teachingSubject">
                   <el-option
                     v-for="item in options"
                     :key="item.value"
@@ -70,10 +71,10 @@
 
                 <el-date-picker
                   style="width: 200px"
-                  v-model="item.dateBegin"
+                  v-model="item.startTime"
                   align="right"
                   type="date"
-                  placeholder="选择日期"
+                  placeholder=""
                   :picker-options="pickerOptions">
                 </el-date-picker>
               </div>
@@ -88,7 +89,7 @@
 
                 <el-date-picker
                   style="width: 200px"
-                  v-model="item.dateEnd"
+                  v-model="item.endTime"
                   align="right"
                   type="date"
                   placeholder="选择日期"
@@ -99,18 +100,18 @@
             </tr>
           </table>
           </div>
-        </el-card>
+       
 
 
 
 
 
       </div></el-col>
-      <el-col :span="2"><div class="grid-content bg-purple">
+      <!--<el-col :span="2"><div class="grid-content bg-purple">
         <el-row>
           <el-button @click="addExperience">增加工作经历</el-button>
         </el-row>
-      </div></el-col>
+      </div></el-col>-->
 
     </el-row>
 
@@ -118,17 +119,13 @@
     <el-row type="flex" class="row-bg" justify="end">
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="nextStep">下一步</el-button>
+          <el-button @click="nextStep" type="info">下一步</el-button>
         </el-row>
       </el-col>
+      
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="submit">提交</el-button>
-        </el-row>
-      </el-col>
-      <el-col :span="2" style="margin-top: 20px">
-        <el-row>
-          <el-button @click="lastStep">返回</el-button>
+          <el-button @click="lastStep" type="info">返回</el-button>
         </el-row>
       </el-col>
     </el-row>
@@ -138,9 +135,20 @@
 </template>
 
 <script>
+import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+import {getOrgByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
+
   export default {
     data() {
       return {
+        teachInfo:{},
+        relOrgTeach:[{}],
+        orgInfo:[{}],
+
+
+
+
         items:[],
 
         options: [{
@@ -189,6 +197,22 @@
       }
 
 
+    },
+    created(){
+      getProfile('110').then(res => {
+        this.teachInfo=res.data.data.teachInfo
+        this.relOrgTeach=res.data.data.relOrgTeach
+        console.log(this.relOrgTeach)
+        console.log(this.relOrgTeach[0])
+        console.log(this.relOrgTeach[0].startTime)
+      
+      })
+      getOrgByTeachAccount('110').then(res => {
+        this.orgInfo=res.data.data
+        console.log(this.orgInfo)
+        
+        
+      })
     },
     methods: {
 
@@ -261,12 +285,10 @@
   };
 </script>
 
-<style scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

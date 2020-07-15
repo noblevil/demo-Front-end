@@ -49,14 +49,14 @@
             <td style="padding-top: 2px">最高学历：</td>
             <td>
               <el-form-item prop="highestEducation">
-              <el-input v-model="teachInfo.highestEducation"   placeholder="teachInfo.highestEducation"></el-input>
+              <el-input v-model="teachInfo.highestEducation"   :placeholder="teachInfo.highestEducation"></el-input>
               </el-form-item>
             </td>
             <td width="100px"></td>
             <td style="padding-top: 2px">所学专业：</td>
             <td>
               <el-form-item prop="major">
-              <el-input v-model="teachInfo.major"  placeholder="teacherDetail.major"></el-input>
+              <el-input v-model="teachInfo.major"  :placeholder="teachInfo.major"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -64,7 +64,7 @@
             <td style="padding-top: 2px">学历获得院校或机构：</td>
             <td>
               <el-form-item prop="educationalInstitution">
-              <el-input v-model="teachInfo.educationalInstitution"  placeholder="teachInfo.educationalInstitution"></el-input>
+              <el-input v-model="teachInfo.educationalInstitution"  :placeholder="teachInfo.educationalInstitution"></el-input>
               </el-form-item>
             </td>
             <td></td>
@@ -78,7 +78,7 @@
                 id="graduatedDate"
                 align="right"
                 type="date"
-                placeholder="teachInfo.graduationDate"
+                :placeholder="teachInfo.graduationDate"
                 :picker-options="pickerOptions">
               </el-date-picker>
               </el-form-item>
@@ -89,14 +89,14 @@
             <td style="padding-top: 2px">最高学位：</td>
             <td>
               <el-form-item prop="highestDegree">
-              <el-input v-model="teachInfo.highestDegree"  placeholder="teachInfo.highestDegree"></el-input>
+              <el-input v-model="teachInfo.highestDegree"  :placeholder="teachInfo.highestDegree"></el-input>
               </el-form-item>
             </td>
             <td></td>
             <td style="padding-top: 2px">专业技术职称：</td>
             <td>
               <el-form-item prop="professionalTitle">
-              <el-input v-model="teachInfo.professionalTitle"   placeholder="teachInfo.professionalTitle"></el-input>
+              <el-input v-model="teachInfo.professionalTitle"   :placeholder="teachInfo.professionalTitle"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -104,9 +104,22 @@
             <td style="padding-top: 2px">学位获得院校或机构：</td>
             <td>
               <el-form-item prop="degreeObtainedInstitution">
-              <el-input v-model="teachInfo.degreeObtainedInstitution"  placeholder="teachInfo.degreeObtainedInstitution"></el-input>
+              <el-input v-model="teachInfo.degreeObtainedInstitution"  :placeholder="teachInfo.degreeObtainedInstitution"></el-input>
               </el-form-item>
             </td>
+            <td></td><td style="padding-top: 2px">工作类型：</td><td><template>
+            <el-form-item prop="workType" >
+              <el-select v-model="teachInfo.workType"  :placeholder="teachInfo.workType">
+                <el-option
+                  v-for="item in workType"
+                  :key="item.value"
+                  :label="item.label"
+                  :value="item.value">
+                </el-option>
+              </el-select>
+            </el-form-item>
+          </template>
+          </td>
           </tr>
         </table>
         </el-form>
@@ -119,23 +132,23 @@
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="resetForm('teacherDetail')">重置</el-button>
+          <el-button @click="resetForm('teacherDetail')" type="info">重置</el-button>
         </el-row>
       </el-col>
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="nextStep">下一步</el-button>
+          <el-button @click="nextStep" type="info">下一步</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>提交</el-button>
+          <el-button type="primary">提交</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="lastStep">返回</el-button>
+          <el-button @click="lastStep" type="info">返回</el-button>
         </el-row>
       </el-col>
     </el-row>
@@ -152,6 +165,20 @@
     data() {
       return {
         teachInfo:{},
+
+
+        workType:[
+          {
+            value:'兼职',
+            label:'兼职'
+          },
+          {
+            value:'全职',
+            label:'全职'
+          },
+
+        ],
+
 
 
 
@@ -297,12 +324,10 @@
   };
 </script>
 
-<style scoped>
+<style lang="less"scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

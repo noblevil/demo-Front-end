@@ -10,7 +10,7 @@ export default {
   clientSecret: 'saber_secret', // 客户端密钥
   tenantMode: true, // 是否开启租户模式
   tenantId: "000000", // 管理组租户编号
-  captchaMode: true, // 是否开启验证码模式
+  captchaMode: false, // 是否开启验证码模式
   lockPage: '/lock',
   tokenTime: 3000,
   //http的status默认放行不才用统一处理的,
@@ -19,7 +19,7 @@ export default {
   isFirstPage: false,
   fistPage: {
     label: "首页",
-    value: "/wel/index",
+    value: "/home",
     params: {},
     query: {},
     meta: {

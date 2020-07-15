@@ -1,3 +1,4 @@
+
 <template>
   <div>
     <!-- <div class="myMap">
@@ -7,18 +8,23 @@
       <my-header></my-header>
     </div>
 
-    <div class="orgQueryForm">
-      <el-form :inline="true" ref="form" :model="queryForm" label-width="100px">
-        <el-row>
-          <el-col :span="12">校外机构查询</el-col>
-          <el-col :span="12">
-            <el-button type="primary" @click="query">查询</el-button>
-            <el-button type="info">重置</el-button>
-          </el-col>
-        </el-row>
+    <el-row>
+      <el-carousel indicator-position="outside">
+        <el-carousel-item v-for="item in dataimg" :key="item">
+          <img :src="item.src" />
+        </el-carousel-item>
+      </el-carousel>
+    </el-row>
 
-        <el-form-item label="请选择区域：">
+    <div class="orgQueryForm">
+      <el-form :inline="true" ref="queryForm" :model="queryForm" :rules="rules" label-width="100px">
+        <el-form-item label="机构名称：" prop="orgName">
+          <el-input style="width: 140px" placeholder="请输入机构名称" v-model="queryForm.orgName" clearable></el-input>
+        </el-form-item>
+
+        <el-form-item label="选择区域：" prop="address">
           <el-cascader
+            style="width: 100px"
             size="large"
             :options="regionOptions"
             v-model="selectedOptions"
@@ -26,12 +32,8 @@
           ></el-cascader>
         </el-form-item>
 
-        <el-form-item label="机构名称：">
-          <el-input placeholder="请输入" v-model="queryForm.orgName" clearable></el-input>
-        </el-form-item>
-
-        <el-form-item label="培训类别：">
-          <el-select v-model="queryForm.trainType" clearable placeholder="请选择">
+        <el-form-item label="培训类别：" prop="trainType">
+          <el-select style="width: 110px" v-model="queryForm.trainType" clearable placeholder="请选择">
             <el-option
               v-for="item in trainTypeOptions"
               :key="item.value"
@@ -41,8 +43,13 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="培训科目：">
-          <el-select v-model="queryForm.trainSubject" clearable placeholder="请选择">
+        <el-form-item label="培训科目：" prop="trainSubject">
+          <el-select
+            style="width: 110px"
+            v-model="queryForm.trainSubject"
+            clearable
+            placeholder="请选择"
+          >
             <el-option
               v-for="item in trainSubjectOptions"
               :key="item.value"
@@ -52,8 +59,8 @@
           </el-select>
         </el-form-item>
 
-        <el-form-item label="培训形式：">
-          <el-select v-model="queryForm.trainForm" clearable placeholder="请选择">
+        <el-form-item label="培训形式：" prop="trainForm">
+          <el-select style="width: 110px" v-model="queryForm.trainForm" clearable placeholder="请选择">
             <el-option
               v-for="item in trainFormOptions"
               :key="item.value"
@@ -62,15 +69,20 @@
             ></el-option>
           </el-select>
         </el-form-item>
+
+        <el-button style="width: 100px" type="primary" @click="query">查询</el-button>
+        <el-button style="width: 100px" type="info" @click="reset">重置</el-button>
       </el-form>
     </div>
 
-    <div class="orgList">
+    <div class="orgList" style="height: 190px">
       <el-table
         :data="orgList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
         stripe
         style="width: 100%"
+        @selection-change="handleCurrentChange"
       >
+        <el-table-column type="index" :index="indexMethod" label="序号" width="100"></el-table-column>
         <el-table-column prop="orgName" label="机构名称" width="180"></el-table-column>
         <el-table-column prop="listType" label="信用等级" width="180"></el-table-column>
         <el-table-column prop="unifiedCode" label="统一社会信用代码" width="180"></el-table-column>
@@ -80,22 +92,36 @@
         <el-table-column prop="trainForm" label="培训形式" width="180"></el-table-column>
         <el-table-column prop="orgId" label="详情">
           <template slot-scope="scope">
-            <el-button @click="gotolink(scope.row)" type="text" size="small">点击跳转页面</el-button>
-            <button @click="gotolink(scope.row)" class="btn btn-success">点击跳转页面</button>
+            <el-button @click="gotolink(scope.row)" type="text" size="small">查看机构详情</el-button>
           </template>
         </el-table-column>
       </el-table>
     </div>
+
+    <div class="pagination">
+      <el-pagination
+        @size-change="handleSizeChange"
+        @current-change="handleCurrentChange"
+        :current-page.sync="currentPage"
+        :page-size="pagesize"
+        layout="total, prev, pager, next"
+        :total="this.orgList.length"
+      ></el-pagination>
+    </div>
+
+    <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
+
   </div>
 </template>
 
 <script>
+
 import { regionData, CodeToText } from "element-china-area-data";
 //自定义组件
 import myHeader from "@/components/home/my-header";
 
 import myMap from "@/components/home/my-map";
-//api
+//f
 import { getAllOrgList } from "@/api/home/home";
 import { queryOrgList } from "@/api/home/home";
 
@@ -106,10 +132,18 @@ export default {
   },
   data() {
     return {
-      //分页信息
-      total: 0,
-      pagesize: 10,
-      currentPage: 1,
+      dataimg: [
+        {
+          src: require("../../../public/img/home/img1.jpg")
+        },
+        {
+          src: require("../../../public/img/home/img2.jpg")
+        }
+      ],
+
+      total: 0, //总条数
+      pagesize: 5, //每页的条数
+      currentPage: 1, //默认开始页面
 
       //下拉列表选项 Options
       regionOptions: regionData,
@@ -224,6 +258,9 @@ export default {
     });
   },
   methods: {
+    reset() {
+      this.$refs["queryForm"].resetFields();
+    },
     handleChange() {
       var loc = "";
       for (let i = 0; i < this.selectedOptions.length; i++) {
@@ -231,6 +268,12 @@ export default {
       }
 
       this.queryForm.address = loc;
+    },
+    indexMethod(index) {
+      return index + 1;
+    },
+    handleCurrentChange: function(currentPage) {
+      this.currentPage = currentPage;
     },
     query() {
       queryOrgList(
@@ -252,6 +295,7 @@ export default {
         });
       });
     },
+
     gotolink(row) {
       //点击跳转至上次浏览页面
       // this.$router.go(-1)
@@ -274,5 +318,46 @@ export default {
 .mymap {
   height: 200px;
   width: 300px;
+}
+
+.pagination {
+  text-align: center;
+}
+
+.el-form-item {
+  width: 250px;
+}
+
+.el-footer {
+  text-align: center;
+  font-size: 13px;
+  width: 100%;
+  height: 70px;
+  background-color: rgb(204, 204, 204);
+}
+.el-carousel {
+  text-align: center;
+}
+
+.el-carousel__item img {
+  line-height: 400px;
+  margin: 0;
+}
+
+.el-footer {
+  height: 100px;
+  line-height: 60px;
+  margin-top: 100px;
+  text-align: center;
+}
+
+.orgQueryForm {
+  padding-bottom: 5px;
+  padding-top: 10px;
+}
+
+.orgList {
+  padding-right: 20px;
+  padding-left: 20px;
 }
 </style>

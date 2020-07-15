@@ -75,3 +75,20 @@ new Vue({
   i18n,
   render: h => h(App)
 }).$mount('#app')
+
+// 导航守卫
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+router.beforeEach((to, from, next) => {
+  if (to.path === '/userlogin') {
+    console.log("登录");
+    next();
+  } else {
+    let token = localStorage.getItem('Authorization');
+    console.log("确实有token");
+    if (token === 'null' || token === '') {
+      next('/userlogin');
+    } else {
+      next();
+    }
+  }
+});

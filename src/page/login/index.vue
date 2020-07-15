@@ -15,27 +15,32 @@
       </div>
       <div class="login-border">
         <div class="login-main">
+
           <h4 class="login-title">
             {{ $t('login.title') }}{{website.title}}
             <top-lang/>
           </h4>
+
           <userLogin v-if="activeName==='user'"/>
           <codeLogin v-else-if="activeName==='code'"/>
           <thirdLogin v-else-if="activeName==='third'"/>
-          <div class="login-menu">
-            <a href="#"
-               @click.stop="activeName='user'">{{ $t('login.userLogin') }}</a>
-            <a href="#"
-               @click.stop="activeName='code'">{{ $t('login.phoneLogin') }}</a>
-            <a href="#"
-               @click.stop="activeName='third'">{{ $t('login.thirdLogin') }}</a>
-          </div>
+
+<!--          <div class="login-menu">-->
+<!--            <a href="#"-->
+<!--               @click.stop="activeName='user'">{{ $t('login.userLogin') }}</a>-->
+<!--            <a href="#"-->
+<!--               @click.stop="activeName='code'">{{ $t('login.phoneLogin') }}</a>-->
+<!--            <a href="#"-->
+<!--               @click.stop="activeName='third'">{{ $t('login.thirdLogin') }}</a>-->
+<!--          </div>-->
+
         </div>
 
       </div>
     </div>
   </div>
 </template>
+
 <script>
   import userLogin from "./userlogin";
   import codeLogin from "./codelogin";

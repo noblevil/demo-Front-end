@@ -1,0 +1,49 @@
+/deep/.el-step.is-simple .el-step__head {
+    font-size: 16px;
+  }
+
+
+.el-header{
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-footer {
+  background-color: #b3c0d1;
+  color: #333;
+  text-align: center;
+  line-height: 60px;
+}
+
+.el-aside {
+  // background-color: #d3dce6;
+  color: #333;
+  text-align: center;
+  line-height: 200px;
+}
+
+.el-main {
+  // background-color: #e9eef3;
+  color: #333;
+  text-align: center;
+  line-height: 160px;
+}
+
+.register {
+  width: 100%;
+  height: 900px;
+
+  background-size: cover;
+  overflow: hidden;
+}
+.register-wrap {
+  background-size: cover;
+  // width: 400px;
+  // height: 400px;
+  margin: 100px 100px 0px 100px;
+  overflow: hidden;
+  padding-top: 10px;
+  line-height: 0px;
+}

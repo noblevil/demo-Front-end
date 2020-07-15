@@ -8,6 +8,7 @@ import blog from './blog'
 import home from './home'
 import org from './org'
 import complaint from './complaint'
+<<<<<<< HEAD
 import policy from './policy'
 import notice from './notice'
 /**

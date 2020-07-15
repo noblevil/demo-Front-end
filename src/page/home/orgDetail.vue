@@ -1,17 +1,17 @@
  <template>
   <div class="homeBox">
     <el-container style="height:100%;" direction="vertical">
-      <el-header style="height:170px">
-        <div>
-          <my-header></my-header>
-        </div>
-      </el-header>
+      <!-- <el-header style="height:170px"> -->
+      <div>
+        <my-header></my-header>
+      </div>
+      <!-- </el-header> -->
       <el-main>
         <div>
           <div>
             <el-row type="flex" class="row-bg" justify="center">
               <el-col :span="10">
-                <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
+                <table cellpadding="10px" border="1">
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td width="400px" v-if="index%2==0 && index > 0">{{labels[name]}}</td>
                     <td width="600px" v-if="index%2==0 && index > 0">{{value}}</td>
@@ -19,7 +19,7 @@
                 </table>
               </el-col>
               <el-col :span="10">
-                <table cellpadding="10px" border="1" style="background-color:#e5e9f2">
+                <table cellpadding="10px" border="1">
                   <tr v-for="(value,name,index) in institution" :key="index">
                     <td v-if="index%2==1" width="400px">{{labels[name]}}</td>
                     <td v-if="index%2==1" width="600px">{{value}}</td>
@@ -73,11 +73,11 @@
               <el-tab-pane label="教师介绍" name="second">
                 <el-form ref="form" :model="queryTeacherForm" label-width="80px">
                   <el-row type="flex" justify="center">
-                    <el-form-item label="教师姓名">
+                    <el-form-item label="教师姓名" label-width="100px">
                       <el-input v-model="queryTeacherForm.teachName" style="width:200px"></el-input>
                     </el-form-item>
 
-                    <el-form-item label="性别">
+                    <el-form-item label="性别" label-width="100px">
                       <el-select
                         v-model="queryTeacherForm.sex"
                         clearable
@@ -85,15 +85,15 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in sexOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in sexOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
 
-                    <el-form-item label="国籍性质">
+                    <el-form-item label="国籍性质" label-width="100px">
                       <!-- <select-country v-model="queryTeacherForm.country"></select-country> -->
                       <el-select
                         v-model="queryTeacherForm.countryNature"
@@ -102,15 +102,15 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in countryNatureOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in countryNatureOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
 
-                    <el-form-item label="工作类型">
+                    <el-form-item label="工作类型" label-width="100px">
                       <el-select
                         v-model="queryTeacherForm.workType"
                         clearable
@@ -118,17 +118,17 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in workTypeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in workTypeOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
                   </el-row>
 
                   <el-row type="flex" justify="center">
-                    <el-form-item label="任教资格分类">
+                    <el-form-item label="任教资格分类" label-width="100px">
                       <el-select
                         v-model="queryTeacherForm.teachQualifClass"
                         clearable
@@ -136,15 +136,15 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in teachQualifClassOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in teachQualifClassOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
                     <!-- 这里需要再考虑 888888888888888 -->
-                    <el-form-item label="资格种类">
+                    <el-form-item label="资格种类" label-width="100px">
                       <el-select
                         v-model="queryTeacherForm.qualifClass"
                         clearable
@@ -152,21 +152,21 @@
                         style="width:200px"
                       >
                         <el-option
-                          v-for="(item, index) in qualifClassOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
+                          v-for="item in qualifClassOptions"
+                          :key="item.value"
+                          :label="item.label"
+                          :value="item.value"
                         ></el-option>
                       </el-select>
                     </el-form-item>
 
-                    <el-form-item label="任教学科">
+                    <el-form-item label="任教学科" label-width="100px">
                       <el-input v-model="queryTeacherForm.teachingSubject" style="width:200px"></el-input>
                     </el-form-item>
 
-                    <el-form-item>
-                      <el-button type="primary" @click="queryTeachers">查询</el-button>
-                      <el-button type="info">重置</el-button>
+                    <el-form-item label-width="100px">
+                      <el-button style="width: 100px" type="primary" @click="queryTeachers">查询</el-button>
+                      <el-button style="width: 100px" type="info">重置</el-button>
                     </el-form-item>
                   </el-row>
                 </el-form>
@@ -193,69 +193,55 @@
               </el-tab-pane>
 
               <el-tab-pane label="课程介绍" name="third">
-                <el-form ref="form" :model="queryTeacherForm" label-width="80px">
-                  <el-row type="flex" justify="center">
-                    <el-form-item label="级别">
-                      <el-select v-model="queryCourseForm.courseLevel" clearable placeholder="请选择">
-                        <el-option
-                          v-for="(item, index) in coursegradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
+                <el-form :inline="true" ref="form" :model="queryCourseForm" label-width="100px">
+                  <el-form-item label="级别">
+                    <el-select v-model="queryCourseForm.courseLevel" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in coursegradeOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
 
-                    <el-form-item label="招生对象学段">
-                      <el-select v-model="queryTeacherForm.studentRank" clearable placeholder="请选择">
-                        <el-option
-                          v-for="(item, index) in studentRankOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item label="招生对象学段">
+                    <el-select v-model="queryCourseForm.studentRank" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in studentRankOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
 
-                  <el-row type="flex" justify="center">
-                    <el-form-item label="学科">
-                      <el-select
-                        v-model="queryTeacherForm.courseSubject"
-                        clearable
-                        placeholder="请选择"
-                      >
-                        <el-option
-                          v-for="item in trainSubjectOptions"
-                          :key="item.value"
-                          :label="item.label"
-                          :value="item.value"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
+                  <el-form-item label="学科" label-width="50px">
+                    <el-select v-model="queryCourseForm.courseSubject" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in trainSubjectOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
 
-                    <el-form-item label="招生对象年级">
-                      <el-select
-                        v-model="queryTeacherForm.studentGrade"
-                        clearable
-                        placeholder="请选择"
-                      >
-                        <el-option
-                          v-for="(item, index) in studentGradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item label="招生对象年级">
+                    <el-select v-model="queryCourseForm.studentGrade" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in studentGradeOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
 
-                  <el-row type="flex" justify="center">
-                    <el-form-item>
-                      <el-button type="primary" @click="queryCourses">查询</el-button>
-                      <el-button type="info">重置</el-button>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item>
+                    <el-button style="width: 100px" type="primary" @click="queryCourses">查询</el-button>
+                    <el-button style="width: 100px" type="info">重置</el-button>
+                  </el-form-item>
                 </el-form>
 
                 <el-table :data="courses" stripe style="width: 100%">
@@ -270,69 +256,61 @@
               </el-tab-pane>
 
               <el-tab-pane label="班次介绍" name="fourth">
-                <el-form ref="form" :model="queryClassForm" label-width="80px">
-                  <el-row type="flex" justify="center">
-                    <el-form-item label="年级">
-                      <el-select v-model="queryClassForm.studentGrade" clearable placeholder="请选择">
-                        <el-option
-                          v-for="(item, index) in studentGradeOptions"
-                          :key="index"
-                          :value="index"
-                          :label="item"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
-                    <el-form-item label="班级名称">
-                      <el-input v-model="queryClassForm.courseClassName"></el-input>
-                    </el-form-item>
-                  </el-row>
+                <el-form :inline="true" ref="form" :model="queryClassForm" label-width="100px">
+                  <el-form-item label="年级">
+                    <el-select v-model="queryClassForm.studentGrade" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in studentGradeOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
+                  <el-form-item label="班级名称">
+                    <el-input v-model="queryClassForm.courseClassName"></el-input>
+                  </el-form-item>
 
-                  <el-row type="flex" justify="center">
-                    <el-form-item label="学科">
-                      <el-select v-model="queryClassForm.courseSubject" clearable placeholder="请选择">
-                        <el-option
-                          v-for="item in trainSubjectOptions"
-                          :key="item.value"
-                          :value="item.value"
-                          :label="item.label"
-                        ></el-option>
-                      </el-select>
-                    </el-form-item>
+                  <el-form-item label="学科">
+                    <el-select v-model="queryClassForm.courseSubject" clearable placeholder="请选择">
+                      <el-option
+                        v-for="item in trainSubjectOptions"
+                        :key="item.value"
+                        :label="item.label"
+                        :value="item.value"
+                      ></el-option>
+                    </el-select>
+                  </el-form-item>
 
-                    <el-form-item label="授课教师">
-                      <el-input v-model="queryClassForm.teachName"></el-input>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item label="授课教师">
+                    <el-input v-model="queryClassForm.teachName"></el-input>
+                  </el-form-item>
 
-                  <el-row type="flex" justify="center">
-                    <el-form-item label="课程起止日期">
-                      <el-date-picker
-                        v-model="queryClassForm.startDate"
-                        type="date"
-                        placeholder="开始日期"
-                        :picker-options="pickerOptions0"
-                      ></el-date-picker>
-                      <el-date-picker
-                        v-model="queryClassForm.endDate"
-                        type="date"
-                        placeholder="结束日期"
-                        :picker-options="pickerOptions1"
-                      ></el-date-picker>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item label="课程起止日期" label-width="100px">
+                    <el-date-picker
+                      v-model="queryClassForm.startDate"
+                      type="date"
+                      placeholder="开始日期"
+                      :picker-options="pickerOptions0"
+                    ></el-date-picker>
+                    <el-date-picker
+                      v-model="queryClassForm.endDate"
+                      type="date"
+                      placeholder="结束日期"
+                      :picker-options="pickerOptions1"
+                    ></el-date-picker>
+                  </el-form-item>
 
-                  <el-row type="flex" justify="center">
-                    <el-form-item>
-                      <el-button type="primary" @click="queryClassCourses">查询</el-button>
-                      <el-button type="info">重置</el-button>
-                    </el-form-item>
-                  </el-row>
+                  <el-form-item>
+                    <el-button style="width: 100px" type="primary" @click="queryClassCourses">查询</el-button>
+                    <el-button style="width: 100px" type="info">重置</el-button>
+                  </el-form-item>
                 </el-form>
 
                 <el-table :data="classCourses" stripe style="width: 100%">
                   <el-table-column prop="courseClassId" label="年级" width="180"></el-table-column>
                   <el-table-column prop="courseSubject" label="学科" width="180"></el-table-column>
-                  <el-table-column prop="courseClassName" label="班级名称" width="180"></el-table-column>
+                  <el-table-column prop="className" label="班级名称" width="180"></el-table-column>
                   <el-table-column prop="enrollNum" label="计划招生人数"></el-table-column>
                   <el-table-column prop="teachName" label="授课教师" width="180"></el-table-column>
                   <el-table-column prop="teachingTime" label="课程上课日期"></el-table-column>
@@ -344,7 +322,7 @@
           </div>
         </div>
       </el-main>
-      <el-footer>Footer</el-footer>
+      <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
     </el-container>
   </div>
 </template>
@@ -707,7 +685,7 @@ export default {
       //课程查询表单
       queryCourseForm: {
         courseLevel: "",
-        trainSubject: "",
+        courseSubject: "",
         studentRank: "",
         studentGrade: ""
       },
@@ -740,17 +718,15 @@ export default {
     //得到传来的参数 orgId
     this.orgId = this.$route.params.orgId;
 
-    console.log("第一个函数前");
-
     getOrgDetailById(this.orgId).then(res => {
       // this.institutionName = res.data.data.institutionName;
       console.log(res);
 
       this.institution = res.data.data;
       // console.log("ddddddd"+res.data.data.institution);
+      delete this.institution["listType"];
+      delete this.institution["nameOfRepresentative"];
     });
-
-    console.log("第一个函数后");
 
     //得到教师的列表
     getTeachListById(this.orgId).then(res => {
@@ -789,7 +765,7 @@ export default {
       queryCourseList(
         this.orgId,
         this.queryCourseForm.courseLevel,
-        this.queryCourseForm.trainSubject,
+        this.queryCourseForm.courseSubject,
         this.queryCourseForm.studentRank,
         this.queryCourseForm.studentGrade
       ).then(res => {
@@ -845,7 +821,7 @@ export default {
   border-radius: 4px;
   min-height: 36px;
   text-align: center;
-  color: #e5e9f2;
+  // color: #e5e9f2;
   padding-top: 10px;
 }
 .row-bg {

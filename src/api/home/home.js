@@ -2,11 +2,8 @@ import request from '@/router/axios';
 
 //根据orgId得到机构详情
 export const getOrgDetailById = (orgId) => {
-
-
-
     return request({
-        url: '/api/blade-demo/orginfo/getOrgDetailById',
+        url: '/api/orginfo/getOrgDetailById',
         method: 'get',
         params: {
             orgId,
@@ -17,7 +14,7 @@ export const getOrgDetailById = (orgId) => {
 //根据orgId得到机构详情
 export const getAllOrgList = () => {
     return request({
-        url: '/api/blade-demo/orginfo/getAllOrgList',
+        url: '/api/orginfo/getAllOrgList',
         method: 'get',
     })
 }
@@ -30,8 +27,11 @@ export const queryOrgList = (
     trainSubject,
     trainForm) => {
 
+    console.log(oftenAddress);
+
+
     return request({
-        url: '/api/blade-demo/orginfo/queryOrgList',
+        url: '/api/orginfo/queryOrgList',
         method: 'get',
 
         params: {
@@ -50,9 +50,8 @@ export const queryOrgList = (
 export const getTeachListById = (orgId) => {
 
 
-
     return request({
-        url: '/api/blade-demo/teachinfo/getTeachListById',
+        url: '/api/teachinfo/getTeachListById',
         method: 'get',
         params: {
             orgId,
@@ -67,7 +66,7 @@ export const getCourseListById = (orgId) => {
 
 
     return request({
-        url: '/api/blade-demo/course/getCourseListById',
+        url: '/api/course/getCourseListById',
         method: 'get',
         params: {
             orgId,
@@ -82,7 +81,7 @@ export const getClassCourseListById = (orgId) => {
 
 
     return request({
-        url: '/api/blade-demo/course/getClassCourseListById',
+        url: '/api/course/getClassCourseListById',
         method: 'get',
         params: {
             orgId,
@@ -105,7 +104,7 @@ export const queryTeachList = (
 ) => {
 
     return request({
-        url: '/api/blade-demo/teachinfo/queryTeachList',
+        url: '/api/teachinfo/queryTeachList',
 
         method: 'get',
         params: {
@@ -133,7 +132,7 @@ export const queryCourseList = (
 ) => {
 
     return request({
-        url: '/api/blade-demo/course/queryCourseList',
+        url: '/api/course/queryCourseList',
         method: 'get',
         params: {
             orgId,
@@ -159,7 +158,7 @@ export const queryClassCourseList = (
 ) => {
 
     return request({
-        url: '/api/blade-demo/course/queryClassCourseList',
+        url: '/api/course/queryClassCourseList',
         method: 'get',
         params: {
             orgId,
@@ -187,46 +186,67 @@ export const getAllComplaintList = () => {
 
 //根据 筛选 得到投诉列表-xxy
 export const queryComplaintList = (
-      address,
-      complaintType,
-      complaintOrgName,
-       ) => {
-         return request({
+    //address,
+    //complaintType,
+    complaintOrgName,
+) => {
+    return request({
         url: '/api/queryComplaintList',
         method: 'get',
         data: {
-            address,
-            complaintType,
+            //address,
+            //complaintType,
             complaintOrgName,
         }
     },
-    console.log(complaintOrgName))
+        console.log(complaintOrgName))
 
 }
 //新增投诉列表-xxy
 export const addComplaintList = (
-      address,
-      complaintType,
-      complaintOrgName,
-      complaintTitle,
-      complaintContent,
-       ) => {
-        return request({
-        url: '/api/addComplaintList',
+    address,
+    complaintType,
+    complaintOrgName,
+    complaintTitle,
+    complaintContent,
+) => {
+    return request({
+        url: '/api/queryComplaintList',
         method: 'post',
         data: {
-          address,
-          complaintType,
-          complaintOrgName,
-          complaintTitle,
-          complaintContent,
+            address,
+            complaintType,
+            complaintOrgName,
+            complaintTitle,
+            complaintContent,
         }
     },
-    console.log(address),
-    console.log(complaintType),
-    console.log(complaintOrgName),
-    console.log(complaintTitle),
-    console.log(complaintContent)
+        console.log(address),
+        console.log(complaintType),
+        console.log(complaintOrgName),
+        console.log(complaintTitle),
+        console.log(complaintContent)
+
+    )
+
+}
+
+//登录
+export const login = (
+    account,
+    password,
+    role,
+
+) => {
+    return request({
+        url: '/api/jwt/signin',
+        method: 'post',
+        params: {
+            account,
+            password,
+            role,
+        }
+    },
     )
 
 }

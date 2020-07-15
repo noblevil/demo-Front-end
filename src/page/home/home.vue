@@ -70,7 +70,7 @@
           </el-select>
         </el-form-item>
 
-        <el-button style="width: 100px" type="primary" @click="query">查询</el-button>
+        <el-button style="width: 100px; margin-top: 20px" type="primary" @click="query">查询</el-button>
         <el-button style="width: 100px" type="info" @click="reset">重置</el-button>
       </el-form>
     </div>

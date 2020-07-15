@@ -12,6 +12,16 @@ export const getProfile = (teachAccount) =>{
   })
 }
 
+//根据teachAccount返回教师课程信息
+export const getCourse= (teachAccount) => {
+  return request({
+    url: '/api/course/getTeachCourseByTeachAccount',
+    method: 'get',
+    params:{
+      teachAccount,
+    }
+  })
+}
 
 //获取所有机构信息
 export const getOrgList = () =>{
@@ -82,6 +92,8 @@ export const changeTeachByTeachId = (teachId,teachAccount,teachInfo) =>{
     }  
   })
 }
+
+
 
 
 /////////////////////////////////////////////

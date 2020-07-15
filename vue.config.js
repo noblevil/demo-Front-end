@@ -28,7 +28,11 @@ module.exports = {
         //远程演示服务地址,可用于直接启动项目
         //target: 'https://saber.bladex.vip/api',
         //测试接口地址
-        target:'http://kp5hk2.natappfree.cc',
+        //target:'http://ybj.ngrok2.xiaomiqiu.cn',
+        //接口地址2
+        //target:'http://ybj.ngrok2.xiaomiqiu.cn',
+        //临时地址：
+        target:' http://svxeiy.natappfree.cc',
         ws: true,
         pathRewrite: {
           '^/api': '/'

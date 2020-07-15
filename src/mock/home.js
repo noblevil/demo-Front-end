@@ -80,7 +80,6 @@ function getClassCourseListByOrgId() {
     const json = { code: 200, success: true, msg: '机构详情' };
     json.data = {
         classCourses: [
-
             {
                 courseClassId: "高2020",
                 courseClassName: "飞行(2)班",
@@ -92,10 +91,7 @@ function getClassCourseListByOrgId() {
                 startDate: "2020.7.7",
                 endDate: "2021.7.7",
             }
-
-
         ]
-
     };
     return json;
 }
@@ -139,7 +135,7 @@ export default ({ mock }) => {
                 linkmanTwoPhone: "155XXXX8888",
                 bussinesLicense: "企业营业执照XXXXX",
                 relatedCertificates: "J-20",
-                qualificationCategory: "有办学资格证", 
+                qualificationCategory: "有办学资格证",
                 nameOfRepresentative: "嘉德罗斯",
             },
         };

@@ -30,6 +30,7 @@ module.exports = {
         //测试接口地址
         target:'http://2rqpyc.natappfree.cc',
         //target:'http://kp5hk2.natappfree.cc',
+        //target:'http://cyf.ngrok2.xiaomiqiu.cn',
         ws: true,
         pathRewrite: {
           '^/api': '/'

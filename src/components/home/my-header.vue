@@ -1,6 +1,6 @@
 <template>
   <div>
-    <h3>区块链智能教育平台</h3>
+    <h3 style="text-align: center;font-size: x-large;">区块链智能教育平台</h3>
     <div class="menu">
       <el-row>
       <el-menu

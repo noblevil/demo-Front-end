@@ -3,11 +3,11 @@
   <div>
     <my-header></my-header>
   </div>
-   <div class="complaintQueryForm">
+   <div class="complaintQueryForm" style="text-align: center;margin-top:50px;">
     <el-form :inline="true" ref="form" :model="queryForm" label-width="100px">
-      <el-row>
+      <!-- <el-row>
         <el-col :span="12">网上投诉</el-col>
-      </el-row>
+      </el-row> -->
 
       <el-form-item label="请选择区域：">
         <el-cascader
@@ -42,14 +42,9 @@
 
  <div>
   <el-table
-        :data="complaintList"
-        style="width: 100%">
-
-        <el-table-column
-          prop="complaintId"
-          label="序号"
-          width="50">
-        </el-table-column>
+        :data="complaintList.slice((currentPage-1)*pagesize,currentPage*pagesize)"
+        @selection-change='handleCurrentChange'
+        style="width: 100%; padding-right:50px;padding-left:50px;">
 
         <el-table-column
           prop="orgId"
@@ -62,6 +57,10 @@
           label="投诉机构名">
         </el-table-column>
 
+        <el-table-column
+          prop="complaintType"
+          label="投诉类别">
+        </el-table-column>
 
         <el-table-column
           prop="content"
@@ -73,7 +72,21 @@
           label="改进意见">
         </el-table-column>
 
+        <el-table-column prop="complaintId" >
+          <template slot-scope="scope">
+            <el-button @click="gotolink(scope.row)" type="text" >点击查看详情</el-button>
+          </template>
+        </el-table-column>
+
       </el-table>
+      <el-pagination
+           align="center"
+          layout="prev, pager, next"
+          :total="this.complaintList.length"
+          @current-change = 'handleCurrentChange'
+          :page-size="pagesize">
+      </el-pagination>
+
 </div>
 </div>
 </template>
@@ -98,6 +111,12 @@ export default {
   data() {
 
     return {
+
+      //分页信息
+      total: 0,
+      pagesize: 10,
+      currentPage: 1,
+
       selectedOptions:'',
       regionOptions: regionData,
 
@@ -116,20 +135,6 @@ export default {
         }
       ],
 
-      // tableData: [{
-      //   complaint_id: '1',
-      //   org_id: '7886',
-      //   org_name:'韦博开心豆',
-      //   content:'欺诈学费，无证经营',
-      //   suggest:'进入调查'
-      // }, {
-      //   complaint_id: '2',
-      //   org_id: '1234',
-      //   org_name:'随便编的',
-      //   content:'欺诈学费，无证经营',
-      //   suggest:'进入调查'
-      // }],
-
       //查询表单
         queryForm: {
         address: "",
@@ -137,6 +142,7 @@ export default {
         complaintOrgName: "",
       },
         complaintList: [],
+        
   };
   },
 
@@ -148,18 +154,34 @@ export default {
       }
 
       this.queryForm.address = loc;
+      //this.queryForm.address = this.queryForm.address.replace(/\s*/g,"");
     },
 
+
+     handleCurrentChange:function(currentPage){
+                this.currentPage = currentPage;
+            },
+
     query() {
-      console.log(this.queryForm.complaintOrgName,),
+      //console.log(this.queryForm.complaintOrgName,),
       queryComplaintList(
-        //this.queryForm.address,
-        //this.queryForm.complaintType,
-        this.queryForm.complaintOrgName,
+        this.queryForm.address,
+        this.queryForm.complaintType,
+        this.queryForm.complaintOrgName.replace(/\s*/g,""),
       ).then(res => {
         this.complaintList = res.data.data.complaintList;
+        console.log(this.complaintList);
       })
     },
+    gotolink(row) {
+      console.log(row.complaintId);
+      this.$router.push({
+        name: "complaintDetail",
+        params: {
+          complaintId: row.complaintId
+        }
+      });
+    }
   },
   }
 

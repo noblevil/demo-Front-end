@@ -187,16 +187,16 @@ export const getAllComplaintList = () => {
 
 //根据 筛选 得到投诉列表-xxy
 export const queryComplaintList = (
-      //address,
-      //complaintType,
+      address,
+      complaintType,
       complaintOrgName,
        ) => {
          return request({
         url: '/api/queryComplaintList',
         method: 'get',
         data: {
-            //address,
-            //complaintType,
+            address,
+            complaintType,
             complaintOrgName,
         }
     },
@@ -211,8 +211,8 @@ export const addComplaintList = (
       complaintTitle,
       complaintContent,
        ) => {
-         return request({
-        url: '/api/queryComplaintList',
+        return request({
+        url: '/api/addComplaintList',
         method: 'post',
         data: {
           address,
@@ -227,7 +227,67 @@ export const addComplaintList = (
     console.log(complaintOrgName),
     console.log(complaintTitle),
     console.log(complaintContent)
-    
+    )
+
+}
+
+//获取所有政策列表-xxy
+export const getAllPolicyList = () => {
+    return request({
+        url: '/api/AllPolicyList',
+        method: 'get',
+    })
+}
+
+//根据policyID查询政策详情-xxy
+export const getPolicyDetailById = (
+      policyID,
+       ) => {
+         return request({
+        url: '/api/getPolicyDetailById',
+        method: 'get',
+        data: {
+            policyID
+        }
+    },
+    console.log("HOME policyID:   "+policyID),
+    )
+}
+
+//获取所有通知列表-xxy
+export const getAllNoticeList = () => {
+    return request({
+        url: '/api/AllNoticeList',
+        method: 'get',
+    })
+}
+
+//根据noticeID查询通知详情-xxy
+export const getNoticeDetailById = (
+      noticeID,
+       ) => {
+         return request({
+        url: '/api/getNoticeDetailById',
+        method: 'get',
+        data: {
+            noticeID
+        }
+    },console.log("HOME noticeID:   "+noticeID),
+    )
+
+}
+
+//根据complaintID查询投诉详情-xxy
+export const getComplaintDetailById = (
+      complaintId,
+       ) => {
+         return request({
+        url: '/api/getComplaintDetailById',
+        method: 'get',
+        data: {
+            complaintId
+        }
+    },console.log("HOME complaintId:   "+complaintId),
     )
 
 }

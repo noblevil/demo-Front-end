@@ -8,7 +8,8 @@ import blog from './blog'
 import home from './home'
 import org from './org'
 import complaint from './complaint'
-
+import policy from './policy'
+import notice from './notice'
 /**
  * 模拟数据mock
  *
@@ -34,6 +35,5 @@ home({ mock: false });
 org({ mock: false });
 
 complaint({ mock: true });
-
-
-
+policy({ mock: true });
+notice ({mock:true});

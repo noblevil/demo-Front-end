@@ -39,8 +39,8 @@
       <el-col :span="8"><div class="grid-content bg-purple" >
         <table cellpadding="10px" >
           <tr>
-            <td>教师资格证：</td><td><el-radio v-model="radio" label="1">备选项</el-radio>
-            <el-radio v-model="radio" label="2">备选项</el-radio></td>
+            <td>教师资格证：</td><td><el-radio v-model="radio" label="1">有</el-radio>
+            <el-radio v-model="radio" label="2">无</el-radio></td>
           </tr>
           <tr>
             <td></td>
@@ -73,8 +73,8 @@
             </td>
           </tr>
           <tr>
-            <td>是否在职：</td><td><el-radio v-model="radio" label="1">备选项</el-radio>
-            <el-radio v-model="radio" label="2">备选项</el-radio></td>
+            <td>是否在职：</td><td><el-radio v-model="radio" label="1">是</el-radio>
+            <el-radio v-model="radio" label="2">否</el-radio></td>
           </tr>
         </table>
 
@@ -127,17 +127,17 @@
     <el-row type="flex" class="row-bg" justify="end">
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>下一步</el-button>
+          <el-button type="info">下一步</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>提交</el-button>
+          <el-button type="primary">提交</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button>返回</el-button>
+          <el-button type="info">返回</el-button>
         </el-row>
       </el-col>
     </el-row>
@@ -262,9 +262,7 @@
 <style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+  
   }
   .el-col {
     border-radius: 4px;

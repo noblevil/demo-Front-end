@@ -1,6 +1,6 @@
 import request from '@/router/axios';
 
-
+//获取教师基本信息
 export const getProfile = (teachAccount) =>{
   console.log(teachAccount)
   return request({
@@ -32,7 +32,7 @@ export const getOrgList = () =>{
 }
 
 
-//模糊搜索机构
+//搜索机构
 export const seracrchOrg = (condition) =>{
   return request({
     url: '/api/orginfo/searchOrg',
@@ -43,8 +43,55 @@ export const seracrchOrg = (condition) =>{
   })
 }
 
+//教师所属机构的信息
+export const getOrgByTeachAccount = (teachAccount) =>{
+  return request({
+    url: '/api/orginfo/getOrgByTeachAccount',
+    method: 'get',
+    params:{
+      teachAccount,
+    }
+    
+  })
+}
 
+//根据teachId、orgId和orgTeachStatus修改教师与机构间的状态
+export const changeOrgTeachStatus = (teachId,orgId,orgTeachStatus) =>{
+  return request({
+    url: '/api/teachinfo/changeOrgTeachStatus',
+    method: 'post',
+    params:{
+      teachId,
+      orgId,
+      orgTeachStatus
+    }
+    
+  })
+}
 
+//获取教师的所有课程
+export const getTeachCourseByTeachAccount = (teachAccount) =>{
+  return request({
+    url: '/api/course/getTeachCourseByTeachAccount',
+    method: 'get',
+    params:{
+      teachAccount,
+    }
+  })
+}
+//根据teachAccount修改教师账户和教师信息
+export const changeTeachByTeachAccount = (teachId,teachAccount,teachInfo) =>{
+  
+  request({
+    url: '/api/teachinfo/changeTeachByTeachAccount',
+    method: 'post',
+    data :{
+      teachId,
+      teachAccount,
+      teachInfo
+    }  
+  })
+}
 
 
 

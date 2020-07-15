@@ -41,7 +41,7 @@
     <el-row type="flex" class="row-bg" justify="space-around">
       <el-col :span="14"><div class="grid-content bg-purple">
         <div style="margin-top: 15px;">
-          <el-input placeholder="请输入内容" v-model="keyWords" class="input-with-select">
+          <el-input placeholder="请输入内容" v-model="condition" class="input-with-select">
 
             <el-button @click="query" slot="append" icon="el-icon-search"></el-button>
           </el-input>
@@ -49,11 +49,11 @@
 
         <div style="margin-top: 50px;border: #e5e9f2 1px solid;padding: 50px">
           <el-checkbox-group v-model="selectedInstitution" >
-            <el-checkbox-button v-for="(institution,index) in institutions"
-                                
-                                :value="institution"
-                                :label="institution"
-                                :key="institution"><div v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize">{{institution.orgName}}<br>{{institution.orgId}}</div></el-checkbox-button>
+            <el-checkbox-button v-for="(org,index) in orgList"
+                              v-if="index<currentPage*pageSize&&index>=(currentPage-1)*pageSize"
+                                :value="org"
+                                :label="org"
+                                :key="org"><div >{{org.orgName}}<br>{{org.orgId}}</div></el-checkbox-button>
           </el-checkbox-group>
         </div>
 
@@ -65,21 +65,23 @@
           background
           layout=" total,sizes,prev, pager, next,jumper"
           :page-sizes="pageSizes"
-          :total="institutions.length">
+          :total="orgList.length">
         </el-pagination>
 
       </div></el-col>
       <el-col :span="8"><div class="grid-content bg-purple">
         <el-table
-          :data="myInstitution"
+          :data="relOrgTeach"
           height="250px"
           border
           style="width: 100%">
           <el-table-column
-            fixed
-            prop="orgName"
+          fixed
             label="机构名称"
-            width="100">
+            width="150">
+            <template slot-scope="scope">
+              {{orgInfo[scope.$index].orgName}}
+            </template>
           </el-table-column>
           <el-table-column
             prop="orgId"
@@ -87,24 +89,30 @@
             width="150">
           </el-table-column>
           <el-table-column
-            prop="teachingSubject"
             label="学科"
             width="150">
+            <template>
+              {{teachInfo.teachingSubject}}
+            </template>
           </el-table-column>
           <el-table-column
-            prop="orgTeachStatus"
             label="机构与教师的状态状态"
             width="150">
+            <template slot-scope="scope">
+              <span v-if="scope.row.orgTeachStatus===1">入职状态1</span>
+              <span v-else-if="scope.row.orgTeachStatus===2">在职状态2</span>
+            </template>
           </el-table-column>
           <el-table-column
             fixed="right"
             label="操作"
             width="100">
             <template slot-scope="scope">
-              <el-button v-if="scope.row.orgTeachStatus==='入职状态1'" @click="handleClick(scope.row,e='确认入职')" type="text" size="small">确认入职</el-button>
-              <el-button v-else-if="scope.row.orgTeachStatus==='在职状态2'" @click="handleClick(scope.row,e='申请离职')" type="text" size="small">申请离职</el-button>
+              <el-button v-if="scope.row.orgTeachStatus===1" @click="changeStatus(teachInfo.teachId,scope.row.orgId,1)" type="text" size="small">确认入职</el-button>
+              <el-button v-else-if="scope.row.orgTeachStatus===2" @click="changeStatus(teachInfo.teachId,scope.row.orgId,2)" type="text" size="small">申请离职</el-button>
             </template>
           </el-table-column>
+          
         </el-table>
 
 
@@ -168,10 +176,13 @@
   import {getOrgList} from "@/api/teacher/teacher_after_login/teacher_after_login";
   import {seracrchOrg} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
+  import {getOrgByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  import {changeOrgTeachStatus} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
-  import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
-  import {searchInstitution} from "@/api/teacher/teacher_register/teacher_register";
-  import {getMyInstitution} from "@/api/teacher/teacher_after_login/teacher_after_login";
+
+  //import {getInstitution} from '@/api/teacher/teacher_register/teacher_register'
+  //import {searchInstitution} from "@/api/teacher/teacher_register/teacher_register";
+  //import {getMyInstitution} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
 
 
@@ -180,7 +191,12 @@
     data() {
       return {
         teachInfo:{},
-        relOrgTeach:{},
+        relOrgTeach:[],
+        orgInfo:[],
+
+        orgList:[],
+
+        condition:'',
 
 
 
@@ -202,7 +218,7 @@
 
     },
     created(){
-      if(sessionStorage.getItem('myInstitution')) {
+      /*if(sessionStorage.getItem('myInstitution')) {
         this.selectedInstitution = JSON.parse(sessionStorage.getItem('myInstitution'))
       }
       getInstitution().then(res => {
@@ -210,19 +226,38 @@
       })
       getMyInstitution(JSON.parse(sessionStorage.getItem('saber-tenantId')).content).then(res => {
         this.myInstitution=res.data.data.institutions
-      })
+      })*/
+      
 
 
       getProfile('110').then(res => {
-        console.log(res)
         this.teachInfo=res.data.data.teachInfo
         this.relOrgTeach=res.data.data.relOrgTeach
+        console.log(this.relOrgTeach)
+
+      })
+
+      getOrgByTeachAccount('110').then(res => {
+        
+        this.orgInfo=res.data.data
+        console.log(this.orgInfo)
+      })
+
+
+
+
+
+      getOrgList().then(res => {
+        this.orgList=res.data.data
 
       })
     },
 
 
     methods: {
+      redirect(){
+         this.$router.go(0)
+      },
 
       institution(){
         this.$router.push({path: "/teacher-after-login/teacher-institution"});
@@ -242,9 +277,9 @@
 
       //搜索机构
       query(){
-        searchInstitution(this.keyWords).then(res => {
+        seracrchOrg(this.condition).then(res => {
           console.log(res)
-          this.institutions=res.data.data.institutions
+          this.orgList=res.data.data
         })
       },
 
@@ -289,15 +324,18 @@
       },
 
 
-      handleClick(row,e) {
-        console.log(row);
-        console.log(e)
-        if(e==='确认入职'){
+      changeStatus(teachId,orgId,status) {
+        console.log(teachId);
+        console.log(orgId)
+        if(status===1){
           this.$confirm('是否确认入职?', '确认入职', {
             confirmButtonText: '确认',
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
+            changeOrgTeachStatus(teachId,orgId,2)
+            this.$router.push({path: "/teacher-after-login/empty"});
+            //window.location.reload()
             this.$message({
               type: 'success',
               message: '信息已提交!'
@@ -315,6 +353,10 @@
             cancelButtonText: '取消',
             type: 'warning'
           }).then(() => {
+            changeOrgTeachStatus(teachId,orgId,1)
+            this.$router.push({path: "/teacher-after-login/empty"});
+            //window.location.reload()
+            //this.$router.replace({path: "/teacher-after-login/teacher-institution"});
             this.$message({
               type: 'success',
               message: '信息已提交!'

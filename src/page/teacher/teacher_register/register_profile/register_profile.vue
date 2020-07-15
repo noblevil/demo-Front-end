@@ -1381,26 +1381,15 @@
                     message: '提交成功!'
                   });
                   //存储到sessionStorage
-                  sessionStorage.setItem('profile',JSON.stringify(this.teacher))
-                  //const keys=Object.keys(this.teacher);
-                  //for(let index=0; index < keys.length; index++){
-                  //  sessionStorage.setItem(keys[index],this.teacher[keys[index]]);
-                  //}
-                  console.log(sessionStorage)
+                  //sessionStorage.setItem('profile',JSON.stringify(this.teacher))
                 }).catch(() => {
                   this.$message({
                     type: 'info',
                     message: '取消提交'
                   });
                 });
-
-
-
-                //console.log('error submit!!');
-                //alert('submit!');
               } else {
                 console.log('error submit!!');
-                //return callback(new Error('格式错误'));
                 this.$message({
                   type: 'error',
                   message: '格式错误!'
@@ -1434,9 +1423,7 @@
 
   .el-row {
     margin-bottom: 20px;
-  &:last-child {
-     margin-bottom: 0;
-   }
+
   }
   .el-col {
     border-radius: 4px;

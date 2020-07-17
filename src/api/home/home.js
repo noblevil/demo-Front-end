@@ -185,16 +185,14 @@ export const getAllComplaintList = () => {
 
 //根据 筛选 得到投诉列表-xxy
 export const queryComplaintList = (
-    //address,
-    //complaintType,
+    address,
     complaintOrgName,
 ) => {
     return request({
         url: '/api/queryComplaintList',
         method: 'get',
         data: {
-            //address,
-            //complaintType,
+            address,
             complaintOrgName,
         }
     },
@@ -204,30 +202,21 @@ export const queryComplaintList = (
 //新增投诉列表-xxy
 export const addComplaintList = (
     address,
-    complaintType,
     complaintOrgName,
     complaintTitle,
     complaintContent,
 ) => {
     return request({
-        url: '/api/queryComplaintList',
+        url: '/api/addComplaintList',
         method: 'post',
         data: {
             address,
-            complaintType,
             complaintOrgName,
             complaintTitle,
             complaintContent,
         }
     },
-        console.log(address),
-        console.log(complaintType),
-        console.log(complaintOrgName),
-        console.log(complaintTitle),
-        console.log(complaintContent)
-
     )
-
 }
 
 //登录

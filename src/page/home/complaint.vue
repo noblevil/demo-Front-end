@@ -9,30 +9,20 @@
         <el-col :span="12">网上投诉</el-col>
       </el-row> -->
 
-      <el-form-item label="请选择区域：">
+     <!-- <el-form-item label="请选择区域：">
         <el-cascader
           size="large"
           :options="regionOptions"
           v-model="selectedOptions"
           @change="handleChange"
         ></el-cascader>
-      </el-form-item>
-
-       <el-form-item label="投诉类别：">
-        <el-select v-model="queryForm.complaintType" clearable placeholder="请选择">
-          <el-option
-            v-for="item in complaintTypeOptions"
-            :key="item.value"
-            :label="item.label"
-            :value="item.value"
-          ></el-option>
-        </el-select>
-      </el-form-item>
-
+      </el-form-item> -->
 
        <el-form-item label="投诉机构名称：" label-width="120px">
         <el-input placeholder="请输入" v-model="queryForm.complaintOrgName" clearable></el-input>
       </el-form-item>
+
+
 
       <el-button type="primary" @click="query">查询</el-button>
       &nbsp;
@@ -53,32 +43,29 @@
         </el-table-column>
 
         <el-table-column
-          prop="complaintOrgName"
+          prop="orgName"
           label="投诉机构名">
         </el-table-column>
 
         <el-table-column
-          prop="complaintType"
-          label="投诉类别">
+          prop="title"
+          label="投诉标题">
         </el-table-column>
 
-        <el-table-column
-          prop="content"
-          label="投诉内容">
-        </el-table-column>
-
-        <el-table-column
+        <!-- <el-table-column
           prop="suggest"
           label="改进意见">
-        </el-table-column>
+        </el-table-column> -->
 
         <el-table-column prop="complaintId" >
           <template slot-scope="scope">
             <el-button @click="gotolink(scope.row)" type="text" >点击查看详情</el-button>
           </template>
+
         </el-table-column>
 
       </el-table>
+
       <el-pagination
            align="center"
           layout="prev, pager, next"
@@ -88,26 +75,29 @@
       </el-pagination>
 
 </div>
+    <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
 </div>
 </template>
 
 <script>
 import { regionData, CodeToText } from "element-china-area-data";
-
 import myHeader from "@/components/home/my-header";
 
-import { getAllComplaintList } from "@/api/home/home";
-import { queryComplaintList } from "@/api/home/home";
+import { getAllComplaintList, queryComplaintList} from "../../api/complaint/complaint";
 
 export default {
+
   components: {
     myHeader
   },
+
   created() {
     getAllComplaintList().then(res => {
-      this.complaintList = res.data.data.complaintList;
+     this.complaintList = res.data.data;
+     //console.log(this.complaintList);
     });
   },
+
   data() {
 
     return {
@@ -118,35 +108,26 @@ export default {
       currentPage: 1,
 
       selectedOptions:'',
+
       regionOptions: regionData,
 
-      complaintTypeOptions: [
-        {
-          value: "违规办学",
-          label: "违规办学"
-        },
-        {
-          value: "违规招生",
-          label: "违规招生"
-        },
-        {
-          value: "其他",
-          label: "其他"
-        }
-      ],
 
       //查询表单
         queryForm: {
-        address: "",
-        complaintType: "",
+        //address: "",
+        //complaintType: "",
         complaintOrgName: "",
       },
         complaintList: [],
-        
+
   };
+
   },
 
+
+
   methods:{
+
     handleChange() {
       var loc = "";
       for (let i = 0; i < this.selectedOptions.length; i++) {
@@ -157,22 +138,24 @@ export default {
       //this.queryForm.address = this.queryForm.address.replace(/\s*/g,"");
     },
 
-
      handleCurrentChange:function(currentPage){
                 this.currentPage = currentPage;
             },
 
     query() {
       //console.log(this.queryForm.complaintOrgName,),
+
       queryComplaintList(
-        this.queryForm.address,
-        this.queryForm.complaintType,
+        //this.queryForm.address,
+       // this.queryForm.complaintType,
         this.queryForm.complaintOrgName.replace(/\s*/g,""),
+
       ).then(res => {
-        this.complaintList = res.data.data.complaintList;
+        this.complaintList = res.data.data;
         console.log(this.complaintList);
       })
     },
+
     gotolink(row) {
       console.log(row.complaintId);
       this.$router.push({
@@ -186,3 +169,12 @@ export default {
   }
 
 </script>
+<style>
+  .el-footer {
+    text-align: center;
+    font-size: 13px;
+    width: 100%;
+    height: 70px;
+    background-color: rgb(204, 204, 204);
+  }
+</style>

@@ -354,7 +354,7 @@
   };
 </script>
 
-<style lang="less"scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   

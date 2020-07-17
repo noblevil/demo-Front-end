@@ -119,14 +119,12 @@
             </td>
             <td style="padding-top: 2px">国家地区:</td>
             <td>
-              <template>
+              
+              
             <el-form-item prop="nationality">
-            <el-select placeholder="请选择国家区号" :value="value" @input="change($event)" v-model="teachInfo.nationality">
-              <el-option v-for="item in options" :key="item.value" :label="`${item.name}(${item.en})  +${item.tel}`" :value="item.tel">
-              </el-option>
-            </el-select>
+               <select-country v-model="teachInfo.nationality" :placeholder="teachInfo.nationality"></select-country>
             </el-form-item>
-            </template>
+            
           </td>
 
 
@@ -186,7 +184,7 @@
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button type="info">下一步</el-button>
+          <el-button type="info" @click="nextStep">下一步</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
@@ -203,16 +201,15 @@
 <script>
 
 import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
-import {changeTeachByTeachAccount} from "@/api/teacher/teacher_after_login/teacher_after_login";
+import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_after_login";
+import selectCountry from "./select-country"
+
 
 export default {
         name: "profile",
-      props: {
-        value: {
-          type: [String, Number, Array],
-          default: ''
-        }
-      },
+        components:{
+          selectCountry
+        },
       data() {
         return {
           teachAccount:{},
@@ -223,8 +220,8 @@ export default {
 
 
           certificateType:[{
-            value: '选项1',
-            label: '身份证'
+            value: 2,
+            label: 2
           },],
           countryNature:[
             {
@@ -283,7 +280,8 @@ export default {
           this.relOrgTeach=res.data.data.relOrgTeach
           console.log(this.teachInfo.teachId)
           console.log(this.teachAccount)
-          console.log(this.teachInfo)
+          console.log(this.teachInfo.nationality)
+          
         })
 
 
@@ -308,6 +306,10 @@ export default {
           experience(){
             this.$router.push({path: "/teacher-after-login/teacher-experience"});
           },
+          nextStep(){
+            this.$router.push({path: "/teacher-after-login/teacher-instituition"});
+          },
+
 
           gotoInfo(teacherId)
           {
@@ -343,19 +345,23 @@ export default {
                   dangerouslyUseHTMLString:true,
                   type: 'warning'
                 }).then(() => {
-                  changeTeachByTeachAccount(this.teachInfo.teachId,this.teachAccount,this.teachInfo)
+                  changeTeachByTeachId(this.teachInfo.teachId,this.teachAccount,this.teachInfo).then(res =>{
+                    if(res){
+                        this.$router.push({path: "/teacher-after-login/empty",query:{name:'profile'}});
+                    }
+                  })
                   this.$message({
                     type: 'success',
                     message: '提交成功!'
                   });
-                  //存储到sessionStorage
-                  //sessionStorage.setItem('profile',JSON.stringify(this.teacher))
-                }).catch(() => {
-                  this.$message({
-                    type: 'info',
-                    message: '取消提交'
-                  });
-                });
+                  //this.$router.push({path: "/teacher-after-login/empty",query:{name:'profile'}});
+                })
+                //.catch(() => {
+                 // this.$message({
+                 //   type: 'info',
+                //    message: '取消提交'
+                //  });
+               // });
               } else {
                 console.log('error submit!!');
                 this.$message({

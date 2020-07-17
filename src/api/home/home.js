@@ -102,7 +102,6 @@ export const queryTeachList = (
     isTeachQualifCert,
     teachingSubject,
 ) => {
-
     return request({
         url: '/api/teachinfo/queryTeachList',
 

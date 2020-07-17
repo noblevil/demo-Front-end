@@ -5,7 +5,7 @@
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">xxx老师</td>
+            <td rowspan="2">{{teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -143,7 +143,7 @@
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button type="primary">提交</el-button>
+          <el-button type="primary" @click="submitForm('teachInfo')">提交</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
@@ -160,11 +160,13 @@
 <script>
   //import {getDetail} from "@/api/teacher/teacher_after_login/teacher_after_login";
   import {getProfile} from "@/api/teacher/teacher_after_login/teacher_after_login";
+  import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_after_login";
 
   export default {
     data() {
       return {
         teachInfo:{},
+        teachAccount:{},
 
 
         workType:[
@@ -244,6 +246,7 @@
     created(){
       getProfile('110').then(res => {
         console.log(res)
+        this.teachAccount=res.data.data.teachAccount
         this.teachInfo=res.data.data.teachInfo
       })
 
@@ -292,28 +295,55 @@
 
 
       nextStep(){
-        this.$router.push({path: "/experience"});
+        this.$router.push({path: "/teacher-after-login/teacher-experience"});
       },
       lastStep(){
-        this.$router.push({path: "/institution"});
+        this.$router.push({path: "/teacher-after-login/teacher-institution"});
       },
 
 
 
 
 
-      submitForm(formName) {
-        this.$refs[formName].validate((valid) => {
-          if (valid) {
-            console.log('error submit!!');
-            alert('submit!');
-          } else {
-            console.log('error submit!!');
-            //return callback(new Error('格式错误'));
-            return false;
-          }
-        });
-      },
+       submitForm(formName) {
+            this.$refs[formName].validate((valid) => {
+              if (valid) {
+
+
+                this.$confirm("是否确认提交信息？", '确认提交信息', {
+                  confirmButtonText: '确定',
+                  cancelButtonText: '取消',
+                  dangerouslyUseHTMLString:true,
+                  type: 'warning'
+                }).then(() => {
+                  console.log(this.teachInfo)
+                  changeTeachByTeachId(this.teachInfo.teachId,this.teachAccount,this.teachInfo).then(res =>{
+                    if(res){
+                        this.$router.push({path: "/teacher-after-login/empty",query:{name:'detail'}});
+                    }
+                  })
+                  this.$message({
+                    type: 'success',
+                    message: '提交成功!'
+                  });
+                  //this.$router.push({path: "/teacher-after-login/empty",query:{name:'detail'}});
+                })
+                //.catch(() => {
+                 // this.$message({
+                 //   type: 'info',
+                  //  message: '取消提交'
+                  //});
+                //});
+              } else {
+                console.log('error submit!!');
+                this.$message({
+                  type: 'error',
+                  message: '格式错误!'
+                });
+                return false;
+              }
+            });
+          },
       resetForm(formName) {
         this.$refs[formName].resetFields();
 

@@ -8,7 +8,6 @@ import blog from './blog'
 import home from './home'
 import org from './org'
 import complaint from './complaint'
-<<<<<<< HEAD
 import policy from './policy'
 import notice from './notice'
 /**
@@ -35,6 +34,6 @@ blog({ mock: false });
 home({ mock: false });
 org({ mock: false });
 
-complaint({ mock: true });
+complaint({ mock: false });
 policy({ mock: true });
 notice ({mock:true});

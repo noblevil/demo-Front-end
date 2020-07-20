@@ -5,7 +5,7 @@
       <el-col :span="2">
         <table   cellpadding="2px">
           <tr>
-            <td rowspan="2">{{teachInfo.teachName}}老师</td>
+            <td rowspan="2">{{teachForm.teachInfo.teachName}}老师</td>
             <td rowspan="2">
               <div class="grid-content bg-purple"><div class="el-icon-user-solid"></div></div>
             </td>
@@ -38,26 +38,26 @@
     <el-row type="flex" class="row-bg" justify="center">
       <el-col :span="14"><div class="grid-content bg-purple" >
           <el-form
-          :rules="teachInfoRules"
-          ref="teachInfo"
-          :model="teachInfo"
-          id="teachInfo"
+          :rules="teachFormRules"
+          ref="teachForm"
+          :model="teachForm"
+          id="teachForm"
         >
         <table cellpadding="10px" >
           <tr>
             <td style="padding-top: 2px">教师资格证：</td>
             <td>
-              <el-form-item prop="isTeachQualifCertication">
-              <el-radio v-model="teachInfo.isTeachQualifCert" label="是">是</el-radio>
-              <el-radio v-model="teachInfo.isTeachQualifCert" label="否">否</el-radio>
+              <el-form-item prop="teachInfo.isTeachQualifCert">
+              <el-radio v-model="teachForm.teachInfo.isTeachQualifCert" label="是">是</el-radio>
+              <el-radio v-model="teachForm.teachInfo.isTeachQualifCert" label="否">否</el-radio>
               </el-form-item>
             </td>
             <td width="100px">
             </td>
             <td style="padding-top: 2px">账户名：</td>
             <td>
-              <el-form-item prop="teachAccount">
-              <el-input v-model="teachAccount.teachAccount" :placeholder="teachAccount.teachAccount" :disabled="true"></el-input>
+              <el-form-item prop="teachAccount.teachAccount">
+              <el-input v-model="teachForm.teachAccount.teachAccount" placeholder="请输入教师账户名" :disabled="true"></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -68,8 +68,8 @@
                 <table cellpadding="10px" style="line-height: 40px;text-align: center;width: 350px;margin-left: 25px">
                   <tr>教师资格证号码：</tr>
                   <tr>
-                    <el-form-item prop="certificateNum">
-                    <el-input v-model="teachInfo.certificateNum" :placeholder="teachInfo.certificateNum" style="width: 300px"></el-input>
+                    <el-form-item prop="teachInfo.certificateNum">
+                    <el-input v-model="teachForm.teachInfo.certificateNum" placeholder="请输入教师资格证号码" style="width: 300px"></el-input>
                     </el-form-item>
                   </tr>
                   <tr>
@@ -100,8 +100,8 @@
             </td>
             <td style="padding-top: 2px">用户密码：</td>
             <td>
-              <el-form-item prop="passwd">
-              <el-input placeholder="请输入密码" v-model="teachAccount.passwd" show-password></el-input>
+              <el-form-item prop="teachAccount.passwd">
+              <el-input placeholder="请输入密码" v-model="teachForm.teachAccount.passwd" show-password></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -112,7 +112,7 @@
             <td style="padding-top: 2px">确认密码:</td>
             <td>
               <el-form-item prop="confirmPassword">
-              <el-input placeholder="请输入密码" v-model="teachAccount.passwd" show-password></el-input>
+              <el-input placeholder="请再次输入密码" v-model="teachForm.confirmPassword" show-password></el-input>
               </el-form-item>
             </td>
           </tr>
@@ -231,7 +231,7 @@
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button type="primary"  @click="submitForm('teachInfo')">提交</el-button>
+          <el-button type="primary"  @click="submitForm('teachForm')">提交</el-button>
         </el-row>
       </el-col>
       <el-col :span="2" style="margin-top: 20px">
@@ -252,9 +252,59 @@ import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_af
 
   export default {
     data() {
+      let validatePass = (rule, value, callback) => {
+        if (value === '') {
+           callback(new Error('请输入密码'));
+        } else {
+          if (this.teachForm.teachAccount.passwd !== '') {
+            //this.$refs.other.validateField('userPassword');
+          }
+          callback();
+        }
+      };
+      let validatePass2 = (rule, value, callback) => {
+        if (value === '') {
+          callback(new Error('请再次输入密码'));
+        } else if (value !== this.teachForm.teachAccount.passwd) {
+          callback(new Error('两次输入密码不一致!'));
+        } else {
+          callback();
+        }
+      };
+
+
+
       return {
-        teachAccount:{},
-        teachInfo:{},
+        teachForm:{
+            teachAccount:{},
+            teachInfo:{},
+            confirmPassword:'',
+          },
+         
+
+
+        //teachAccount:{},
+        //teachInfo:{},
+
+        teachFormRules:{
+          'teachInfo.isTeachQualifCert':[
+            { required: true, message: '请选择是否有教师资格证', trigger: 'change' },
+          ],
+          
+          'teachInfo.certificateNum':[
+            { required: true, message: '请输入教师资格证号码', trigger: 'blur' },
+          ],
+          'teachAccount.passwd':[
+            {validator: validatePass, trigger: "blur"},
+
+          ],
+          confirmPassword:[
+            {validator: validatePass2, trigger: "blur"},
+
+          ]
+
+
+        },
 
 
 
@@ -279,8 +329,12 @@ import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_af
     created(){
         getProfile('110').then(res => {
           console.log(res)
-          this.teachAccount=res.data.data.teachAccount
-          this.teachInfo=res.data.data.teachInfo    
+          //this.teachAccount=res.data.data.teachAccount
+          //this.teachInfo=res.data.data.teachInfo  
+          //////////
+          this.teachForm.teachAccount=res.data.data.teachAccount
+          this.teachForm.teachInfo=res.data.data.teachInfo  
+          console.log(this.teachForm) 
         })
     },
 
@@ -386,7 +440,7 @@ import {changeTeachByTeachId} from "@/api/teacher/teacher_after_login/teacher_af
                   dangerouslyUseHTMLString:true,
                   type: 'warning'
                 }).then(() => {
-                  changeTeachByTeachId(this.teachInfo.teachId,this.teachAccount,this.teachInfo).then(res =>{
+                  changeTeachByTeachId(this.teachForm.teachInfo.teachId,this.teachForm.teachAccount,this.teachForm.teachInfo).then(res =>{
                     if(res){
                         this.$router.push({path: "/teacher-after-login/empty",query:{name:'other'}});
                     }

@@ -75,6 +75,7 @@
               <el-date-picker
                 style="width: 200px"
                 v-model="teachInfo.graduationDate"
+                value-format="yyyy-MM-dd"
                 id="graduatedDate"
                 align="right"
                 type="date"

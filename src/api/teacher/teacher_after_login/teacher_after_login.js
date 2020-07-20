@@ -79,9 +79,9 @@ export const getTeachCourseByTeachAccount = (teachAccount) =>{
     }
   })
 }
-//根据teachAccount修改教师账户和教师信息
+//根据teachId修改教师账户和教师信息
 export const changeTeachByTeachId = (teachId,teachAccount,teachInfo) =>{
-  
+  console.log(teachInfo)
   return request({
     url: '/api/teachinfo/changeTeachByTeachId',
     method: 'post',

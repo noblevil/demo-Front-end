@@ -8,8 +8,7 @@ function getAllComplaintList() {
                   complaintId: 1,
                   orgId: "0001",
                   complaintOrgName:"韦博开心豆",
-                  complaintType:"违规办学",
-                  content:"欺诈学费",
+                  title:"欺诈学费",
                   suggest:"进入调查",
 
               },
@@ -17,16 +16,14 @@ function getAllComplaintList() {
                   complaintId: 2,
                   orgId: '0002',
                   complaintOrgName:'随便编的',
-                  complaintType:"违规招生",
-                  content:'无证经营',
+                  title:'无证经营',
                   suggest:'进入调查',
               },
               {
                   complaintId: 3,
                   orgId: "0003",
                   complaintOrgName:"随便编的",
-                  complaintType:"其他",
-                  content:"欺诈学费，无证经营",
+                  title:"欺诈学费，无证经营",
                   suggest:"进入调查ing",
 
               },
@@ -34,112 +31,10 @@ function getAllComplaintList() {
                   complaintId: 4,
                   orgId: '0004',
                   complaintOrgName:'你',
-                  complaintType:"其他",
-                  content:'欺诈学费，无证经营',
+                  title:'欺诈学费，无证经营',
                   suggest:'进入调查ING',
               },
-              {
-                  complaintId: 1,
-                  orgId: "0001",
-                  complaintOrgName:"韦博开心豆",
-                  complaintType:"违规办学",
-                  content:"欺诈学费",
-                  suggest:"进入调查",
 
-              },
-              {
-                  complaintId: 2,
-                  orgId: '0002',
-                  complaintOrgName:'随便编的',
-                  complaintType:"违规招生",
-                  content:'无证经营',
-                  suggest:'进入调查',
-              },
-              {
-                  complaintId: 3,
-                  orgId: "0003",
-                  complaintOrgName:"随便编的",
-                  complaintType:"其他",
-                  content:"欺诈学费，无证经营",
-                  suggest:"进入调查ing",
-
-              },
-              {
-                  complaintId: 4,
-                  orgId: '0004',
-                  complaintOrgName:'你',
-                  complaintType:"其他",
-                  content:'欺诈学费，无证经营',
-                  suggest:'进入调查ING',
-              },
-              {
-                  complaintId: 1,
-                  orgId: "0001",
-                  complaintOrgName:"韦博开心豆",
-                  complaintType:"违规办学",
-                  content:"欺诈学费",
-                  suggest:"进入调查",
-
-              },
-              {
-                  complaintId: 2,
-                  orgId: '0002',
-                  complaintOrgName:'随便编的',
-                  complaintType:"违规招生",
-                  content:'无证经营',
-                  suggest:'进入调查',
-              },
-              {
-                  complaintId: 3,
-                  orgId: "0003",
-                  complaintOrgName:"随便编的",
-                  complaintType:"其他",
-                  content:"欺诈学费，无证经营",
-                  suggest:"进入调查ing",
-
-              },
-              {
-                  complaintId: 4,
-                  orgId: '0004',
-                  complaintOrgName:'你',
-                  complaintType:"其他",
-                  content:'欺诈学费，无证经营',
-                  suggest:'进入调查ING',
-              },
-              {
-                  complaintId: 1,
-                  orgId: "0001",
-                  complaintOrgName:"韦博开心豆",
-                  complaintType:"违规办学",
-                  content:"欺诈学费",
-                  suggest:"进入调查",
-
-              },
-              {
-                  complaintId: 2,
-                  orgId: '0002',
-                  complaintOrgName:'随便编的',
-                  complaintType:"违规招生",
-                  content:'无证经营',
-                  suggest:'进入调查',
-              },
-              {
-                  complaintId: 3,
-                  orgId: "0003",
-                  complaintOrgName:"随便编的",
-                  complaintType:"其他",
-                  content:"欺诈学费，无证经营",
-                  suggest:"进入调查ing",
-
-              },
-              {
-                  complaintId: 4,
-                  orgId: '0004',
-                  complaintOrgName:'你',
-                  complaintType:"其他",
-                  content:'欺诈学费，无证经营',
-                  suggest:'进入调查ING',
-              },
           ]
     };
     return json;
@@ -264,13 +159,6 @@ export default ({ mock }) => {
         const json = { code: 200, success: true, msg: '新增投诉' };
         json.data = {
             addComplaintList: [
-                // {
-                //     address:"",
-                //     complaintType:"",
-                //     complaintOrgName:"",
-                //     complaintTitle:"",
-                //     complaintContent:"",
-                // },
             ]
         };
         json.data.addComplaintList.address = JSON.parse(addComplaintList.body).address;

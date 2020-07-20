@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-bg" justify="center">
       <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
-        <table  style="color: #e5e9f2" cellpadding="2px">
+        <table   cellpadding="2px">
           <tr>
             <td rowspan="2">xxx老师</td>
             <td rowspan="2">

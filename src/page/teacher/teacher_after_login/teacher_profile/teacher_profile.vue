@@ -180,7 +180,7 @@
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="resetForm('teacher')" type="info">重置</el-button>
+          <el-button @click="resetForm('teachForm')" type="info">重置</el-button>
         </el-row>
       </el-col>
 
@@ -373,7 +373,7 @@ export default {
             this.$router.push({path: "/teacher-after-login/teacher-experience"});
           },
           nextStep(){
-            this.$router.push({path: "/teacher-after-login/teacher-instituition"});
+            this.$router.push({path: "/teacher-after-login/teacher-institution"});
           },
 
 

@@ -133,7 +133,7 @@
 
       <el-col :span="2" style="margin-top: 20px">
         <el-row>
-          <el-button @click="resetForm('teacherDetail')" type="info">重置</el-button>
+          <el-button @click="resetForm('teachInfo')" type="info">重置</el-button>
         </el-row>
       </el-col>
 
@@ -355,7 +355,7 @@
   };
 </script>
 
-<style lang="less"scoped>
+<style lang="less" scoped>
   .el-row {
     margin-bottom: 20px;
   

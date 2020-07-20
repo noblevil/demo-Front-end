@@ -59,12 +59,13 @@
         </div>
       </div>
     </div>
+
   </div>
 </template>
 <script>
 import myHeader from "@/components/home/my-header";
-import { login } from "@/api/home/home";
 import { mapMutations } from "vuex";
+import {userLogin} from "../../api/home/home";
 
 export default {
   components: {
@@ -94,19 +95,41 @@ export default {
     userLogin() {
       let _this = this;
       if (this.loginForm.account === "" || this.loginForm.password === "") {
-        alert("账号或密码不能为空");
+        this.$message({
+          type:'error',
+          message:'用户名或密码为空！'
+        })
       } else {
-        login(
-          this.loginForm.account,
-          this.loginForm.password,
-          this.loginForm.role
-        ).then(res => {
-          console.log(res.data.data.token);
+        userLogin(JSON.stringify(this.loginForm)).then(res => {
+          if(res.data.success&&this.loginForm.role==='org'){
+            this.$message({
+              type:'success',
+              message:'登录成功'
+            })
+            _this.$router.push("/org/login");
+          }
+          else if(res.data.success&&this.loginForm.role==='teach')
+          {
+            this.$message({
+              type:'success',
+              message:'登录成功'
+            })
+          }
+          else{
+            this.$message(
+              {
+                type:'info',
+                message:'账号或密码错误！'
+              }
+            )
+          }
+          console.log(res.data.success)
+          // console.log(this.loginForm.role);
+          // console.log(res.data.data.token);
           _this.userToken = "Bearer " + res.data.data.token;
           // 将用户token保存到vuex中
           _this.changeLogin({ Authorization: _this.userToken });
-          _this.$router.push("/home");
-          alert("登陆成功");
+          // _this.$router.push("/home");
         });
       }
     }
@@ -114,7 +137,8 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+  @import "@/styles/login.scss";
 .loginForm {
   /*padding-top: 100px;*/
   text-align: center;

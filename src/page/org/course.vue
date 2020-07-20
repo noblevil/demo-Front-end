@@ -80,7 +80,7 @@
     </el-row>
 
     <el-dialog :title="dialogTitle" width="600px" :visible.sync="formVisable" @close="resetFields" center>
-      <el-form :model="blogForm" :rules="rules" ref="blogForm">
+      <el-form :model="blogForm" :rules="addRules" ref="blogForm">
         <el-form-item label="课程名称" prop="courseName" label-width="100px" >
           <el-input v-model="addList.courseName" auto-complete="off" style="width:400px"></el-input>
         </el-form-item>
@@ -106,7 +106,7 @@
           <el-input v-model="addList.studentGrade" auto-complete="off" style="width:400px"></el-input>
         </el-form-item>
         <el-form-item label="教材" prop="textBook" label-width="100px" >
-          <el-input v-model="addList.textBook" auto-complete="off" style="width:400px"></el-input>
+          <el-input v-model="addList.textbook" auto-complete="off" style="width:400px"></el-input>
         </el-form-item>
         <el-form-item label="出版社" prop="publishCompany" label-width="100px" >
           <el-input v-model="addList.publishCompany" auto-complete="off" style="width:400px"></el-input>
@@ -123,10 +123,10 @@
     <el-dialog :title="editForm" width="600px" :visible.sync="editFormVisable" @close="resetFields" center>
       <el-form :model="editForm" :rules="editrules" ref="editForm">
         <el-form-item label="课程名称" prop="courseName" label-width="100px" >
-          <el-input v-model="editList.courseName" auto-complete="off" style="width:400px"></el-input>
+          <el-input v-model="editList.courseName" auto-complete="off" disabled style="width:400px"></el-input>
         </el-form-item>
         <el-form-item label="课程学科" prop="courseSubject" label-width="100px" >
-          <el-input v-model="editList.courseSubject" auto-complete="off" style="width:400px"></el-input>
+          <el-input v-model="editList.courseSubject" auto-complete="off" disabled style="width:400px"></el-input>
         </el-form-item>
         <el-form-item label="课程级别" prop="courseLevel" label-width="100px" >
           <el-input v-model="editList.courseLevel" auto-complete="off" style="width:400px"></el-input>
@@ -268,11 +268,30 @@
     },
     methods:{
       handleDelete(index,row){
-        console.log(row);
-        deleteCourse(1101234561,row.courseId).then(res=>{
+        this.$confirm('确认删除？','提示',{
+          confirmButtonText:'确认',
+          cancelButtonText:'取消',
+          type:'warning',
+          center:true
+        }).then(()=>{
+          deleteCourse(1101234561,row.courseId).then(res=>{
             getOrgCourse(1101234561).then(res=>{
-              this.courseList = res.data.data;})
+              this.courseList = res.data.data;
+              this.$message({
+                type:'success',
+                message:'删除成功！'
+              })
+            })
+          })
         })
+        .catch(()=>{
+          this.$message({
+            type:'info',
+            message:'取消删除'
+          })
+        })
+        console.log(row);
+
       },
 
       handleEdit(row){
@@ -313,6 +332,10 @@
           console.log('success');
             getOrgCourse(1101234561).then(res=>{
               this.courseList = res.data.data;
+              this.$message({
+                type:'success',
+                message:'添加成功！'
+              })
             })
         }
         )}

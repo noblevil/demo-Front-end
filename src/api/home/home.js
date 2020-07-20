@@ -299,3 +299,15 @@ export const getComplaintDetailById = (
     )
 
 }
+
+export const userLogin = (params
+) => {
+  return request({
+    url: '/api/login/userLogin',
+    method: 'post',
+    headers:{'content-Type':'application/json'},
+    data: params
+  })
+}
+
+

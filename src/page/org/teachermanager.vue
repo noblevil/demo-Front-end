@@ -129,36 +129,21 @@
       </el-pagination>
     </el-row>
 
-    <el-dialog :title="dialogTitle" width="600px" :visible.sync="formVisable" @close="resetForm(blogForm)">
-      <el-form :model="blog" :rules="rules" ref="blogForm">
-        <el-form-item label="教师邮箱" prop="teachEmail" label-width="80px">
+
+    <el-dialog :title="dialogTitle" width="600px" :visible.sync="formVisable" center>
+      <el-form :model="blog" :rules="addRules" ref="blog">
+        <el-form-item label="教师邮箱" prop="email" label-width="80px">
           <el-input v-model="blog.email" auto-complete="off" style="width:400px"></el-input>
         </el-form-item>
-        <el-form-item label="教师账号" prop="teachAccount" label-width="80px">
+        <el-form-item label="教师账号" prop="account" label-width="80px">
           <el-input v-model="blog.account"  auto-complete="off" style="width: 400px"></el-input>
         </el-form-item>
       </el-form>
       <div slot="footer" class="dialog-footer">
-        <el-button @click="formVisable=false">取消</el-button>
-        <el-button type="primary" @click="submitBlog('blogForm')">确定</el-button>
-      </div>
-    </el-dialog>
-
-    <el-dialog :title="dialogTitle" width="600px" :visible.sync="formVisable" @close=resetForm(blog) center>
-      <el-form :model="blog" :rules="rules" ref="blogForm">
-        <el-form-item label="教师邮箱" prop="teachEmail" label-width="80px">
-          <el-input v-model="blog.email" auto-complete="off" style="width:400px"></el-input>
-        </el-form-item>
-        <el-form-item label="教师账号" prop="teachAccount" label-width="80px">
-          <el-input v-model="blog.account"  auto-complete="off" style="width: 400px"></el-input>
-        </el-form-item>
-      </el-form>
-      <div slot="footer" class="dialog-footer">
-        <el-button type="primary" @click="submitBlog('blogForm')">确定</el-button>
+        <el-button type="primary" @click="submitBlog()">确定</el-button>
         <el-button @click="formVisable=false">取消</el-button>
       </div>
     </el-dialog>
-
 
 
   </basic-container>
@@ -168,8 +153,6 @@
 <script>
   import {getOrgCourse, getOrgTeacher, orgAddTeach, orgRemoveTeach,queryTeachList} from "../../api/org/org";
 
-
-
   export default {
     name:"teachermanager",
     data() {
@@ -178,7 +161,12 @@
 
         dilogTitle:'',
 
-        rules:{
+        addRules:{
+          email:[
+            {required: true, message: '请输入邮箱地址', trigger: 'blur' },,
+            {type:'email',message: '请输入正确的邮箱格式',trigger: ['blur','change']}
+          ],
+          account:{required: true, message: '请输入邮箱地址', trigger: 'blur'}
         },
         blog:{
           id:'',
@@ -273,16 +261,19 @@
       resetForm(formName){
         this.$refs[formName].clearValidate()
       },
-      submitBlog(formName){
+      submitBlog(){
         orgAddTeach(this.blog.email,this.blog.account,1101234561).then(
           res=>{
-            console.log('success');
+            console.log(this.blog.email);
             getOrgTeacher(1101234561).then(res=>{
               this.teacherList = res.data.data;
-
               this.formVisable=false;
               this.blog.email='';
               this.blog.account='';
+              this.$message({
+                type:'success',
+                message:'添加成功！'
+              })
             })
           }
         )},
@@ -296,13 +287,33 @@
         console.log(row);
       },
       handleDelete(index, row) {
-        orgRemoveTeach(1101234561,row.teachId).then(
-          res=>{
-          getOrgTeacher(1101234561).then(res=>{
-            this.teacherList=res.data.data;
-            console.log(res.data.data);
-          })
+        this.$confirm('确认删除？','提示',{
+          confirmButtonText:'确定',
+          cancelButtonText:'取消',
+          type:'warning',
+          center:true
         })
+          .then(()=>{
+          orgRemoveTeach(1101234561,row.teachId)
+            .then(res=>{
+              getOrgTeacher(1101234561)
+                .then(res=>{
+                this.teacherList=res.data.data;
+                this.$message({
+                  type:'success',
+                  message:'删除成功！'
+                })
+              })
+            })
+        })
+        .catch(()=>{
+          this.$message({
+            type:'info',
+            message:'取消删除'
+          })
+          }
+        )
+
       },
       handleMultiDelete() {
         console.log("multi-delete")

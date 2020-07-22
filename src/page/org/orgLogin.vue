@@ -51,36 +51,29 @@
             <div class="register-wrap">
               <el-row type="flex" justify="center">
                 <el-form ref="loginForm" :model="user" status-icon label-width="80px">
-                  <el-form-item prop="accountPhone" label="公司名称">
-                    <el-input v-model="org.orgName" placeholder="公司名称(不可修改)" disabled></el-input>
+                  <el-form-item prop="orgAccount" label="登录账号">
+                    <el-input v-model="account.orgAccount" placeholder="账号(不可修改)" disabled></el-input>
                   </el-form-item>
-                  <el-form-item prop="repassword" label="手机号码">
+                  <el-form-item prop="orgPhone" label="手机号码">
                     <el-input
-                      v-model="org.orgphone"
+                      v-model="account.orgPhone"
                       placeholder="手机号码"
                       v-bind:disabled="flag!=true"
                     ></el-input>
                   </el-form-item>
-                  <el-form-item prop="repassword" label="公司电话">
-                    <el-input
-                      v-model="org.orgPhone"
-                      placeholder="公司电话"
-                      v-bind:disabled="flag!=true"
-                    ></el-input>
-                  </el-form-item>
-                  <el-form-item prop="repassword" label="邮箱地址">
-                    <el-input v-model="org.orgEmail" placeholder="邮箱地址(不可修改)" disabled></el-input>
+                  <el-form-item prop="orgEmail" label="邮箱地址">
+                    <el-input v-model="account.orgEmail" placeholder="邮箱地址(不可修改)" disabled></el-input>
                   </el-form-item>
                   <el-form-item prop="password" label="密码">
                     <el-input
-                      v-model="org.passwd"
+                      v-model="account.passwd"
                       show-password
                       placeholder="密码"
                       v-bind:disabled="flag!=true"
                     ></el-input>
                   </el-form-item>
                   <el-button type="primary" @click="toReverseFlag" round>修 改</el-button>
-                  <el-button type="success" @click="toReverseFlagFalse"  round>确 定</el-button>
+                  <el-button type="success" @click="UpdateInfo"  round>确 定</el-button>
                 </el-form>
               </el-row>
             </div>
@@ -90,7 +83,7 @@
               <el-card class="box-card">
                 <div slot="header" class="clearfix">
                   <span style="float: left; padding: 3px;" type="text" >基本信息</span>
-                  <el-button style="float: right; padding: 3px" type="text" @click="toReverseFflagFalse">确  定</el-button>
+                  <el-button style="float: right; padding: 3px" type="text" @click="toReverseFflagFalse">确 定</el-button>
                   <el-button style="float: right; padding: 3px" type="text" @click="toReverseFflag">修 改</el-button>
 
                 </div>
@@ -98,26 +91,26 @@
                   <el-form ref="loginForm" :model="user" status-icon label-width="80px">
                     <el-row type="flex" justify="center">
                       <el-form-item label="常用联系人1">
-                        <el-input v-model="org.linkmanOne" placeholder v-bind:disabled="fflag!=true"></el-input>
+                        <el-input v-model="info.linkmanOne" placeholder v-bind:disabled="fflag!=true"></el-input>
                       </el-form-item>
                       <el-form-item label="常用联系人1-手机">
-                        <el-input v-model="org.linkmanOnePhone" placeholder v-bind:disabled="fflag!=true"></el-input>
+                        <el-input v-model="info.linkmanOnePhone" placeholder v-bind:disabled="fflag!=true"></el-input>
                       </el-form-item>
                     </el-row>
                     <el-row type="flex" justify="center">
                       <el-form-item label="常用联系人2">
-                        <el-input v-model="org.linkmanTwo" placeholder v-bind:disabled="fflag!=true"></el-input>
+                        <el-input v-model="info.linkmanTwo" placeholder v-bind:disabled="fflag!=true"></el-input>
                       </el-form-item>
                       <el-form-item label="常用联系人2-手机">
-                        <el-input v-model="org.linkmanTwoPhone" placeholder v-bind:disabled="fflag!=true"></el-input>
+                        <el-input v-model="info.linkmanTwoPhone" placeholder v-bind:disabled="fflag!=true"></el-input>
                       </el-form-item>
                     </el-row>
                     <el-row type="flex" justify="center">
                       <el-form-item label="企业电话">
-                        <el-input v-model="org.orgPhone" placeholder v-bind:disabled="fflag!=true"></el-input>
+                        <el-input v-model="info.orgPhone" placeholder disabled></el-input>
                       </el-form-item>
                       <el-form-item label="场地性质">
-                        <el-select v-model="org.siteProperties" placeholder v-bind:disabled="fflag!=true">
+                        <el-select v-model="org.siteProperties" placeholder disabled>
                           <el-option label="自有" value="自有"></el-option>
                           <el-option label="租用" value="租用"></el-option>
                           <el-option label="其他" value="其他"></el-option>
@@ -137,26 +130,26 @@
                   <el-form ref="loginForm" :model="user" status-icon label-width="80px">
                     <el-row type="flex" justify="center">
                       <el-form-item label="企业名">
-                        <el-input v-model="org.orgName" placeholder="企业名称" disabled></el-input>
+                        <el-input v-model="info.orgName" placeholder="企业名称" disabled></el-input>
                       </el-form-item>
                       <el-form-item label="企业简称">
-                        <el-input v-model="org.orgSimpleName" placeholder="企业简称" disabled></el-input>
+                        <el-input v-model="info.orgSimpleName" placeholder="企业简称" disabled></el-input>
                       </el-form-item>
                     </el-row>
                     <el-row type="flex" justify="center">
                       <el-form-item label="注册地址">
-                        <el-input v-model="org.registerAddress" placeholder disabled></el-input>
+                        <el-input v-model="info.registerAddress" placeholder disabled></el-input>
                       </el-form-item>
                       <el-form-item label="常用地址">
-                        <el-input v-model="org.oftenAddress" placeholder disabled></el-input>
+                        <el-input v-model="info.oftenAddress" placeholder disabled></el-input>
                       </el-form-item>
                     </el-row>
                     <el-row type="flex" justify="center">
                       <el-form-item label="统一社会信用代码">
-                        <el-input v-model="org.unifiedCode" placeholder disabled></el-input>
+                        <el-input v-model="info.unifiedCode" placeholder disabled></el-input>
                       </el-form-item>
                       <el-form-item label="资质类别">
-                        <el-select v-model="org.qualificationCategory" placeholder disabled>
+                        <el-select v-model="info.qualificationCategory" placeholder disabled>
                           <el-option label="有办学许可证" value="有办学许可证"></el-option>
                           <el-option label="无办学许可证，有营业执照" value="无办学许可证，有营业执照"></el-option>
                           <el-option label="无办学许可证，无营业执照" value="无办学许可证，无营业执照"></el-option>
@@ -175,17 +168,17 @@
                 <el-row type="flex" justify="center">
                   <el-form ref="loginForm" :model="user" status-icon label-width="80px">
                     <el-form-item prop="accountPhone" label="ICP备案号">
-                      <el-input v-model="org.orgName" placeholder disabled></el-input>
+                      <el-input v-model="qualift.icpRecordNum" placeholder disabled></el-input>
                     </el-form-item>
                     <el-form-item prop="repassword" label="电信业务经营许可证">
-                      <el-input v-model="org.orgphone" placeholder="手机号码" disabled></el-input>
+                      <el-input v-model="qualift.telecommunicationBusinessLicense" placeholder="手机号码" disabled></el-input>
                     </el-form-item>
                     <el-form-item prop="repassword" label="网络安全等级保护定级备案证明">
-                      <el-input v-model="org.orgPhone" placeholder disabled></el-input>
+                      <el-input v-model="qualift.networkSecLevRec" placeholder disabled></el-input>
                     </el-form-item>
 
-                    <el-button type="primary" @click="toReverseFlag" round>修 改</el-button>
-                    <el-button type="success" round>确 定</el-button>
+<!--                    <el-button type="primary" @click="toReverseFlag" round>修 改</el-button>-->
+<!--                    <el-button type="success" round>确 定</el-button>-->
                   </el-form>
                 </el-row>
               </div>
@@ -206,6 +199,7 @@
 
 <script>
 import myHeader from "@/components/home/my-header";
+import {getOrginfo,UpdateOrgAccountInfo,UpdateOrgInfo} from "../../api/org/org";
 import Teachermanager from "./teachermanager";
 import Course from "./course";
 export default {
@@ -219,6 +213,40 @@ export default {
       stepActive: 1,
       flag: false,
       fflag: false,
+      account:{
+        orgId:'',
+        orgAccount:'',
+        orgPhone:'',
+        orgEmail:'',
+        passwd:'',
+        createTime:''
+      },
+      info:{
+        orgAccount: '1101234561',
+        orgType:'',
+        orgName:'',
+        orgSimpleName: '',
+        establishedTime:'',
+        orgPhone:'',
+        registerAddress:'',
+        oftenAddress: '',
+        isInversyAbroad: '',
+        schoolLicence:'',
+        schoolLicenceDepartment:'',
+        unifiedCode: '',
+        trainType:'',
+        trainContent:'',
+        trainForm:'',
+        enrollObject:'',
+        enrollRegion:'',
+        listType:'',
+        linkmanOne: '',
+        linkmanOnePhone: '' ,
+        linkmanTwo: '',
+        linkmanTwoPhone: '',
+        bussinesLicense: '',
+        relatedCertificates:''
+      },
       org: {
         orgEmail: "mayun@Alibaba",
         passwd: "333333",
@@ -235,11 +263,37 @@ export default {
         linkmanTwo:"蔡崇信",
         linkmanOne:"马云",
         linkmanOnePhone:"3778817",
+      },
+      qualift:{
+        icpRecordNum:'',
+        telecommunicationBusinessLicense:'',
+        networkSecLevRec:''
       }
     };
   },
   computed: {},
+  created() {
+    getOrginfo(1101234561).then(res=>{
+      console.log(res.data.data);
+      this.account=res.data.data.orgAccount;
+      this.info=res.data.data.orgInfo;
+      this.info.orgAccount='1101234561',
+      this.qualift=res.data.data.orgQualifData;
+    })
+  },
   methods: {
+    UpdateInfo(){
+      console.log(JSON.stringify(this.account));
+      UpdateOrgAccountInfo(JSON.stringify(this.account)).then(res=>{
+        getOrginfo(1101234561).then(res=>{
+          this.account=res.data.data.orgAccount;
+          this.$message({
+            type:'success',
+            message:'修改成功'
+          })
+        })
+      })
+    },
     toAccountInfo() {
       this.stepActive = 1;
     },
@@ -265,7 +319,18 @@ export default {
       this.fflag = true;
     },
     toReverseFflagFalse(){
-      this.fflag = false;
+
+      UpdateOrgInfo(JSON.stringify(this.info)).then(res=>{
+        console.log(JSON.stringify(this.info));
+        getOrginfo(1101234561).then(res=>{
+          this.info=res.data.data.orgInfo;
+          this.$message({
+            type:'success',
+            message:'修改成功'
+          })
+          this.fflag = false;
+        })
+      })
     }
   }
 };

@@ -99,3 +99,44 @@ export const deleteCourse = (orgAccount,courseId) => {
     }
   })
 }
+
+
+export const getOrginfo = (orgAccount) => {
+  return request({
+    url: '/api/orginfo/getOrgInfo',
+    method: 'get',
+    params: {
+      orgAccount,
+    }
+  })
+}
+
+export const UpdateOrgAccountInfo = (params
+) => {
+  return request({
+    url: '/api/orginfo/UpdateOrgAccountInfo',
+    method: 'post',
+    headers:{'content-Type':'application/json'},
+    data: params
+  })
+}
+
+export const UpdateOrgInfo = (params
+) => {
+  return request({
+    url: '/api/orginfo/UpdateOrgInfo',
+    method: 'post',
+    headers:{'content-Type':'application/json'},
+    data: params
+  })
+}
+
+export const inserOrhInfo = (params
+) => {
+  return request({
+    url: '/api/orginfo/insertOrgInfo',
+    method: 'post',
+    headers:{'content-Type':'application/json'},
+    data: params
+  })
+}

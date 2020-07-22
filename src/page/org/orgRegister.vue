@@ -15,9 +15,9 @@
 
         <div v-if="stepActive === 1">
           <div class="register-wrap">
-            <el-radio v-model="orgInfo.orgType" label="1">企业法人</el-radio>
-            <el-radio v-model="orgInfo.orgType" label="2">社会团体</el-radio>
-            <el-radio v-model="orgInfo.orgType" label="3">事业法人</el-radio>
+            <el-radio v-model="org.orgInfo.orgType" label="1">企业法人</el-radio>
+            <el-radio v-model="org.orgInfo.orgType" label="2">社会团体</el-radio>
+            <el-radio v-model="org.orgInfo.orgType" label="3">事业法人</el-radio>
           </div>
         </div>
         <div v-else-if="stepActive === 2">
@@ -25,19 +25,19 @@
             <el-row type="flex" justify="center">
               <el-form ref="loginForm" :model="user" status-icon label-width="80px">
                 <el-form-item prop="accountPhone" label="账户名">
-                  <el-input v-model="orgAccountInfo.orgAccount" placeholder="请输入账户名"></el-input>
+                  <el-input v-model="org.orgAccountInfo.orgAccount" placeholder="请输入账户名"></el-input>
                 </el-form-item>
                 <el-form-item prop="accountPhone" label="手机号码">
-                  <el-input v-model="orgAccountInfo.orgPhone" placeholder="请输入手机号码"></el-input>
+                  <el-input v-model="org.orgAccountInfo.orgPhone" placeholder="请输入手机号码"></el-input>
                 </el-form-item>
                 <el-form-item prop="accountPhone" label="邮箱">
-                  <el-input v-model="orgAccountInfo.orgEmail" placeholder="请输入邮箱"></el-input>
+                  <el-input v-model="org.orgAccountInfo.orgEmail" placeholder="请输入邮箱"></el-input>
                 </el-form-item>
                 <el-form-item prop="password" label="密码">
-                  <el-input v-model="orgAccountInfo.passwd" show-password placeholder="请输入密码"></el-input>
+                  <el-input v-model="org.orgAccountInfo.passwd" show-password placeholder="请输入密码"></el-input>
                 </el-form-item>
                 <el-form-item prop="repassword" label="确认密码">
-                  <el-input v-model="orgAccountInfo.repasswd" show-password placeholder="请再次输入密码"></el-input>
+                  <el-input v-model="org.orgAccountInfo.repasswd" show-password placeholder="请再次输入密码"></el-input>
                 </el-form-item>
               </el-form>
             </el-row>
@@ -49,42 +49,42 @@
             <el-form class="company" ref="loginForm" :model="user" status-icon label-width="80px">
               <el-row type="flex" justify="center">
                 <el-form-item label="企业名">
-                  <el-input v-model="orgInfo.orgName" placeholder="请输入企业名称"></el-input>
+                  <el-input v-model="org.orgInfo.orgName" placeholder="请输入企业名称"></el-input>
                 </el-form-item>
                 <el-form-item label="常用联系人1">
-                  <el-input v-model="orgInfo.linkmanOne" placeholder="姓名"></el-input>
+                  <el-input v-model="org.orgInfo.linkmanOne" placeholder="姓名"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="企业简称">
-                  <el-input v-model="orgInfo.orgSimpleName" placeholder="企业简称"></el-input>
+                  <el-input v-model="org.orgInfo.orgSimplyName" placeholder="企业简称"></el-input>
                 </el-form-item>
                 <el-form-item label="常用联系人1-手机">
-                  <el-input v-model="orgInfo.linkmanOnePhone" placeholder="手机号码"></el-input>
+                  <el-input v-model="org.orgInfo.linkmanOnePhone" placeholder="手机号码"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="企业注册地址">
-                  <el-input v-model="orgInfo.registerAddress" placeholder="请输入企业注册地址"></el-input>
+                  <el-input v-model="org.orgInfo.registerAddress" placeholder="请输入企业注册地址"></el-input>
                 </el-form-item>
                 <el-form-item label="常用联系人2">
-                  <el-input v-model="orgInfo.linkmanTwo" placeholder="姓名"></el-input>
+                  <el-input v-model="org.orgInfo.linkmanTwo" placeholder="姓名"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="企业常用地址">
-                  <el-input v-model="orgInfo.oftenAddress" placeholder="请输入企业常用地址"></el-input>
+                  <el-input v-model="org.orgInfo.oftenAddress" placeholder="请输入企业常用地址"></el-input>
                 </el-form-item>
                 <el-form-item label="常用联系人2-手机">
-                  <el-input v-model="orgInfo.linkmanTwoPhone" placeholder="请输入手机号码"></el-input>
+                  <el-input v-model="org.orgInfo.linkmanTwoPhone" placeholder="请输入手机号码"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="培训形式">
-                  <el-input v-model="orgInfo.trainForm" placeholder="请输入..."></el-input>
+                  <el-input v-model="org.orgInfo.trainForm" placeholder="请输入..."></el-input>
                 </el-form-item>
                 <el-form-item label="培训类别">
-                  <el-select v-model="orgInfo.trainType" placeholder="请选择">
+                  <el-select v-model="org.orgInfo.trainType" placeholder="请选择">
                     <el-option label="中小学学科类" value="中小学学科类"></el-option>
                     <el-option label="艺术类" value="艺术类"></el-option>
                     <el-option label="体育类" value="体育类"></el-option>
@@ -99,18 +99,18 @@
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="招生对象">
-                  <el-input v-model="orgInfo.enrollObject" placeholder="请输入..."></el-input>
+                  <el-input v-model="org.orgInfo.enrollObject" placeholder="请输入..."></el-input>
                 </el-form-item>
                 <el-form-item label="招生范围">
-                  <el-input v-model="orgInfo.enrollRegion" placeholder="请输入..."></el-input>
+                  <el-input v-model="org.orgInfo.enrollRegion" placeholder="请输入..."></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="培训内容">
-                  <el-input v-model="orgInfo.trainContent" placeholder="请输入..."></el-input>
+                  <el-input v-model="org.orgInfo.trainContent" placeholder="请输入..."></el-input>
                 </el-form-item>
                 <el-form-item label="资质类别">
-                  <el-select v-model="orgInfo.qualificationCategory" placeholder="请选择">
+                  <el-select v-model="org.orgInfo.qualificationCategory" placeholder="请选择">
                     <el-option label="有办学许可证" value="有办学许可证"></el-option>
                     <el-option label="无办学许可证，有营业执照" value="无办学许可证，有营业执照"></el-option>
                     <el-option label="无办学许可证，无营业执照" value="无办学许可证，无营业执照"></el-option>
@@ -119,19 +119,18 @@
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="是否有境外投资">
-                  <el-select v-model="orgInfo.isInvestAbroad" placeholder="活动区域">
+                  <el-select v-model="org.orgInfo.isInvestAbroad" placeholder="活动区域">
                     <el-option label="是" value="是"></el-option>
                     <el-option label="否" value="否"></el-option>
                   </el-select>
                 </el-form-item>
                 <el-form-item label="统一社会信用代码">
-                  <el-input v-model="orgInfo.unifiedCode" placeholder="请输入..."></el-input>
+                  <el-input v-model="org.orgInfo.unifiedCode" placeholder="请输入..."></el-input>
                 </el-form-item>
               </el-row>
             </el-form>
           </div>
         </div>
-
         <div v-else>
           <div class="register-wrap">
             <el-form
@@ -143,26 +142,26 @@
             >
               <el-row type="flex" justify="center">
                 <el-form-item label="法人代表">
-                  <el-input v-model="orgQualifInfo.legalRepresentName" placeholder="姓名"></el-input>
+                  <el-input v-model="org.orgQualifInfo.legalRepresentName" placeholder="姓名"></el-input>
                 </el-form-item>
               </el-row>
 
               <el-row type="flex" justify="center">
                 <el-form-item label="联系方式">
-                  <el-input v-model="orgQualifInfo.legalRepresentPhone" placeholder="手机号码"></el-input>
+                  <el-input v-model="org.orgQualifInfo.legalRepresentPhone" placeholder="手机号码"></el-input>
                 </el-form-item>
               </el-row>
 
               <el-row type="flex" justify="center">
                 <el-form-item label="ICP备案号">
-                  <el-input v-model="orgQualifInfo.icpRecordNum" placeholder="ICP备案号"></el-input>
+                  <el-input v-model="org.orgQualifInfo.icpRecordNum" placeholder="ICP备案号"></el-input>
                 </el-form-item>
               </el-row>
 
               <el-row type="flex" justify="center">
                 <el-form-item label="电信业务营业许可证">
                   <el-input
-                    v-model="orgQualifInfo.telecommunicationBusinessLicense"
+                    v-model="org.orgQualifInfo.telecommunicationBusinessLicense"
                     placeholder="电信业务营业许可证"
                   ></el-input>
                 </el-form-item>
@@ -170,24 +169,24 @@
 
               <el-row type="flex" justify="center">
                 <el-form-item label="网络安全等级备案证明">
-                  <el-input v-model="orgQualifInfo.networkSecLevRec" placeholder="网络安全等级备案证明"></el-input>
+                  <el-input v-model="org.orgQualifInfo.networkSecLevRec" placeholder="网络安全等级备案证明"></el-input>
                 </el-form-item>
               </el-row>
 
               <el-row type="flex" justify="center">
                 <el-form-item label="证件类型">
-                  <el-radio v-model="orgQualifInfo.idType" label="1">中国居民身份证</el-radio>
-                  <el-radio v-model="orgQualifInfo.idType" label="2">港澳居民来往内地通行证</el-radio>
-                  <el-radio v-model="orgQualifInfo.idType" label="3">台湾居民来往大陆通行证</el-radio>
-                  <el-radio v-model="orgQualifInfo.idType" label="4">护照</el-radio>
-                  <el-radio v-model="orgQualifInfo.idType" label="5">外国人永居留身份证</el-radio>
-                  <el-radio v-model="orgQualifInfo.idType" label="6">港澳台居住证</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="1">中国居民身份证</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="2">港澳居民来往内地通行证</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="3">台湾居民来往大陆通行证</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="4">护照</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="5">外国人永居留身份证</el-radio>
+                  <el-radio v-model="org.orgQualifInfo.idType" label="6">港澳台居住证</el-radio>
                 </el-form-item>
               </el-row>
 
               <el-row type="flex" justify="center">
                 <el-form-item label="证件号码">
-                  <el-input v-model="orgQualifInfo.idNum" placeholder="证件号"></el-input>
+                  <el-input v-model="org.orgQualifInfo.idNum" placeholder="证件号"></el-input>
                 </el-form-item>
               </el-row>
 
@@ -215,7 +214,7 @@
           <el-button v-if="stepActive == 1" @click="toLogin" type="primary" round>返 回</el-button>
           <el-button v-if="stepActive > 1" @click="back" type="success" round>上一步</el-button>
           <el-button v-if="stepActive < 4" @click="toAccountRegister" type="success" round>下一步</el-button>
-          <el-button v-if="stepActive == 4" @click="toLogin" type="primary" round>完 成</el-button>
+          <el-button v-if="stepActive == 4" @click="submitRegister" type="primary" round>完 成</el-button>
         </div>
       </el-main>
     </el-container>
@@ -224,6 +223,7 @@
 </template>
 
 <script>
+  import {inserOrhInfo} from "../../api/org/org";
 export default {
   name: "register",
   data() {
@@ -235,43 +235,63 @@ export default {
       dialogVisible: false,
       radio: "1",
       stepActive: 1,
-      orgInfo: {
-        orgType: "1",
-        orgName: "",
-        orgSimpleName: "",
-        linkmanOne: "",
-        linkmanOnePhone: "",
-        registerAddress: "",
-        linkmanTwo: "",
-        oftenAddress: "",
-        linkmanTwoPhone: "",
-        isInvestAbroad: "",
-        trainType: "",
-        unifiedCode: "",
-        qualificationCategory: "",
-        enrollObject: "",
-        enrollRegion: "",
-        trainContent: ""
+      org:{
+        orgInfo: {
+          orgName: "",
+          orgType: "",
+          orgSimplyName: "",
+          orgPhone:"",
+          registerAddress: "",
+          oftenAddress: "",
+          isInvestAbroad: "",
+          unifiedCode: "",
+          linkmanOne: "",
+          linkmanOnePhone: "",
+          linkmanTwo: "",
+          linkmanTwoPhone: "",
+          trainType: "",
+          trainContent: "",
+          trainForm:"",
+          enrollObject: "",
+          enrollRegion: "",
+          businessLicense:"有",
+          qualificationCategory: "",
+        },
+        orgAccountInfo: {
+          orgAccount: "",
+          orgPhone: "",
+          orgEmail: "",
+          passwd: "",
+          repasswd: ""
+        },
+        orgQualifInfo: {
+          legalRepresentName: "",
+          legalRepresentPhone: "",
+          idType: "",
+          idNum: "",
+          icpRecordNum: "",
+          telecommunicationBusinessLicense: "",
+          networkSecLevRec: ""
+        }
       },
-      orgAccountInfo: {
-        orgAccount: "",
-        orgPhone: "",
-        orgEmail: "",
-        passwd: "",
-        repasswd: ""
-      },
-      orgQualifInfo: {
-        legalRepresentName: "",
-        legalRepresentPhone: "",
-        idType: "",
-        idNum: "",
-        icpRecordNum: "",
-        telecommunicationBusinessLicense: "",
-        networkSecLevRec: ""
-      }
+
+
     };
   },
   methods: {
+    submitRegister(){
+      console.log(JSON.stringify(this.org));
+      inserOrhInfo(JSON.stringify(this.org)).then(res=>{
+        this.$message({
+          type:'success',
+          message:'注册成功'
+        })
+        this.$router.push({
+          path: "/userlogin"
+        });
+      })
+    },
+
     handleRemove(file, fileList) {
       console.log(file, fileList);
     },

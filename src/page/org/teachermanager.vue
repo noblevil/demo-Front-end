@@ -1,21 +1,21 @@
 <template>
   <basic-container>
-    <el-row>
+    <el-row style="line-height:80px">
       <el-col :span="4">
         <div class="tool-box">
           <el-button type="primary" icon="el-icon-circle-plus-outline" size="small" @click="handleAdd">添加</el-button>
-<!--          <el-button type="danger" icon="el-icon-delete" size="small" @click="handleMultiDelete">批量删除</el-button>-->
+     <!--    <el-button type="danger" icon="el-icon-delete" size="small" @click="handleMultiDelete">批量删除</el-button>-->
         </div>
       </el-col>
 
       <div class="orgQueryForm">
-        <el-form :inline="true" >
+        <el-form :inline="true">
           <el-form-item label="教师姓名：" prop="teacherName">
             <el-input
               placeholder="请输入姓名"
               v-model="queryTeacher.name"
               size="small"
-              style="width: 120px;margin-top: 60px"
+              style="width: 120px;margin-top: 25px"
               clearable>
             </el-input>
           </el-form-item>
@@ -24,7 +24,7 @@
                        placeholder="请选择"
                        size="small"
                        style="width: 100px;
-                       margin-top: 60px"
+                       margin-top: 25px"
                        clearable
             ><el-option label="男" value="男"></el-option>
               <el-option label="女" value="女"></el-option>
@@ -33,7 +33,7 @@
           <el-form-item label="培训科目：" prop="trainSubject">
             <el-select
               style="width: 100px;
-              margin-top: 60px"
+              margin-top: 25px"
               size="small"
               v-model="queryTeacher.trainSubject"
               clearable
@@ -46,8 +46,9 @@
             ></el-option>
             </el-select>
           </el-form-item>
-          <el-button size="small" style="width: 100px" icon="el-icon-search" type="primary" @click="queryteachers">查询</el-button>
+          <el-button size="small" style="width: 80px;margin-top: 28px" icon="el-icon-search" type="primary" @click="queryteachers">查询</el-button>
         </el-form>
+        <el-divider content-position="right"></el-divider>
       </div>
     </el-row>
 
@@ -55,7 +56,8 @@
       <el-table
         :data="this.teacherList.slice((this.page.currentPage-1)*this.page.size,this.page.currentPage*this.page.pageSize)"
         @selection-change="selectChange"
-        style="width: 100%">
+        style="width: 100%"
+        border>
         <el-table-column
           prop="id"
           type="selection"
@@ -84,7 +86,7 @@
         <el-table-column
           prop="teachingSubject"
           label="学科"
-          width="180"
+          width="100"
         ></el-table-column>
         <el-table-column
           prop="workType"

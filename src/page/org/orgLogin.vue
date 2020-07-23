@@ -1,13 +1,14 @@
 <template>
   <el-container>
-    <el-header>
+    <el-header style="text-align: center;font-size: x-large;">
       <!-- <myHeader></myHeader> -->
-      区块链智慧教育平台
+      区块链智能教育平台
     </el-header>
+    <el-divider content-position="right"></el-divider>
     <!-- <div class="register clearfix"> -->
 
     <el-container style="height:700px">
-      <el-aside style="background-color: rgb(84, 92, 100);width:'200px'">
+      <el-aside style="background-color: rgb(255, 255, 255);width:'200px'">
         <!-- <div class="register-wrap"> -->
         <el-col :span="12" style="width:200px">
           <el-menu
@@ -15,9 +16,9 @@
             class="el-menu-vertical-demo"
             @open="handleOpen"
             @close="handleClose"
-            background-color="#545c64"
-            text-color="#fff"
-            active-text-color="#ffd04b"
+            background-color="#fff"
+            text-color="#000000"
+            active-text-color="#409EFF"
           >
             <el-menu-item index="1" @click="toAccountInfo">
               <i class="el-icon-user"></i>
@@ -44,6 +45,7 @@
           </el-menu>
         </el-col>
       </el-aside>
+      <!--<el-divider direction="vertical"></el-divider>-->
 
       <el-container>
         <el-main>
@@ -193,7 +195,7 @@
         </el-main>
       </el-container>
     </el-container>
-    <el-footer>Footer</el-footer>
+    <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
   </el-container>
 </template>
 

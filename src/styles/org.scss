@@ -4,17 +4,24 @@
 
 
 .el-header{
-  background-color: #b3c0d1;
-  color: #333;
+  //background-color: #b3c0d1;
+  //color: #333;
+  background-color:white;
+  color:black;
   text-align: center;
-  line-height: 60px;
+  line-height: 80px;
+  font-weight: bold;
 }
 
 .el-footer {
-  background-color: #b3c0d1;
+  //background-color: #b3c0d1;
   color: #333;
   text-align: center;
   line-height: 60px;
+  font-size: 13px;
+  width: 100%;
+  //height: 70px;
+  background-color: rgb(204, 204, 204);
 }
 
 .el-aside {
@@ -43,8 +50,9 @@
   background-size: cover;
   // width: 400px;
   // height: 400px;
-  margin: 100px 100px 0px 100px;
+  margin: 50px 100px 0px 100px;
   overflow: hidden;
   padding-top: 10px;
   line-height: 0px;
 }
+

@@ -1,10 +1,11 @@
 <template>
   <el-container>
-    <el-header>区块链智慧教育平台</el-header>
+    <el-header style="text-align: center;font-size: x-large;">区块链智能教育平台</el-header>
+    <el-divider content-position="right"></el-divider>
     <el-container :style="height">
       <el-main>
         <div>
-          <el-steps :active="stepActive" finish-status="success" simple style="margin-top: 30px">
+          <el-steps :active="stepActive" finish-status="success" simple style="margin-top: 20px;line-height:80px">
             <el-step title="培训机构类型"></el-step>
             <el-step title="账号信息"></el-step>
             <el-step title="企业信息"></el-step>
@@ -14,7 +15,7 @@
         </div>
 
         <div v-if="stepActive === 1">
-          <div class="register-wrap">
+          <div class="register-wrap" style="margin:100px 100px 0px 100px">
             <el-radio v-model="org.orgInfo.orgType" label="1">企业法人</el-radio>
             <el-radio v-model="org.orgInfo.orgType" label="2">社会团体</el-radio>
             <el-radio v-model="org.orgInfo.orgType" label="3">事业法人</el-radio>
@@ -46,45 +47,45 @@
 
         <div v-else-if="stepActive === 3">
           <div class="register-wrap">
-            <el-form class="company" ref="loginForm" :model="user" status-icon label-width="80px">
+            <el-form class="company" ref="loginForm" :model="user" status-icon>
               <el-row type="flex" justify="center">
-                <el-form-item label="企业名">
+                <el-form-item label="企业名" label-width="130px">
                   <el-input v-model="org.orgInfo.orgName" placeholder="请输入企业名称"></el-input>
                 </el-form-item>
-                <el-form-item label="常用联系人1">
+                <el-form-item label="常用联系人1" label-width="140px">
                   <el-input v-model="org.orgInfo.linkmanOne" placeholder="姓名"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="企业简称">
+                <el-form-item label="企业简称" label-width="130px">
                   <el-input v-model="org.orgInfo.orgSimplyName" placeholder="企业简称"></el-input>
                 </el-form-item>
-                <el-form-item label="常用联系人1-手机">
+                <el-form-item label="常用联系人1-手机" label-width="140px">
                   <el-input v-model="org.orgInfo.linkmanOnePhone" placeholder="手机号码"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="企业注册地址">
+                <el-form-item label="企业注册地址" label-width="130px">
                   <el-input v-model="org.orgInfo.registerAddress" placeholder="请输入企业注册地址"></el-input>
                 </el-form-item>
-                <el-form-item label="常用联系人2">
+                <el-form-item label="常用联系人2" label-width="140px">
                   <el-input v-model="org.orgInfo.linkmanTwo" placeholder="姓名"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="企业常用地址">
+                <el-form-item label="企业常用地址" label-width="130px">
                   <el-input v-model="org.orgInfo.oftenAddress" placeholder="请输入企业常用地址"></el-input>
                 </el-form-item>
-                <el-form-item label="常用联系人2-手机">
+                <el-form-item label="常用联系人2-手机" label-width="140px">
                   <el-input v-model="org.orgInfo.linkmanTwoPhone" placeholder="请输入手机号码"></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="培训形式">
+                <el-form-item label="培训形式" label-width="130px">
                   <el-input v-model="org.orgInfo.trainForm" placeholder="请输入..."></el-input>
                 </el-form-item>
-                <el-form-item label="培训类别">
-                  <el-select v-model="org.orgInfo.trainType" placeholder="请选择">
+                <el-form-item label="培训类别" label-width="140px">
+                  <el-select v-model="org.orgInfo.trainType" placeholder="请选择" style="width:180px">
                     <el-option label="中小学学科类" value="中小学学科类"></el-option>
                     <el-option label="艺术类" value="艺术类"></el-option>
                     <el-option label="体育类" value="体育类"></el-option>
@@ -98,19 +99,19 @@
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="招生对象">
+                <el-form-item label="招生对象" label-width="130px">
                   <el-input v-model="org.orgInfo.enrollObject" placeholder="请输入..."></el-input>
                 </el-form-item>
-                <el-form-item label="招生范围">
+                <el-form-item label="招生范围" label-width="140px">
                   <el-input v-model="org.orgInfo.enrollRegion" placeholder="请输入..."></el-input>
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="培训内容">
+                <el-form-item label="培训内容" label-width="130px">
                   <el-input v-model="org.orgInfo.trainContent" placeholder="请输入..."></el-input>
                 </el-form-item>
-                <el-form-item label="资质类别">
-                  <el-select v-model="org.orgInfo.qualificationCategory" placeholder="请选择">
+                <el-form-item label="资质类别" label-width="140px">
+                  <el-select v-model="org.orgInfo.qualificationCategory" placeholder="请选择" style="width:180px">
                     <el-option label="有办学许可证" value="有办学许可证"></el-option>
                     <el-option label="无办学许可证，有营业执照" value="无办学许可证，有营业执照"></el-option>
                     <el-option label="无办学许可证，无营业执照" value="无办学许可证，无营业执照"></el-option>
@@ -118,13 +119,13 @@
                 </el-form-item>
               </el-row>
               <el-row type="flex" justify="center">
-                <el-form-item label="是否有境外投资">
-                  <el-select v-model="org.orgInfo.isInvestAbroad" placeholder="活动区域">
+                <el-form-item label="是否有境外投资" label-width="130px">
+                  <el-select v-model="org.orgInfo.isInvestAbroad" placeholder="活动区域" style="width:180px">
                     <el-option label="是" value="是"></el-option>
                     <el-option label="否" value="否"></el-option>
                   </el-select>
                 </el-form-item>
-                <el-form-item label="统一社会信用代码">
+                <el-form-item label="统一社会信用代码" label-width="140px">
                   <el-input v-model="org.orgInfo.unifiedCode" placeholder="请输入..."></el-input>
                 </el-form-item>
               </el-row>
@@ -138,7 +139,7 @@
               ref="loginForm"
               :model="legalRepresentative"
               status-icon
-              label-width="80px"
+              label-width="155px"
             >
               <el-row type="flex" justify="center">
                 <el-form-item label="法人代表">
@@ -168,7 +169,7 @@
               </el-row>
 
               <el-row type="flex" justify="center">
-                <el-form-item label="网络安全等级备案证明">
+                <el-form-item label="网络安全等级备案证明" label-width="155px">
                   <el-input v-model="org.orgQualifInfo.networkSecLevRec" placeholder="网络安全等级备案证明"></el-input>
                 </el-form-item>
               </el-row>
@@ -218,7 +219,7 @@
         </div>
       </el-main>
     </el-container>
-    <el-footer>Copyright@2020</el-footer>
+    <el-footer>版权所有 &copy; xxxxxxxx &nbsp;&nbsp; 24小时客户服务热线：400-8879-597</el-footer>
   </el-container>
 </template>
 

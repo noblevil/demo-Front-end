@@ -3,7 +3,7 @@
     <el-row type="flex" class="row-bg" justify="center">
       <el-col :span="22"><div class="grid-content bg-purple"><h2>培训机构线上管理平台</h2></div></el-col>
       <el-col :span="2">
-        <table  style="color: #e5e9f2" cellpadding="2px">
+        <table   cellpadding="2px">
           <tr>
             <td rowspan="2">xxx老师</td>
             <td rowspan="2">
@@ -355,10 +355,10 @@
     border-radius: 4px;
   }
   .bg-purple-dark {
-    background: #99a9bf;
+    background: #000000;
   }
   .bg-purple {
-    background: #20222a;
+    background: #FFFFFF;
   }
   .bg-purple-light {
     background: #e5e9f2;
@@ -367,13 +367,13 @@
     border-radius: 4px;
     min-height: 36px;
     text-align: center;
-    color: #e5e9f2;
+    color: #000000;
     padding-top: 10px;
 
   }
   .row-bg {
     padding: 10px 0;
-    background-color: #20222a;
+    background-color: #FFFFFF;
   }
 
 

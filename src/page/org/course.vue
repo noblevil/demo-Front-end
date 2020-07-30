@@ -1,6 +1,6 @@
 <template>
   <basic-container>
-    <el-row>
+    <el-row style="line-height:80px">
       <el-col :span="4">
         <div class="tool-box">
           <el-button type="primary" icon="el-icon-circle-plus-outline" size="small" @click="handleAdd">添加</el-button>
@@ -8,49 +8,53 @@
         </div>
       </el-col>
     </el-row>
+    <el-divider></el-divider>
 
     <el-row>
       <el-table
         :data="courseList"
         @selection-change="selectChange"
-        style="width: 100%">
+        style="width: 100%"
+        max-height="500"
+        :key="sTable"
+        >
         <el-table-column
           prop="id"
           type="selection"
-          width="55"
+          width="65"
         ></el-table-column>
         <el-table-column
           prop="courseId"
           label="课程编号"
-          width="100"
+          width="110"
         ></el-table-column>
         <el-table-column
           prop="courseName"
           label="课程名称"
-          width="100"
+          width="110"
         ></el-table-column>
         <el-table-column
           prop="courseSubject"
           label="学科"
-          width="100"
+          width="110"
         ></el-table-column>
         <el-table-column
           prop="contentIntro"
           label="课程内容介绍"
-          width="180">
+          width="210">
         </el-table-column>
         <el-table-column
           prop="validPeriod"
           label="课程有效期"
-          width="180">
+          width="190">
         </el-table-column>
         <el-table-column
           prop="courseLink"
           label="课程链接"
-          width="180">
+          width="190">
         </el-table-column>
 
-        <el-table-column label="操作"  width="250">
+        <el-table-column label="操作"  width="260">
           <template slot-scope="scope">
             <el-button
               size="mini"

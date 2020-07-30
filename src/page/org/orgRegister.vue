@@ -85,7 +85,7 @@
                   <el-input v-model="org.orgInfo.trainForm" placeholder="请输入..."></el-input>
                 </el-form-item>
                 <el-form-item label="培训类别" label-width="140px">
-                  <el-select v-model="org.orgInfo.trainType" placeholder="请选择" style="width:180px">
+                  <el-select v-model="org.orgInfo.trainType" placeholder="请选择" style="width:194px">
                     <el-option label="中小学学科类" value="中小学学科类"></el-option>
                     <el-option label="艺术类" value="艺术类"></el-option>
                     <el-option label="体育类" value="体育类"></el-option>
@@ -111,7 +111,7 @@
                   <el-input v-model="org.orgInfo.trainContent" placeholder="请输入..."></el-input>
                 </el-form-item>
                 <el-form-item label="资质类别" label-width="140px">
-                  <el-select v-model="org.orgInfo.qualificationCategory" placeholder="请选择" style="width:180px">
+                  <el-select v-model="org.orgInfo.qualificationCategory" placeholder="请选择" style="width:194px">
                     <el-option label="有办学许可证" value="有办学许可证"></el-option>
                     <el-option label="无办学许可证，有营业执照" value="无办学许可证，有营业执照"></el-option>
                     <el-option label="无办学许可证，无营业执照" value="无办学许可证，无营业执照"></el-option>
@@ -120,7 +120,7 @@
               </el-row>
               <el-row type="flex" justify="center">
                 <el-form-item label="是否有境外投资" label-width="130px">
-                  <el-select v-model="org.orgInfo.isInvestAbroad" placeholder="活动区域" style="width:180px">
+                  <el-select v-model="org.orgInfo.isInvestAbroad" placeholder="活动区域" style="width:194px">
                     <el-option label="是" value="是"></el-option>
                     <el-option label="否" value="否"></el-option>
                   </el-select>

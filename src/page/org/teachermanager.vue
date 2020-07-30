@@ -48,7 +48,7 @@
           </el-form-item>
           <el-button size="small" style="width: 80px;margin-top: 28px" icon="el-icon-search" type="primary" @click="queryteachers">查询</el-button>
         </el-form>
-        <el-divider content-position="right"></el-divider>
+        <el-divider></el-divider>
       </div>
     </el-row>
 
@@ -57,7 +57,9 @@
         :data="this.teacherList.slice((this.page.currentPage-1)*this.page.size,this.page.currentPage*this.page.pageSize)"
         @selection-change="selectChange"
         style="width: 100%"
-        border>
+        max-height="500"
+        :key="sTable"
+        >
         <el-table-column
           prop="id"
           type="selection"
@@ -102,7 +104,7 @@
           prop="professionalTitle"
           label="专业职称"
           width="180"
-      ></el-table-column>
+         ></el-table-column>
         <el-table-column
           label="操作"
           width="250"

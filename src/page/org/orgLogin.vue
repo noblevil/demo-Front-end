@@ -45,7 +45,7 @@
           </el-menu>
         </el-col>
       </el-aside>
-      <!--<el-divider direction="vertical"></el-divider>-->
+      <el-divider direction="vertical"></el-divider>
 
       <el-container>
         <el-main>
@@ -356,6 +356,15 @@ export default {
 /deep/ .el-input.is-disabled .el-input__inner {
   background-color: white;
 }
+.el-divider--vertical{
+  display:inline-block;
+  width:1px;
+  height:100%;
+  margin:0 8px;
+  vertical-align:middle;
+  position:relative;
+}
+
 // card模块
 .text {
   font-size: 14px;

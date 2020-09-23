@@ -59,35 +59,34 @@
         </div>
       </div>
     </div>
-
   </div>
 </template>
 <script>
 import myHeader from "@/components/home/my-header";
 import { mapMutations } from "vuex";
-import {userLogin} from "../../api/home/home";
+import { userLogin } from "../../api/home/home";
 
 export default {
   components: {
-    myHeader
+    myHeader,
   },
   data() {
     return {
       options: [
         {
           value: "org",
-          label: "机构"
+          label: "机构",
         },
         {
           value: "teach",
-          label: "教师"
-        }
+          label: "教师",
+        },
       ],
       loginForm: {
         role: "",
         account: "",
-        password: ""
-      }
+        password: "",
+      },
     };
   },
   methods: {
@@ -96,34 +95,30 @@ export default {
       let _this = this;
       if (this.loginForm.account === "" || this.loginForm.password === "") {
         this.$message({
-          type:'error',
-          message:'用户名或密码为空！'
-        })
+          type: "error",
+          message: "用户名或密码为空！",
+        });
       } else {
-        userLogin(JSON.stringify(this.loginForm)).then(res => {
-          if(res.data.success&&this.loginForm.role==='org'){
+        userLogin(JSON.stringify(this.loginForm)).then((res) => {
+          if (res.data.success && this.loginForm.role === "org") {
             this.$message({
-              type:'success',
-              message:'登录成功'
-            })
+              type: "success",
+              message: "登录成功",
+            });
             _this.$router.push("/org/login");
-          }
-          else if(res.data.success&&this.loginForm.role==='teach')
-          {
+          } else if (res.data.success && this.loginForm.role === "teach") {
             this.$message({
-              type:'success',
-              message:'登录成功'
-            })
+              type: "success",
+              message: "登录成功",
+            });
+            _this.$router.push("/teacher-after-login/teacher-home");
+          } else {
+            this.$message({
+              type: "info",
+              message: "账号或密码错误！",
+            });
           }
-          else{
-            this.$message(
-              {
-                type:'info',
-                message:'账号或密码错误！'
-              }
-            )
-          }
-          console.log(res.data.success)
+          console.log(res.data.success);
           // console.log(this.loginForm.role);
           // console.log(res.data.data.token);
           _this.userToken = "Bearer " + res.data.data.token;
@@ -132,13 +127,13 @@ export default {
           // _this.$router.push("/home");
         });
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-  @import "@/styles/login.scss";
+@import "@/styles/login.scss";
 .loginForm {
   /*padding-top: 100px;*/
   text-align: center;
